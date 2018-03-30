@@ -85,12 +85,14 @@
 <meta property="og:url" content="http://yoursite.com/2018/03/27/hexo-install/index.html">
 <meta property="og:site_name" content="CGLS 的博客 | 彼岸花开花开彼岸">
 <meta property="og:description" content="第一步 安装  安装git1.1 centos版  yum install git-core 1.2 windows版 下载安装即可：https://git-scm.com/downloads   安装node.js   2.1 centos版 下载https://nodejs.org/dist/latest-v8.x/node-v8.1.4-linux-x64.tar.gz```123下载完成后">
-<meta property="og:image" content="https://cdn.liaoxuefeng.com/cdn/files/attachments/001384908342205cc1234dfe1b541ff88b90b44b30360da000/0">
-<meta property="og:updated_time" content="2018-03-30T01:41:08.431Z">
+<meta property="og:image" content="http://img.blog.csdn.net/20161115144252106">
+<meta property="og:image" content="http://img.blog.csdn.net/20161115151846671">
+<meta property="og:image" content="http://img.blog.csdn.net/20161115151916503">
+<meta property="og:updated_time" content="2018-03-30T01:42:44.512Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo_install">
 <meta name="twitter:description" content="第一步 安装  安装git1.1 centos版  yum install git-core 1.2 windows版 下载安装即可：https://git-scm.com/downloads   安装node.js   2.1 centos版 下载https://nodejs.org/dist/latest-v8.x/node-v8.1.4-linux-x64.tar.gz```123下载完成后">
-<meta name="twitter:image" content="https://cdn.liaoxuefeng.com/cdn/files/attachments/001384908342205cc1234dfe1b541ff88b90b44b30360da000/0">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161115144252106">
 
 
 
@@ -395,18 +397,30 @@
 <li><p>换主题<br>选择一个主题：<br><a href="https://www.zhihu.com/question/24422335" target="_blank" rel="noopener">https://www.zhihu.com/question/24422335</a></p>
 </li>
 </ol>
-<p>克隆主题：<br><figure class="highlight plain"><figcaption><span>clone</span><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">themes/next```</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">修改theme为主题名</span><br><span class="line">![image](http://img.blog.csdn.net/20161115144252106)</span><br></pre></td></tr></table></figure></p>
-<p>hexo clean  //清除缓存<br>hexo g  //重新生成代码<br>hexo s  //部署到本地<br>//然后打开浏览器访问 localhost:4000 查看效果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">7. hexo后台运行</span><br><span class="line">安装并运行hexo博客后，一般教程都会告诉运行命令是:hexo s,但是关掉Terminal，进程也就结束了，对于一个希望永远运行的服务器来说是不可接受的。</span><br><span class="line"></span><br><span class="line">查阅一些资料后找到一个后台运行的命令: hexo s &amp;</span><br><span class="line"></span><br><span class="line">关闭服务：</span><br><span class="line"></span><br><span class="line">netstat -aon|findstr &quot;4000&quot;；</span><br><span class="line"></span><br><span class="line">tasklist|findstr &quot;PID&quot;；</span><br><span class="line"></span><br><span class="line">杀死nodejs服务。</span><br><span class="line"></span><br><span class="line">这个命令确实可以实现后台运行，关闭服务的体验太差。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">8. 部署到github上</span><br><span class="line">8.1 密钥设置</span><br><span class="line"></span><br><span class="line">创建一个新项目</span><br><span class="line">![image](http://img.blog.csdn.net/20161115151846671)</span><br><span class="line"></span><br><span class="line">按格式输入项目名称</span><br><span class="line">![image](http://img.blog.csdn.net/20161115151916503)</span><br><span class="line"></span><br><span class="line">创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：</span><br><span class="line">```ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br></pre></td></tr></table></figure></p>
-<p>你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。</p>
-<p>如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</p>
-<p>第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：</p>
-<p>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：<br><img src="https://cdn.liaoxuefeng.com/cdn/files/attachments/001384908342205cc1234dfe1b541ff88b90b44b30360da000/0" alt="image"></p>
-<p>点“Add Key”，你就应该看到已经添加的Key</p>
-<p>8.2 hexo连接github</p>
-<p>repo库（Repository）地址<br>branch    分支名称。如果您使用的是 GitHub 或 GitCafe 的话，程序会尝试自动检测。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vim  _config.yml</span><br><span class="line"></span><br><span class="line">deploy:</span><br><span class="line">- type: git</span><br><span class="line">  repo:  git@github.com:yourname/yourname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-<p>8.3 安装发布工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
-<p>8.4 访问博客<br><a href="https://cuigelasi.github.io/" target="_blank" rel="noopener">https://cuigelasi.github.io/</a></p>
+<p>克隆主题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></p>
+<p>修改theme为主题名<br><img src="http://img.blog.csdn.net/20161115144252106" alt="image"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean  //清除缓存</span><br><span class="line">hexo g  //重新生成代码</span><br><span class="line">hexo s  //部署到本地</span><br><span class="line">//然后打开浏览器访问 localhost:4000 查看效果</span><br></pre></td></tr></table></figure></p>
+<ol start="7">
+<li>hexo后台运行<br>安装并运行hexo博客后，一般教程都会告诉运行命令是:hexo s,但是关掉Terminal，进程也就结束了，对于一个希望永远运行的服务器来说是不可接受的。</li>
+</ol>
+<p>查阅一些资料后找到一个后台运行的命令: hexo s &amp;</p>
+<p>关闭服务：</p>
+<p>netstat -aon|findstr “4000”；</p>
+<p>tasklist|findstr “PID”；</p>
+<p>杀死nodejs服务。</p>
+<p>这个命令确实可以实现后台运行，关闭服务的体验太差。</p>
+<ol start="8">
+<li>部署到github上<br>8.1 密钥设置</li>
+</ol>
+<p>创建一个新项目<br><img src="http://img.blog.csdn.net/20161115151846671" alt="image"></p>
+<p>按格式输入项目名称<br><img src="http://img.blog.csdn.net/20161115151916503" alt="image"></p>
+<p>创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：<br><figure class="highlight plain"><figcaption><span>-t rsa -C "youremail@example.com"```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。</span><br><span class="line"></span><br><span class="line">如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。</span><br><span class="line"></span><br><span class="line">第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：</span><br><span class="line"></span><br><span class="line">然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：</span><br><span class="line">![image](https://cdn.liaoxuefeng.com/cdn/files/attachments/001384908342205cc1234dfe1b541ff88b90b44b30360da000/0)</span><br><span class="line"></span><br><span class="line">点“Add Key”，你就应该看到已经添加的Key</span><br><span class="line"></span><br><span class="line">8.2 hexo连接github</span><br><span class="line"></span><br><span class="line">repo库（Repository）地址</span><br><span class="line">branch	分支名称。如果您使用的是 GitHub 或 GitCafe 的话，程序会尝试自动检测。</span><br></pre></td></tr></table></figure></p>
+<p>vim  _config.yml</p>
+<p>deploy:</p>
+<ul>
+<li>type: git<br>repo:  <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:yourname/yourname.github.io.git<br>branch: master<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">8.3 安装发布工具</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>npm install hexo-deployer-git –save<br>hexo clean<br>hexo g<br>hexo d<br><code>`</code><br>8.4 访问博客<br><a href="https://cuigelasi.github.io/" target="_blank" rel="noopener">https://cuigelasi.github.io/</a></p>
 
       
     </div>
