@@ -3,16 +3,36 @@
 
 
     
-    
-    
-    
   <url>
     <loc>http://yoursite.com/2018/03/27/hexo-install/</loc>
-    <lastmod>2018-03-30T01:44:28.320Z</lastmod>
+    <lastmod>2018-08-03T03:00:43.190Z</lastmod>
     <data>
         <display>
         <title>hexo_install</title>
         <pubTime>2018-03-27T08:50:46.000Z</pubTime>
+        
+        <tag>PS3</tag>
+         
+        <tag>Games</tag>
+         
+         
+           
+             
+              <breadCrumb title="Diary" url="http://yoursite.com/categories/Diary/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://yoursite.com/2018/08/02/tags/</loc>
+    <lastmod>2018-08-02T08:57:05.776Z</lastmod>
+    <data>
+        <display>
+        <title>tags</title>
+        <pubTime>2018-08-02T08:57:05.000Z</pubTime>
         
          
            
@@ -20,6 +40,8 @@
     </data>
     </url>
 
+    
+    
     
   <url>
     <loc>http://yoursite.com/2018/03/27/hello-world/</loc>
