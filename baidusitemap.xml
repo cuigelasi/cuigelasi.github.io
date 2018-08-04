@@ -4,8 +4,29 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/08/04/kubernetes%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98/</loc>
+    <lastmod>2018-08-04T07:12:27.079Z</lastmod>
+    <data>
+        <display>
+        <title>kubernetes入门与实战</title>
+        <pubTime>2018-08-04T07:09:44.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>云计算</tag>
+         
+        <tag>kubernetes</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/08/04/humpback%E5%AE%B9%E5%99%A8%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0/</loc>
-    <lastmod>2018-08-04T04:12:37.892Z</lastmod>
+    <lastmod>2018-08-04T04:12:48.129Z</lastmod>
     <data>
         <display>
         <title>humpback容器管理平台</title>
