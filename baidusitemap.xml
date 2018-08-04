@@ -4,8 +4,27 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/08/04/docker%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/</loc>
+    <lastmod>2018-08-04T03:40:54.177Z</lastmod>
+    <data>
+        <display>
+        <title>docker技术入门与实践</title>
+        <pubTime>2018-08-04T03:08:44.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>云计算</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/03/27/hexo-install/</loc>
-    <lastmod>2018-08-04T02:14:18.551Z</lastmod>
+    <lastmod>2018-08-04T03:07:31.927Z</lastmod>
     <data>
         <display>
         <title>hexo_install</title>
@@ -25,12 +44,9 @@
     </url>
 
     
-    
-    
-    
   <url>
     <loc>http://yoursite.com/2018/03/27/hello-world/</loc>
-    <lastmod>2018-03-27T08:29:39.131Z</lastmod>
+    <lastmod>2018-08-04T02:34:42.324Z</lastmod>
     <data>
         <display>
         <title>Hello World</title>
@@ -42,4 +58,7 @@
     </data>
     </url>
 
+    
+    
+    
 </urlset>

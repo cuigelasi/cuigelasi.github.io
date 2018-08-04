@@ -87,15 +87,12 @@
 <meta property="og:site_name" content="CGLS 的博客">
 <meta property="og:description" content="安装部署安装gitcentos版yum install git-core windows版下载安装即可：https://git-scm.com/downloads  安装node.jscentos版下载wget https://nodejs.org/dist/latest-v8.x/node-v8.1.4-linux-x64.tar.gz 下载完成后解压tar zxvf node-v8.1.4-l">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://s1.ax1x.com/2018/08/03/PBiuPs.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/08/03/PBiM2q.png">
-<meta property="og:image" content="https://cdn.liaoxuefeng.com/cdn/files/attachments/001384908342205cc1234dfe1b541ff88b90b44b30360da000/0">
-<meta property="og:image" content="https://s1.ax1x.com/2018/08/03/PBkYC9.png">
-<meta property="og:updated_time" content="2018-08-04T02:14:18.551Z">
+<meta property="og:image" content="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg">
+<meta property="og:updated_time" content="2018-08-04T03:07:31.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo_install">
 <meta name="twitter:description" content="安装部署安装gitcentos版yum install git-core windows版下载安装即可：https://git-scm.com/downloads  安装node.jscentos版下载wget https://nodejs.org/dist/latest-v8.x/node-v8.1.4-linux-x64.tar.gz 下载完成后解压tar zxvf node-v8.1.4-l">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/08/03/PBiuPs.png">
+<meta name="twitter:image" content="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg">
 
 
 
@@ -395,6 +392,22 @@
 
       
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg" rel="gallery_cjkev7xse0003rgcx4vv0w6e9"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
         <h1 id="安装部署"><a href="#安装部署" class="headerlink" title="安装部署"></a>安装部署</h1><h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><h3 id="centos版"><a href="#centos版" class="headerlink" title="centos版"></a>centos版</h3><p>yum install git-core</p>
@@ -448,6 +461,10 @@
 <h2 id="hexo的next主题个性化教程"><a href="#hexo的next主题个性化教程" class="headerlink" title="hexo的next主题个性化教程"></a>hexo的next主题个性化教程</h2><p><a href="https://blog.csdn.net/qq_33699981/article/details/72716951" target="_blank" rel="noopener">https://blog.csdn.net/qq_33699981/article/details/72716951</a></p>
 <h2 id="设置首页不显示全文-只显示预览"><a href="#设置首页不显示全文-只显示预览" class="headerlink" title="设置首页不显示全文(只显示预览)"></a>设置首页不显示全文(只显示预览)</h2><p>进入hexo博客项目的themes/next目录<br>用文本编辑器打开_config.yml文件<br>搜索”auto_excerpt”,找到如下部分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommand.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure></p>
 <p>然后hexo d -g，再进主页，问题就解决了！</p>
+<h2 id="设置首页不显示全文-只显示图片"><a href="#设置首页不显示全文-只显示图片" class="headerlink" title="设置首页不显示全文(只显示图片)"></a>设置首页不显示全文(只显示图片)</h2><p>进入hexo博客项目的themes/next目录<br>用文本编辑器打开_config.yml文件<br>搜索”auto_excerpt”,找到如下部分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Automatically Excerpt. Not recommand.</span><br><span class="line"># Please use &lt;!-- more --&gt; in the post to control excerpt accurately.</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 0</span><br></pre></td></tr></table></figure></p>
+<p>然后在md文件前添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">top:</span><br><span class="line">photos: </span><br><span class="line">    - &quot;http://oz2tkq0zj.bkt.clouddn.com/17-11-9/52323298.jpg&quot;</span><br></pre></td></tr></table></figure></p>
+<p>然后hexo d -g，再进主页，问题就解决了！</p>
+<h2 id="添加看板娘"><a href="#添加看板娘" class="headerlink" title="添加看板娘"></a>添加看板娘</h2><p>第一步在项目下安装<br>npm install –save hexo-helper-live2d<br>在主题的_config.yml文件添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw/</span><br><span class="line">  pluginJsPath: lib/</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: false</span><br><span class="line">  log: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-wanko</span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 150</span><br><span class="line">    height: 300</span><br><span class="line">  mobile:</span><br><span class="line">    show: true</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -489,6 +506,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/04/docker技术入门与实践/" rel="prev" title="docker技术入门与实践">
+                docker技术入门与实践 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -569,7 +590,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -591,7 +612,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -688,7 +709,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装部署"><span class="nav-number">1.</span> <span class="nav-text">安装部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装git"><span class="nav-number">1.1.</span> <span class="nav-text">安装git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos版"><span class="nav-number">1.1.1.</span> <span class="nav-text">centos版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows版"><span class="nav-number">1.1.2.</span> <span class="nav-text">windows版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装node-js"><span class="nav-number">1.2.</span> <span class="nav-text">安装node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos版-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">centos版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows版-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">windows版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">1.3.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化项目"><span class="nav-number">1.4.</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写博客"><span class="nav-number">1.5.</span> <span class="nav-text">写博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#换主题"><span class="nav-number">1.6.</span> <span class="nav-text">换主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo后台运行"><span class="nav-number">1.7.</span> <span class="nav-text">hexo后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到github上"><span class="nav-number">1.8.</span> <span class="nav-text">部署到github上</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#密钥设置"><span class="nav-number">1.8.1.</span> <span class="nav-text">密钥设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo连接github"><span class="nav-number">1.8.2.</span> <span class="nav-text">hexo连接github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装发布工具"><span class="nav-number">1.8.3.</span> <span class="nav-text">安装发布工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问博客"><span class="nav-number">1.8.4.</span> <span class="nav-text">访问博客</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加标签"><span class="nav-number">1.9.</span> <span class="nav-text">添加标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接入统计功能"><span class="nav-number">1.10.</span> <span class="nav-text">接入统计功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习网站"><span class="nav-number">1.11.</span> <span class="nav-text">学习网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MarkDown-编辑工具"><span class="nav-number">1.12.</span> <span class="nav-text">MarkDown 编辑工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签云"><span class="nav-number">1.13.</span> <span class="nav-text">标签云</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo的next主题个性化教程"><span class="nav-number">1.14.</span> <span class="nav-text">hexo的next主题个性化教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置首页不显示全文-只显示预览"><span class="nav-number">1.15.</span> <span class="nav-text">设置首页不显示全文(只显示预览)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装部署"><span class="nav-number">1.</span> <span class="nav-text">安装部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装git"><span class="nav-number">1.1.</span> <span class="nav-text">安装git</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos版"><span class="nav-number">1.1.1.</span> <span class="nav-text">centos版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows版"><span class="nav-number">1.1.2.</span> <span class="nav-text">windows版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装node-js"><span class="nav-number">1.2.</span> <span class="nav-text">安装node.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#centos版-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">centos版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#windows版-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">windows版</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hexo"><span class="nav-number">1.3.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化项目"><span class="nav-number">1.4.</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写博客"><span class="nav-number">1.5.</span> <span class="nav-text">写博客</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#换主题"><span class="nav-number">1.6.</span> <span class="nav-text">换主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo后台运行"><span class="nav-number">1.7.</span> <span class="nav-text">hexo后台运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署到github上"><span class="nav-number">1.8.</span> <span class="nav-text">部署到github上</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#密钥设置"><span class="nav-number">1.8.1.</span> <span class="nav-text">密钥设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo连接github"><span class="nav-number">1.8.2.</span> <span class="nav-text">hexo连接github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装发布工具"><span class="nav-number">1.8.3.</span> <span class="nav-text">安装发布工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问博客"><span class="nav-number">1.8.4.</span> <span class="nav-text">访问博客</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加标签"><span class="nav-number">1.9.</span> <span class="nav-text">添加标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接入统计功能"><span class="nav-number">1.10.</span> <span class="nav-text">接入统计功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习网站"><span class="nav-number">1.11.</span> <span class="nav-text">学习网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MarkDown-编辑工具"><span class="nav-number">1.12.</span> <span class="nav-text">MarkDown 编辑工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签云"><span class="nav-number">1.13.</span> <span class="nav-text">标签云</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo的next主题个性化教程"><span class="nav-number">1.14.</span> <span class="nav-text">hexo的next主题个性化教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置首页不显示全文-只显示预览"><span class="nav-number">1.15.</span> <span class="nav-text">设置首页不显示全文(只显示预览)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置首页不显示全文-只显示图片"><span class="nav-number">1.16.</span> <span class="nav-text">设置首页不显示全文(只显示图片)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加看板娘"><span class="nav-number">1.17.</span> <span class="nav-text">添加看板娘</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -706,7 +727,7 @@
     <h3 class="widget-title">Tag Cloud</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
     </div>
