@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2018/08/04/docker%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/</loc>
+    <loc>http://yoursite.com/2018/08/04/humpback%E5%AE%B9%E5%99%A8%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0/</loc>
     
-    <lastmod>2018-08-04T03:40:54.177Z</lastmod>
+    <lastmod>2018-08-04T04:12:37.892Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2018/03/27/hexo-install/</loc>
     
-    <lastmod>2018-08-04T03:07:31.927Z</lastmod>
+    <lastmod>2018-08-04T03:45:29.103Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/04/docker%E6%8A%80%E6%9C%AF%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E8%B7%B5/</loc>
+    
+    <lastmod>2018-08-04T03:40:54.177Z</lastmod>
     
   </url>
   
