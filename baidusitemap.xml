@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/08/27/docker%E9%87%8D%E5%90%AF%E7%AD%96%E7%95%A5/</loc>
+    <lastmod>2018-08-27T10:04:09.555Z</lastmod>
+    <data>
+        <display>
+        <title>docker重启策略</title>
+        <pubTime>2018-08-27T09:30:29.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>面试</tag>
+         
+         
+           
+             
+              <breadCrumb title="Deploy" url="http://yoursite.com/categories/Deploy/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/08/07/openstack%E5%AE%98%E6%96%B9Mitaka%E7%89%88/</loc>
     <lastmod>2018-08-07T02:00:30.067Z</lastmod>
     <data>
