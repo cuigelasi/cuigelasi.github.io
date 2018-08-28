@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Docker,面试," />
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CGLS 的博客">
-<meta property="og:url" content="http://yoursite.com/tags/openstack/index.html">
+<meta name="description" content="前言很多人问我，docker是通过什么隔离，实现了与物理机的隔离，可以在物理机上运行容器。这样的隔离是否安全，隔离了哪些资源？今天就简单和大家聊一下docker与物理机间的隔离机制。 名称解析LXC （Linux Container） ：内核级的虚拟化 。 namespace ：命名空间 ，相当于班级的概念，A班和B班都有小明，可以通过班级这个命名空间进行隔离得以区分。 cgroup ：控制组，提">
+<meta name="keywords" content="Docker,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker与物理机-相爱相杀的隔离机制">
+<meta property="og:url" content="http://yoursite.com/2018/08/28/Docker与物理机-相爱相杀的隔离机制/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta property="og:description" content="前言很多人问我，docker是通过什么隔离，实现了与物理机的隔离，可以在物理机上运行容器。这样的隔离是否安全，隔离了哪些资源？今天就简单和大家聊一下docker与物理机间的隔离机制。 名称解析LXC （Linux Container） ：内核级的虚拟化 。 namespace ：命名空间 ，相当于班级的概念，A班和B班都有小明，可以通过班级这个命名空间进行隔离得以区分。 cgroup ：控制组，提">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535433604193&di=eaea27c4658fb3c7eac02a886cf09e4a&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png">
+<meta property="og:updated_time" content="2018-08-28T03:42:39.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CGLS 的博客">
-<meta name="twitter:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta name="twitter:title" content="Docker与物理机-相爱相杀的隔离机制">
+<meta name="twitter:description" content="前言很多人问我，docker是通过什么隔离，实现了与物理机的隔离，可以在物理机上运行容器。这样的隔离是否安全，隔离了哪些资源？今天就简单和大家聊一下docker与物理机间的隔离机制。 名称解析LXC （Linux Container） ：内核级的虚拟化 。 namespace ：命名空间 ，相当于班级的概念，A班和B班都有小明，可以通过班级这个命名空间进行隔离得以区分。 cgroup ：控制组，提">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535433604193&di=eaea27c4658fb3c7eac02a886cf09e4a&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/openstack/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/28/Docker与物理机-相爱相杀的隔离机制/"/>
 
 
 
 
 
-  <title>标签: openstack | CGLS 的博客</title>
+  <title>Docker与物理机-相爱相杀的隔离机制 | CGLS 的博客</title>
   
 
 
@@ -153,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -287,82 +291,218 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>openstack<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/28/Docker与物理机-相爱相杀的隔离机制/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/08/07/openstack官方Mitaka版/" itemprop="url">
-              
-                <span itemprop="name">openstack官方Mitaka版</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Docker与物理机-相爱相杀的隔离机制</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-07T09:56:14+08:00"
-              content="2018-08-07" >
-          08-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T10:31:34+08:00">
+                2018-08-28
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Base/" itemprop="url" rel="index">
+                    <span itemprop="name">Base</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535433604193&di=eaea27c4658fb3c7eac02a886cf09e4a&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png" rel="gallery_cjld61wfh0001bgcxzzjv5q2j"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535433604193&di=eaea27c4658fb3c7eac02a886cf09e4a&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png" itemprop="contentUrl"/>
+              </a>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          </div>
+        </div>
+      
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/04/每天5分钟玩转openstack/" itemprop="url">
-              
-                <span itemprop="name">每天5分钟玩转openstack</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-04T15:27:14+08:00"
-              content="2018-08-04" >
-          08-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>很多人问我，docker是通过什么隔离，实现了与物理机的隔离，可以在物理机上运行容器。这样的隔离是否安全，隔离了哪些资源？今天就简单和大家聊一下docker与物理机间的隔离机制。</p>
+<h2 id="名称解析"><a href="#名称解析" class="headerlink" title="名称解析"></a>名称解析</h2><p>LXC （Linux Container） ：内核级的虚拟化 。</p>
+<p>namespace ：命名空间 ，相当于班级的概念，A班和B班都有小明，可以通过班级这个命名空间进行隔离得以区分。</p>
+<p>cgroup ：控制组，提供了一套机制用于控制一组特定进程对资源的使用 。</p>
+<p>capability ：权限限制 。</p>
+<h1 id="Docker-与-虚拟机的对比"><a href="#Docker-与-虚拟机的对比" class="headerlink" title="Docker 与 虚拟机的对比"></a>Docker 与 虚拟机的对比</h1><p>虚拟机是完全虚拟化，用Hypervisor将底层硬件进行了虚拟化，最大的好处是能支持操作系统及软件 。</p>
+<p>Docker是内核虚拟化，不使用Hypervisor是不完全虚拟化，依赖内核的特性实现资源隔离， 所以说docker是直接使用物理硬件资源，那么docker启动不需要加载内核就可以快速启动。</p>
+<h1 id="隔离机制"><a href="#隔离机制" class="headerlink" title="隔离机制"></a>隔离机制</h1><p>Docker技术通过LXC来实现轻量级的虚拟化，通过namespace进行隔离、cgroup进行资源限制、capability进行权限限制，以满足容器的安全隔离。然而由于Docker容器是共享Linux内核的，所以我们应该认识到容器并非严格全封闭，使用Docker容器一定需要注意保证内核的安全和稳定，需要配合必要的监控和容错。 </p>
+<h2 id="Linux-namespace"><a href="#Linux-namespace" class="headerlink" title="Linux namespace"></a>Linux namespace</h2><p>六种命名空间：</p>
+<p>1) UTS命名空间负责主机名和域名的隔离</p>
+<p>使得容器都拥有自己的主机名和域名，可以被看作一个独立的网络节点。</p>
+<p>2) IPC命名空间负责信号量、消息队列和共享内存的隔离</p>
+<p>其包含了系统IPC标示符以及实现POSIX消息队列的文件系统，使得同一个IPC命名空间下的进程彼此可见，不同的则相互不可见；</p>
+<p>3) PID命名空间负责进程PID编号的隔离</p>
+<p>不同的PID命名空间下的进程可以有相同的PID，每个PID命名空间都有独立的计数程序。</p>
+<p>4) Network命名空间负责网络资源的隔离</p>
+<p>这里的隔离并非真正意义的网络隔离，而是把容器的网络独立出来，如同一个独立的网络实体来与外部通信。</p>
+<p>5) Mount命名空间负责挂载点的隔离</p>
+<p>不同Mount命名空间下的文件结构发生变化互不影响。</p>
+<p>6) User命名空间负责安全相关的标示符和属性的隔离</p>
+<p>包括用户ID、用户组ID、root目录、密钥key以及特殊权限等，该命名空间技术支持进程在容器内外拥有不同级别的权限。</p>
+<h2 id="cgroup"><a href="#cgroup" class="headerlink" title="cgroup"></a>cgroup</h2><p>四种功能</p>
+<p>1) 资源限制</p>
+<p>对任务使用的资源总量进行限制，如应用在运行时超过上限配额就会给与提示。</p>
+<p>2) 优先级分配</p>
+<p>通过分配的CPU时间片数量及磁盘IO带宽大小，实际上就相当于控制了任务的优先级。</p>
+<p>3) 资源统计</p>
+<p>可以统计系统的资源使用量，如CPU、内存等使用情况。</p>
+<p>4) 任务控制</p>
+<p>可以对任务进行挂起、恢复等操作。  </p>
+<h2 id="capability"><a href="#capability" class="headerlink" title="capability"></a>capability</h2><p>Linux支持把超级用户不同单元的权限分离，可以单独的开启和禁止，即capability的概念。</p>
+<p>可以将capability赋给普通的进程，使其可以做root用户可以做的事情。内核在验证进程是否具有某项权限时，不再验证该进程的是特权进程(有效用户ID为0)和非特权进程(有效用户ID非0)，而是验证该进程是否具有其进行该操作的capability。不合理的禁止capability，会导致应用崩溃。目前Docker默认启用一个严格capability限制权限，同时支持开发者通过命令行来改变其默认设置，保障可用性的同时又可以确保其安全。 </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/docker重启策略/" rel="next" title="Docker 的重启策略">
+                <i class="fa fa-chevron-left"></i> Docker 的重启策略
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -370,6 +510,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -390,8 +534,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -519,6 +672,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#名称解析"><span class="nav-number">1.1.</span> <span class="nav-text">名称解析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-与-虚拟机的对比"><span class="nav-number">2.</span> <span class="nav-text">Docker 与 虚拟机的对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隔离机制"><span class="nav-number">3.</span> <span class="nav-text">隔离机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-namespace"><span class="nav-number">3.1.</span> <span class="nav-text">Linux namespace</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cgroup"><span class="nav-number">3.2.</span> <span class="nav-text">cgroup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#capability"><span class="nav-number">3.3.</span> <span class="nav-text">capability</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -696,6 +865,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
