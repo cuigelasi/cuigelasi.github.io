@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Docker,面试," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,20 +79,16 @@
 
 
 
-<meta name="description" content="前言有一个朋友最近面试docker相关岗位，面试完之后和我说，非常不好面试官问的都不知道。我就好奇了，现在的面试关到底面试什么问题，仔细询问之后，才了解到，问的问题是基础的docker策略。那么我们今天就聊聊docker相关的策略，以docker的重启策略为例。 start 策略 &amp;amp; stop 策略在讲restart策略之前我们要介绍一下start和stop策略。 所为的容器，可以理解为运">
-<meta name="keywords" content="Docker,面试">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Docker 的重启策略">
-<meta property="og:url" content="http://yoursite.com/2018/08/27/docker重启策略/index.html">
+<meta name="description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CGLS 的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="前言有一个朋友最近面试docker相关岗位，面试完之后和我说，非常不好面试官问的都不知道。我就好奇了，现在的面试关到底面试什么问题，仔细询问之后，才了解到，问的问题是基础的docker策略。那么我们今天就聊聊docker相关的策略，以docker的重启策略为例。 start 策略 &amp;amp; stop 策略在讲restart策略之前我们要介绍一下start和stop策略。 所为的容器，可以理解为运">
+<meta property="og:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535372471348&di=24542b71be3ea0bb38c07933b79fba47&imgtype=0&src=http%3A%2F%2Fres.dyhjw.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20161024%2F1477281298122073.jpg">
-<meta property="og:updated_time" content="2018-08-28T02:34:51.352Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker 的重启策略">
-<meta name="twitter:description" content="前言有一个朋友最近面试docker相关岗位，面试完之后和我说，非常不好面试官问的都不知道。我就好奇了，现在的面试关到底面试什么问题，仔细询问之后，才了解到，问的问题是基础的docker策略。那么我们今天就聊聊docker相关的策略，以docker的重启策略为例。 start 策略 &amp;amp; stop 策略在讲restart策略之前我们要介绍一下start和stop策略。 所为的容器，可以理解为运">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535372471348&di=24542b71be3ea0bb38c07933b79fba47&imgtype=0&src=http%3A%2F%2Fres.dyhjw.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20161024%2F1477281298122073.jpg">
+<meta name="twitter:title" content="CGLS 的博客">
+<meta name="twitter:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
 
 
 
@@ -122,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/27/docker重启策略/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2018/page/2/"/>
 
 
 
 
 
-  <title>Docker 的重启策略 | CGLS 的博客</title>
+  <title>归档 | CGLS 的博客</title>
   
 
 
@@ -157,7 +153,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,205 +287,78 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 11 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2018">2018</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/docker重启策略/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="cuijianmin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="CGLS 的博客">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2018/03/27/hello-world/" itemprop="url">
+              
+                <span itemprop="name">Hello World</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">Docker 的重启策略</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T17:30:29+08:00">
-                2018-08-27
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-03-27T16:29:39+08:00"
+              content="2018-03-27" >
+          03-27
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Deploy/" itemprop="url" rel="index">
-                    <span itemprop="name">Deploy</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
-          
-          
-            <div class="post-gallery-row">
-              <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535372471348&di=24542b71be3ea0bb38c07933b79fba47&imgtype=0&src=http%3A%2F%2Fres.dyhjw.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20161024%2F1477281298122073.jpg" rel="gallery_cjldgs7j7000810cx2mtud6hc"
-                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535372471348&di=24542b71be3ea0bb38c07933b79fba47&imgtype=0&src=http%3A%2F%2Fres.dyhjw.com%2Fueditor%2Fphp%2Fupload%2Fimage%2F20161024%2F1477281298122073.jpg" itemprop="contentUrl"/>
-              </a>
-            
-          
-
-          
-          </div>
-        </div>
-      
-
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>有一个朋友最近面试docker相关岗位，面试完之后和我说，非常不好面试官问的都不知道。我就好奇了，现在的面试关到底面试什么问题，仔细询问之后，才了解到，问的问题是基础的docker策略。那么我们今天就聊聊docker相关的策略，以docker的重启策略为例。</p>
-<h1 id="start-策略-amp-stop-策略"><a href="#start-策略-amp-stop-策略" class="headerlink" title="start 策略 &amp; stop 策略"></a>start 策略 &amp; stop 策略</h1><p>在讲restart策略之前我们要介绍一下start和stop策略。</p>
-<p>所为的容器，可以理解为运行在物理服务器上的一个进程（守护进程）。我们用docker run命令创建一个容器（进程），使用docker start命令启动一个容器（进程），使用docker stop命令停止一个容器（进程）。</p>
-<p>这些命令通过向容器这个进程发送一个信号（SIGTERM）,容器接收到这个信号执行相应的操作。如果希望快速停止容器，我们可以使用docker kill命令，发送SIGKILL信号。</p>
-<h1 id="restart-策略"><a href="#restart-策略" class="headerlink" title="restart 策略"></a>restart 策略</h1><p>策略一：no，默认策略，在容器退出时不重启容器</p>
-<p>策略二：on-failure，在容器非正常退出时（退出状态非0），才会重启容器 </p>
-<p>策略三：on-failure:3，在容器非正常退出时重启容器，最多重启3次</p>
-<p>策略四：在容器退出时总是重启容器 </p>
-<p>策略五：在容器退出时总是重启容器，但是不考虑在Docker守护进程启动时就已经停止了的容器 </p>
-<p>总共有5个策略，所以当我们使用docker restar命令时，并不一定是执行了docker stop &amp; docker start命令。也解释了日常工作环境中，运维人员使用docker restart无法实现容器重启。那么现在我们知道restart默认策略是策略一，如果我们希望改一下restart策略就应该在docker run中指定。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run  -itd --restart=always centos</span><br></pre></td></tr></table></figure>
-<p>根据我们的日常业务需求，给docker设置其相应的策略。</p>
-<h1 id="退出的状态码"><a href="#退出的状态码" class="headerlink" title="退出的状态码"></a>退出的状态码</h1><p>当容器退出的时候会有相应的状态码</p>
-<p>0：表示正常退出<br>非0：表示异常退出（退出状态码采用chroot标准）<br>    125：Docker守护进程本身的错误<br>    126：容器启动后，要执行的默认命令无法调用<br>    127：容器启动后，要执行的默认命令不存在</p>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>docker 的每一个参数都涉及到很多学问，平时在使用这些参数创建容器时候，我们需要好好研究一下用到的参数。不然被有人问到，就会被diss了。</p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
-          
-            <a href="/tags/面试/" rel="tag"># 面试</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/08/07/openstack官方Mitaka版/" rel="next" title="openstack官方Mitaka版">
-                <i class="fa fa-chevron-left"></i> openstack官方Mitaka版
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/28/Docker与物理机-相爱相杀的隔离机制/" rel="prev" title="Docker与物理机-相爱相杀的隔离机制">
-                Docker与物理机-相爱相杀的隔离机制 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2018/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
 
 
           </div>
@@ -497,10 +366,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -521,17 +386,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -659,22 +515,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#start-策略-amp-stop-策略"><span class="nav-number">2.</span> <span class="nav-text">start 策略 &amp; stop 策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#restart-策略"><span class="nav-number">3.</span> <span class="nav-text">restart 策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退出的状态码"><span class="nav-number">4.</span> <span class="nav-text">退出的状态码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结："><span class="nav-number">5.</span> <span class="nav-text">总结：</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -852,10 +692,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
