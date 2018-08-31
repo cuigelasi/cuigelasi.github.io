@@ -4,6 +4,43 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/08/31/%E4%BA%86%E8%A7%A3Docker%E9%95%9C%E5%83%8F%E7%9A%84%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2018-08-31T06:45:01.586Z</lastmod>
+    <data>
+        <display>
+        <title>了解Docker镜像的分层结构</title>
+        <pubTime>2018-08-31T06:09:54.000Z</pubTime>
+        
+        <tag>镜像</tag>
+         
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/08/30/Docker-%E5%AE%B9%E5%99%A8%E4%BA%91%E5%B9%B3%E5%8F%B0openshfit/</loc>
+    <lastmod>2018-08-30T09:58:56.878Z</lastmod>
+    <data>
+        <display>
+        <title>Docker 容器云平台openshfit</title>
+        <pubTime>2018-08-30T06:53:20.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/08/29/python-%E9%82%82%E9%80%85%E7%AE%97%E6%B3%95%E7%BB%98%E5%9B%BE/</loc>
     <lastmod>2018-08-30T02:49:26.564Z</lastmod>
     <data>
