@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Docker,Swarm,编排," />
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CGLS 的博客">
-<meta property="og:url" content="http://yoursite.com/tags/humpback/index.html">
+<meta name="description" content="Swarm介绍swarm 和 kubernetes 一样是容器的编排工具也就是管理docker集群的工具。swarm是docker原生的（亲儿子），kubernetes是谷歌容器管理技术的开源版本（养子）。对于初学者来说，二者很多地方的设计思路是一致的，但是入门学习的难度确是不一样的，亲儿子swarm入门更为简单。接下来，我会带着大家一步步学习swarm，待swarm都掌握了再去攻克kuberne">
+<meta name="keywords" content="Docker,Swarm,编排">
+<meta property="og:type" content="article">
+<meta property="og:title" content="容器编排工具Swarm入门-1-管理docker集群">
+<meta property="og:url" content="http://yoursite.com/2018/09/03/容器编排工具Swarm入门-1-管理docker集群/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta property="og:description" content="Swarm介绍swarm 和 kubernetes 一样是容器的编排工具也就是管理docker集群的工具。swarm是docker原生的（亲儿子），kubernetes是谷歌容器管理技术的开源版本（养子）。对于初学者来说，二者很多地方的设计思路是一致的，但是入门学习的难度确是不一样的，亲儿子swarm入门更为简单。接下来，我会带着大家一步步学习swarm，待swarm都掌握了再去攻克kuberne">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535970333305&di=8b185a28063adf3d251a203a4085ec8d&imgtype=0&src=http%3A%2F%2Fs5.51cto.com%2Fwyfs02%2FM02%2F89%2F87%2FwKioL1gW9QGgDw1DAACrRlz-B2I501.jpg-wh_651x-s_943631985.jpg">
+<meta property="og:updated_time" content="2018-09-03T08:50:47.901Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CGLS 的博客">
-<meta name="twitter:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta name="twitter:title" content="容器编排工具Swarm入门-1-管理docker集群">
+<meta name="twitter:description" content="Swarm介绍swarm 和 kubernetes 一样是容器的编排工具也就是管理docker集群的工具。swarm是docker原生的（亲儿子），kubernetes是谷歌容器管理技术的开源版本（养子）。对于初学者来说，二者很多地方的设计思路是一致的，但是入门学习的难度确是不一样的，亲儿子swarm入门更为简单。接下来，我会带着大家一步步学习swarm，待swarm都掌握了再去攻克kuberne">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535970333305&di=8b185a28063adf3d251a203a4085ec8d&imgtype=0&src=http%3A%2F%2Fs5.51cto.com%2Fwyfs02%2FM02%2F89%2F87%2FwKioL1gW9QGgDw1DAACrRlz-B2I501.jpg-wh_651x-s_943631985.jpg">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/humpback/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/03/容器编排工具Swarm入门-1-管理docker集群/"/>
 
 
 
 
 
-  <title>标签: humpback | CGLS 的博客</title>
+  <title>容器编排工具Swarm入门-1-管理docker集群 | CGLS 的博客</title>
   
 
 
@@ -153,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -287,54 +291,226 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>humpback<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/容器编排工具Swarm入门-1-管理docker集群/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/08/04/humpback容器管理平台/" itemprop="url">
-              
-                <span itemprop="name">humpback容器管理平台</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">容器编排工具Swarm入门-1-管理docker集群</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-04T12:03:26+08:00"
-              content="2018-08-04" >
-          08-04
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T15:37:05+08:00">
+                2018-09-03
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Base/" itemprop="url" rel="index">
+                    <span itemprop="name">Base</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535970333305&di=8b185a28063adf3d251a203a4085ec8d&imgtype=0&src=http%3A%2F%2Fs5.51cto.com%2Fwyfs02%2FM02%2F89%2F87%2FwKioL1gW9QGgDw1DAACrRlz-B2I501.jpg-wh_651x-s_943631985.jpg" rel="gallery_cjlm1r4vp000w14cx0wstxxbc"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535970333305&di=8b185a28063adf3d251a203a4085ec8d&imgtype=0&src=http%3A%2F%2Fs5.51cto.com%2Fwyfs02%2FM02%2F89%2F87%2FwKioL1gW9QGgDw1DAACrRlz-B2I501.jpg-wh_651x-s_943631985.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="Swarm介绍"><a href="#Swarm介绍" class="headerlink" title="Swarm介绍"></a>Swarm介绍</h1><p>swarm 和 kubernetes 一样是容器的编排工具也就是管理docker集群的工具。swarm是docker原生的（亲儿子），kubernetes是谷歌容器管理技术的开源版本（养子）。对于初学者来说，二者很多地方的设计思路是一致的，但是入门学习的难度确是不一样的，亲儿子swarm入门更为简单。接下来，我会带着大家一步步学习swarm，待swarm都掌握了再去攻克kubernetes。</p>
+<h1 id="准备实验环境"><a href="#准备实验环境" class="headerlink" title="准备实验环境"></a>准备实验环境</h1><p>准备三台虚拟机，安装centos7.3系统，selinux关闭，防火墙开启，互信做好。</p>
+<p>controller : 172.16.2.234<br>compute1 : 172.16.2.235<br>compute2 : 172.16.2.234</p>
+<p>实验目标：创建swarm集群，将controller虚拟机设置为主控制节点；将compute1和compute2设置为工作节点。</p>
+<p>填坑准备：如果你的环境无法实现创建swarm集群，请检查是否开启了selinux，防火墙规则是否生效，网络是否可以正常访问外网。</p>
+<h1 id="创建Swarm集群"><a href="#创建Swarm集群" class="headerlink" title="创建Swarm集群"></a>创建Swarm集群</h1><p>控制节点：</p>
+<p>安装并启动docker服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# yum -y install docker</span><br><span class="line">[ root@controller ]# systemctl start docker</span><br></pre></td></tr></table></figure>
+<p>创建swarm集群设置主控制节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# docker swarm init --advertise-addr 172.16.2.234</span><br></pre></td></tr></table></figure>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1535961775401e17bd76bd3" alt="img"></p>
+<p>设置防火墙规则，使得集群间通信正常</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# firewall-cmd --permanent --zone=public --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/tcp --add-port=4789/udp</span><br><span class="line">[ root@controller ]# firewall-cmd --reload</span><br><span class="line">[ root@controller ]# firewall-cmd --permanent --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+<p><img src="http://p3.pstatp.com/large/pgc-image/15359617838672346ccd7b5" alt="img"></p>
+<p>查看swarm集群</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# docker node ls</span><br></pre></td></tr></table></figure>
+<p><img src="http://p99.pstatp.com/large/pgc-image/15359618012000dcd49f6e1" alt="img"></p>
+<p>工作节点：</p>
+<p>安装并启动docker服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute1 ]# yum -y install docker</span><br><span class="line">[ root@compute1 ]# systemctl start docker</span><br></pre></td></tr></table></figure>
+<p>设置防火墙规则，使得集群间通信正常</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute1  ]# firewall-cmd --permanent --zone=public --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/tcp --add-port=4789/udp</span><br><span class="line">[ root@compute1  ]# firewall-cmd --reload</span><br><span class="line">[ root@compute1  ]# firewall-cmd --permanent --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1535961809826f5b9f3a089" alt="img"></p>
+<p>添加compute1到swarm集群中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute1 ]# docker swarm join --token SWMTKN-1-3d0h25uee1kgtb16flo374zpfnr2v8ttz2mzy1zbjjjtutsk7g-5lf48tdr8z457ruuqh7bi8m3j 172.16.2.234:2377</span><br></pre></td></tr></table></figure>
+<p><img src="http://p99.pstatp.com/large/pgc-image/15359618176293d2f3d3063" alt="img"></p>
+<p>安装并启动docker服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute2 ]# yum -y install docker</span><br><span class="line">[ root@compute2 ]# systemctl start docker</span><br></pre></td></tr></table></figure>
+<p>设置防火墙规则，使得集群间通信正常</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute2  ]# firewall-cmd --permanent --zone=public --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/tcp --add-port=4789/udp</span><br><span class="line">[ root@compute2  ]# firewall-cmd --reload</span><br><span class="line">[ root@compute2  ]# firewall-cmd --permanent --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+<p><img src="http://p3.pstatp.com/large/pgc-image/15359618254873a8d48b440" alt="img"></p>
+<p>添加compute2到swarm集群中</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute2 ]# docker swarm join --token SWMTKN-1-3d0h25uee1kgtb16flo374zpfnr2v8ttz2mzy1zbjjjtutsk7g-5lf48tdr8z457ruuqh7bi8m3j 172.16.2.234:2377</span><br></pre></td></tr></table></figure>
+<p><img src="http://p1.pstatp.com/large/pgc-image/15359618333872290e6ce79" alt="img"></p>
+<p>控制节点：</p>
+<p>查看swarm集群</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]#  docker node ls</span><br></pre></td></tr></table></figure>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1535961840830fe0852dea0" alt="img"></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+            <a href="/tags/Swarm/" rel="tag"># Swarm</a>
+          
+            <a href="/tags/编排/" rel="tag"># 编排</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/31/了解Docker镜像的分层结构/" rel="next" title="了解Docker镜像的分层结构">
+                <i class="fa fa-chevron-left"></i> 了解Docker镜像的分层结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -342,6 +518,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -362,8 +542,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -491,6 +680,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swarm介绍"><span class="nav-number">1.</span> <span class="nav-text">Swarm介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备实验环境"><span class="nav-number">2.</span> <span class="nav-text">准备实验环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建Swarm集群"><span class="nav-number">3.</span> <span class="nav-text">创建Swarm集群</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -668,6 +873,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
