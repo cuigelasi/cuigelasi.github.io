@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Docker,Swarm,编排," />
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CGLS 的博客">
-<meta property="og:url" content="http://yoursite.com/tags/编排/index.html">
+<meta name="description" content="Swarm动态扩容 - scaleswarm是作为管理docker集群的工具，自然有管理集群的便捷属性。swarm通过自身的扩容机制，我们只需使用scale命令即可实现动态的扩容。 动态扩容的使用场景： 1.docker集群中某一工作节点宕机，需要动态的将该工作节点上运行的容器迁移到其他工作节点。 2.某服务一段时间内访问过于频繁，需要进行扩容减压，对该服务的容器进行扩容。 增加 12docker">
+<meta name="keywords" content="Docker,Swarm,编排">
+<meta property="og:type" content="article">
+<meta property="og:title" content="容器编排工具Swarm入门-2-动态扩容和路由转发">
+<meta property="og:url" content="http://yoursite.com/2018/09/03/容器编排工具Swarm入门-2-动态扩容和路由转发/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta property="og:description" content="Swarm动态扩容 - scaleswarm是作为管理docker集群的工具，自然有管理集群的便捷属性。swarm通过自身的扩容机制，我们只需使用scale命令即可实现动态的扩容。 动态扩容的使用场景： 1.docker集群中某一工作节点宕机，需要动态的将该工作节点上运行的容器迁移到其他工作节点。 2.某服务一段时间内访问过于频繁，需要进行扩容减压，对该服务的容器进行扩容。 增加 12docker">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3037919654,402056693&fm=26&gp=0.jpg">
+<meta property="og:updated_time" content="2018-09-03T09:24:24.975Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CGLS 的博客">
-<meta name="twitter:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta name="twitter:title" content="容器编排工具Swarm入门-2-动态扩容和路由转发">
+<meta name="twitter:description" content="Swarm动态扩容 - scaleswarm是作为管理docker集群的工具，自然有管理集群的便捷属性。swarm通过自身的扩容机制，我们只需使用scale命令即可实现动态的扩容。 动态扩容的使用场景： 1.docker集群中某一工作节点宕机，需要动态的将该工作节点上运行的容器迁移到其他工作节点。 2.某服务一段时间内访问过于频繁，需要进行扩容减压，对该服务的容器进行扩容。 增加 12docker">
+<meta name="twitter:image" content="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3037919654,402056693&fm=26&gp=0.jpg">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/编排/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/03/容器编排工具Swarm入门-2-动态扩容和路由转发/"/>
 
 
 
 
 
-  <title>标签: 编排 | CGLS 的博客</title>
+  <title>容器编排工具Swarm入门-2-动态扩容和路由转发 | CGLS 的博客</title>
   
 
 
@@ -153,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -287,82 +291,201 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>编排<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/容器编排工具Swarm入门-2-动态扩容和路由转发/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/09/03/容器编排工具Swarm入门-2-动态扩容和路由转发/" itemprop="url">
-              
-                <span itemprop="name">容器编排工具Swarm入门-2-动态扩容和路由转发</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">容器编排工具Swarm入门-2-动态扩容和路由转发</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-03T16:57:16+08:00"
-              content="2018-09-03" >
-          09-03
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T16:57:16+08:00">
+                2018-09-03
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Base/" itemprop="url" rel="index">
+                    <span itemprop="name">Base</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3037919654,402056693&fm=26&gp=0.jpg" rel="gallery_cjlm30vbu0011w4cxk73pkri3"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3037919654,402056693&fm=26&gp=0.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          </div>
+        </div>
+      
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/03/容器编排工具Swarm入门-1-管理docker集群/" itemprop="url">
-              
-                <span itemprop="name">容器编排工具Swarm入门-1-管理docker集群</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-03T15:37:05+08:00"
-              content="2018-09-03" >
-          09-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <h1 id="Swarm动态扩容-scale"><a href="#Swarm动态扩容-scale" class="headerlink" title="Swarm动态扩容 - scale"></a>Swarm动态扩容 - scale</h1><p>swarm是作为管理docker集群的工具，自然有管理集群的便捷属性。swarm通过自身的扩容机制，我们只需使用scale命令即可实现动态的扩容。</p>
+<p>动态扩容的使用场景：</p>
+<p>1.docker集群中某一工作节点宕机，需要动态的将该工作节点上运行的容器迁移到其他工作节点。</p>
+<p>2.某服务一段时间内访问过于频繁，需要进行扩容减压，对该服务的容器进行扩容。</p>
+<p>增加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker service create --name web_server httpd</span><br><span class="line">docker service scale web_server=3</span><br></pre></td></tr></table></figure>
+<p>减少</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker service create --name web_server --replicas=3 httpd</span><br><span class="line">docker service scale web_server=1</span><br></pre></td></tr></table></figure>
+<h1 id="Swarm-路由转发"><a href="#Swarm-路由转发" class="headerlink" title="Swarm 路由转发"></a>Swarm 路由转发</h1><p>swarm管理docker集群，内部的网络是如何通信的？如果我们指定service暴露端口到宿主机，此时的网络是有两套的，eth0对应着跨主机网络ingress ，eth1对应着宿主机桥接网络docker_gwbridge 。eth0负责HA负载均衡，eth1负责与外网通信。这里我们可以访问任意一个节点相应端口，这就是swarm路由转发的功能。</p>
+<p>我们删除之前创建的web_server服务，重新创建暴露端口的web_server服务，创建完毕之后我们访问任意节点相应的8080端口都是可以正常访问的。这便是路由转发。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker service rm web_server</span><br><span class="line">docker service create --name web_server --publish 8080:80 --replicas=2 httpd</span><br><span class="line">curl http:172.16.2.234:8080</span><br><span class="line">curl http:172.16.2.235:8080</span><br><span class="line">curl http:172.16.2.236:8080</span><br></pre></td></tr></table></figure>
+<p>我们再删除web_server服务，重新创建暴露端口的web_server服务这次我们选用自己创建的跨主机网络cgls_net，然后再创建一个测试服务，验证测试服务与web_server服务的网络互通信。结果是测试服务可以正常访问web_server服务，这时测试服务实际上访问的是web_server服务的VIP。这便是服务发现。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker service rm web_server</span><br><span class="line">docker network create --driver overlay cgls_net</span><br><span class="line">docker service create --name web_server --replicas=3 --network cgls_net httpd</span><br><span class="line">docker service create --name test --network cgls_net busybox sleep 10000000</span><br><span class="line">docker exec test.1.ince8jicjjrkv1318x6xrpwh2 ping -c 3 web_server</span><br></pre></td></tr></table></figure>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+            <a href="/tags/Swarm/" rel="tag"># Swarm</a>
+          
+            <a href="/tags/编排/" rel="tag"># 编排</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/03/容器编排工具Swarm入门-1-管理docker集群/" rel="next" title="容器编排工具Swarm入门-1-管理docker集群">
+                <i class="fa fa-chevron-left"></i> 容器编排工具Swarm入门-1-管理docker集群
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -370,6 +493,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -390,8 +517,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -519,6 +655,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swarm动态扩容-scale"><span class="nav-number">1.</span> <span class="nav-text">Swarm动态扩容 - scale</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swarm-路由转发"><span class="nav-number">2.</span> <span class="nav-text">Swarm 路由转发</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -696,6 +848,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

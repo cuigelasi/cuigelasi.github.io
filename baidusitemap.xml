@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/09/03/%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92%E5%B7%A5%E5%85%B7Swarm%E5%85%A5%E9%97%A8-1-%E7%AE%A1%E7%90%86docker%E9%9B%86%E7%BE%A4/</loc>
-    <lastmod>2018-09-03T08:50:47.901Z</lastmod>
+    <loc>http://yoursite.com/2018/09/03/%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92%E5%B7%A5%E5%85%B7Swarm%E5%85%A5%E9%97%A8-2-%E5%8A%A8%E6%80%81%E6%89%A9%E5%AE%B9%E5%92%8C%E8%B7%AF%E7%94%B1%E8%BD%AC%E5%8F%91/</loc>
+    <lastmod>2018-09-03T09:24:24.975Z</lastmod>
     <data>
         <display>
-        <title>容器编排工具Swarm入门-1-管理docker集群</title>
-        <pubTime>2018-09-03T07:37:05.000Z</pubTime>
+        <title>容器编排工具Swarm入门-2-动态扩容和路由转发</title>
+        <pubTime>2018-09-03T08:57:16.000Z</pubTime>
         
         <tag>Docker</tag>
          
@@ -29,7 +29,7 @@
     
   <url>
     <loc>http://yoursite.com/2018/08/29/python-%E9%82%82%E9%80%85%E7%AE%97%E6%B3%95%E7%BB%98%E5%9B%BE/</loc>
-    <lastmod>2018-09-03T02:18:08.702Z</lastmod>
+    <lastmod>2018-09-03T08:54:23.851Z</lastmod>
     <data>
         <display>
         <title>python 邂逅算法绘图</title>
@@ -43,6 +43,30 @@
            
              
               <breadCrumb title="绘图" url="http://yoursite.com/categories/%E7%BB%98%E5%9B%BE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/03/%E5%AE%B9%E5%99%A8%E7%BC%96%E6%8E%92%E5%B7%A5%E5%85%B7Swarm%E5%85%A5%E9%97%A8-1-%E7%AE%A1%E7%90%86docker%E9%9B%86%E7%BE%A4/</loc>
+    <lastmod>2018-09-03T08:50:47.901Z</lastmod>
+    <data>
+        <display>
+        <title>容器编排工具Swarm入门-1-管理docker集群</title>
+        <pubTime>2018-09-03T07:37:05.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>Swarm</tag>
+         
+        <tag>编排</tag>
+         
+         
+           
+             
+              <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
           
         </display>
     </data>
