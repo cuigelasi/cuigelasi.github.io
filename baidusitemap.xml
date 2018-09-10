@@ -5,11 +5,33 @@
     
   <url>
     <loc>http://yoursite.com/2018/09/10/Docker%20logs%20%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</loc>
-    <lastmod>2018-09-10T03:41:25.833Z</lastmod>
+    <lastmod>2018-09-10T05:54:39.145Z</lastmod>
     <data>
         <display>
         <title>Docker logs 日志收集</title>
         <pubTime>2018-09-10T02:41:52.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>限制</tag>
+         
+         
+           
+             
+              <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/08/30/Docker-%E5%AE%B9%E5%99%A8%E4%BA%91%E5%B9%B3%E5%8F%B0openshfit/</loc>
+    <lastmod>2018-09-10T05:53:53.434Z</lastmod>
+    <data>
+        <display>
+        <title>Docker 容器云平台openshfit</title>
+        <pubTime>2018-08-30T06:53:20.000Z</pubTime>
         
          
            
@@ -149,21 +171,6 @@
              
               <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/08/30/Docker-%E5%AE%B9%E5%99%A8%E4%BA%91%E5%B9%B3%E5%8F%B0openshfit/</loc>
-    <lastmod>2018-08-30T09:58:56.878Z</lastmod>
-    <data>
-        <display>
-        <title>Docker 容器云平台openshfit</title>
-        <pubTime>2018-08-30T06:53:20.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>

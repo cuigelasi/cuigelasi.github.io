@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="CGLS 的博客">
 <meta property="og:description" content="安装宿主机准备 controller：管理节点 172.16.2.234 compute1：计算节点 172.16.2.235 互信准备 双机免密互信检测通过 域名解析 cat /etc/hosts 172.16.2.234 controller 172.16.2.235 compute1 端口转发 sysctl net.ipv4.ip_forward=1  1234567891011121314">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-30T09:58:56.878Z">
+<meta property="og:updated_time" content="2018-09-10T05:53:53.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 容器云平台openshfit">
 <meta name="twitter:description" content="安装宿主机准备 controller：管理节点 172.16.2.234 compute1：计算节点 172.16.2.235 互信准备 双机免密互信检测通过 域名解析 cat /etc/hosts 172.16.2.234 controller 172.16.2.235 compute1 端口转发 sysctl net.ipv4.ip_forward=1  1234567891011121314">
@@ -381,6 +381,43 @@
 <p>端口转发</p>
 <p>sysctl net.ipv4.ip_forward=1 </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">yum -y install wget git net-tools bind-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct</span><br><span class="line">yum -y update</span><br><span class="line">cat &lt;&lt; EOF &gt;&gt; /etc/yum.repos.d/all.repo</span><br><span class="line">[base]</span><br><span class="line">name=CentOS-$releasever - Base</span><br><span class="line">baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/os/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">[updates]</span><br><span class="line">name=CentOS-$releasever - Updates</span><br><span class="line">baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/updates/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">[extras]</span><br><span class="line">name=CentOS-$releasever - Extras</span><br><span class="line">baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/extras/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">[openshift-3.10]</span><br><span class="line">name=Openshift 3.10</span><br><span class="line">baseurl=http://mirrors.ustc.edu.cn/centos/$releasever/paas/$basearch/openshift-origin310/</span><br><span class="line">gpgcheck=0</span><br><span class="line">[epel]</span><br><span class="line">name=Centos EPEL</span><br><span class="line">baseurl=http://mirrors.ustc.edu.cn/epel/7/$basearch/</span><br><span class="line">gpgcheck=0</span><br><span class="line">EOF</span><br><span class="line">yum makecache</span><br><span class="line">yum -y install openshift-ansible</span><br><span class="line">yum -y install docker</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参加同学会名单</th>
+<th>联系方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>崔健敏</td>
+<td>15629135537</td>
+</tr>
+<tr>
+<td>文浪</td>
+<td>15629127275</td>
+</tr>
+<tr>
+<td>肖飞</td>
+<td>15629121251</td>
+</tr>
+<tr>
+<td>王鼎鑫</td>
+<td>15927048371</td>
+</tr>
+<tr>
+<td>李飞龙</td>
+<td>15629126863</td>
+</tr>
+<tr>
+<td>胡文莉</td>
+<td>15927048371</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -635,7 +672,7 @@
     <h3 class="widget-title">Tag Cloud</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
     </div>

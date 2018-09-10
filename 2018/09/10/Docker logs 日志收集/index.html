@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Docker,限制," />
 
 
 
@@ -80,18 +80,19 @@
 
 
 <meta name="description" content="常用日志收集为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变">
+<meta name="keywords" content="Docker,限制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker logs 日志收集">
 <meta property="og:url" content="http://yoursite.com/2018/09/10/Docker logs 日志收集/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
 <meta property="og:description" content="常用日志收集为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://image.ipaiban.com/upload-ueditor-image-20171031-1509439261232024465.png">
-<meta property="og:updated_time" content="2018-09-10T03:41:25.833Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536568945359&di=c3236abb39925250bd31ab921ad92ab4&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png">
+<meta property="og:updated_time" content="2018-09-10T05:54:39.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker logs 日志收集">
 <meta name="twitter:description" content="常用日志收集为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变">
-<meta name="twitter:image" content="https://image.ipaiban.com/upload-ueditor-image-20171031-1509439261232024465.png">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536568945359&di=c3236abb39925250bd31ab921ad92ab4&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png">
 
 
 
@@ -344,6 +345,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Base/" itemprop="url" rel="index">
+                    <span itemprop="name">Base</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -368,6 +391,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536568945359&di=c3236abb39925250bd31ab921ad92ab4&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png" rel="gallery_cjlvvhkv500021kcxddtp8d5m"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536568945359&di=c3236abb39925250bd31ab921ad92ab4&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
       
 
       
@@ -398,6 +437,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+            <a href="/tags/限制/" rel="tag"># 限制</a>
+          
+        </div>
       
 
       
@@ -634,7 +681,7 @@
     <h3 class="widget-title">Tag Cloud</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
     </div>
