@@ -79,16 +79,19 @@
 
 
 
-<meta name="description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CGLS 的博客">
-<meta property="og:url" content="http://yoursite.com/tags/python/index.html">
+<meta name="description" content="常用日志收集为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker logs 日志收集">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/Docker logs 日志收集/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta property="og:description" content="常用日志收集为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://image.ipaiban.com/upload-ueditor-image-20171031-1509439261232024465.png">
+<meta property="og:updated_time" content="2018-09-10T03:41:25.833Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CGLS 的博客">
-<meta name="twitter:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta name="twitter:title" content="Docker logs 日志收集">
+<meta name="twitter:description" content="常用日志收集为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变">
+<meta name="twitter:image" content="https://image.ipaiban.com/upload-ueditor-image-20171031-1509439261232024465.png">
 
 
 
@@ -118,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/python/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/10/Docker logs 日志收集/"/>
 
 
 
 
 
-  <title>标签: python | CGLS 的博客</title>
+  <title>Docker logs 日志收集 | CGLS 的博客</title>
   
 
 
@@ -153,7 +156,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -287,82 +290,153 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>python<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/Docker logs 日志收集/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/08/29/python-邂逅算法绘图/" itemprop="url">
-              
-                <span itemprop="name">python 邂逅算法绘图</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Docker logs 日志收集</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-29T17:18:50+08:00"
-              content="2018-08-29" >
-          08-29
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T10:41:52+08:00">
+                2018-09-10
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/29/python-邂逅算法的设计/" itemprop="url">
-              
-                <span itemprop="name">python 邂逅算法的设计</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-29T15:36:42+08:00"
-              content="2018-08-29" >
-          08-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <h1 id="常用日志收集"><a href="#常用日志收集" class="headerlink" title="常用日志收集"></a>常用日志收集</h1><h1 id="为什么要日志收集"><a href="#为什么要日志收集" class="headerlink" title="为什么要日志收集"></a>为什么要日志收集</h1><p>日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？</p>
+<p>这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变动的，而且容器是动态的扩展收缩的，这种情况下我们是无法直接进入相应的容器去查看容器的日志的，所以日志收集一定要进行方案设计。</p>
+<h1 id="常见的日志收集方案"><a href="#常见的日志收集方案" class="headerlink" title="常见的日志收集方案"></a>常见的日志收集方案</h1><p>常用的docker的日志收集方案大致是四种，docker原生的Docker logs；ELK; Fluentd; graylog。</p>
+<h1 id="Docker-logs"><a href="#Docker-logs" class="headerlink" title="Docker logs"></a>Docker logs</h1><p>docker默认会将日志发送到容器的STDOUT和STDERR，其实就是发送到标准输出设备和标准错误设备。我们在启动容器的时候会增加-itd参数：<br>-i 让容器的标准输出持续打开<br>-t 让docker分配一个伪终端，并绑定到容器的标准输出上<br>-d 让容器在后台以守护态形式运行</p>
+<p>所以不加参数d运行的话，我们就会在前台看见标准输出，如果加了参数d的话，我们可以选择进入容器查看标准输出，也可以选择docker logs查看标准输出。</p>
+<p>Docker支持很多种logging driver。</p>
+<p><img src="https://image.ipaiban.com/upload-ueditor-image-20171031-1509439261232024465.png" alt="111"></p>
+<p>我们可以通过命令查看你的logging driver，可以看到我的日志driver是journald。参考官方网站：<a href="https://docs.docker.com/config/containers/logging/journald/#options" target="_blank" rel="noopener">https://docs.docker.com/config/containers/logging/journald/#options</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker info | grep 'Logging Driver'</span><br><span class="line">Logging Driver: journald</span><br></pre></td></tr></table></figure>
+<p>根据journald driver编写log.py文件查看日志</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> systemd.journal</span><br><span class="line"></span><br><span class="line">reader = systemd.journal.Reader()</span><br><span class="line">container_name = raw_input(<span class="string">"&gt;&gt;&gt; please input your container_name:"</span>)</span><br><span class="line"><span class="comment">#raw_inputA=raw_input("pls input sth:")</span></span><br><span class="line">reader.add_match(<span class="string">'CONTAINER_NAME=%s'</span> % container_name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> msg <span class="keyword">in</span> reader:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'&#123;CONTAINER_ID_FULL&#125;: &#123;MESSAGE&#125;'</span>.format(**msg)</span><br></pre></td></tr></table></figure>
+<p>使用log.py文件交互输入容器名进行日志查询</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br><span class="line">python log.py</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; please input your container_name:container_name</span><br></pre></td></tr></table></figure>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/10/Docker-资源限制/" rel="next" title="Docker 资源限制">
+                <i class="fa fa-chevron-left"></i> Docker 资源限制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -370,6 +444,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -390,8 +468,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -519,6 +606,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#常用日志收集"><span class="nav-number">1.</span> <span class="nav-text">常用日志收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要日志收集"><span class="nav-number">2.</span> <span class="nav-text">为什么要日志收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的日志收集方案"><span class="nav-number">3.</span> <span class="nav-text">常见的日志收集方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-logs"><span class="nav-number">4.</span> <span class="nav-text">Docker logs</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -696,6 +799,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
