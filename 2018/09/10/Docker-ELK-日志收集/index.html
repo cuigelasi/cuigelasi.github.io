@@ -82,17 +82,17 @@
 <meta name="description" content="为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变动的，而且容">
 <meta name="keywords" content="Docker,日志收集">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker logs 日志收集">
-<meta property="og:url" content="http://yoursite.com/2018/09/10/Docker logs 日志收集/index.html">
+<meta property="og:title" content="Docker ELK 日志收集">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/Docker-ELK-日志收集/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
 <meta property="og:description" content="为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变动的，而且容">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536568945359&di=c3236abb39925250bd31ab921ad92ab4&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png">
-<meta property="og:updated_time" content="2018-09-10T06:50:08.607Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537166948&di=f2cf726d1e0783bfeb981e4e57915c7d&imgtype=jpg&er=1&src=http%3A%2F%2Fs4.51cto.com%2Foss%2F201808%2F17%2Ff6c05ff14e2bb803dc3b11908a42f75d.jpg-wh_651x-s_378888502.jpg">
+<meta property="og:updated_time" content="2018-09-11T09:34:29.920Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker logs 日志收集">
+<meta name="twitter:title" content="Docker ELK 日志收集">
 <meta name="twitter:description" content="为什么要日志收集日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？ 这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变动的，而且容">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536568945359&di=c3236abb39925250bd31ab921ad92ab4&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537166948&di=f2cf726d1e0783bfeb981e4e57915c7d&imgtype=jpg&er=1&src=http%3A%2F%2Fs4.51cto.com%2Foss%2F201808%2F17%2Ff6c05ff14e2bb803dc3b11908a42f75d.jpg-wh_651x-s_378888502.jpg">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/10/Docker logs 日志收集/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/10/Docker-ELK-日志收集/"/>
 
 
 
 
 
-  <title>Docker logs 日志收集 | CGLS 的博客</title>
+  <title>Docker ELK 日志收集 | CGLS 的博客</title>
   
 
 
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/Docker logs 日志收集/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/Docker-ELK-日志收集/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cuijianmin">
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker logs 日志收集</h1>
+          <h1 class="post-title" itemprop="name headline">Docker ELK 日志收集</h1>
         
 
         <div class="post-meta">
@@ -334,7 +334,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T10:41:52+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T14:48:35+08:00">
                 2018-09-10
               </time>
             
@@ -397,9 +397,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536568945359&di=c3236abb39925250bd31ab921ad92ab4&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png" rel="gallery_cjlywldqm00030wcxdpj8uy37"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537166948&di=f2cf726d1e0783bfeb981e4e57915c7d&imgtype=jpg&er=1&src=http%3A%2F%2Fs4.51cto.com%2Foss%2F201808%2F17%2Ff6c05ff14e2bb803dc3b11908a42f75d.jpg-wh_651x-s_378888502.jpg" rel="gallery_cjlywldxt003d0wcxpvgew6s0"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536568945359&di=c3236abb39925250bd31ab921ad92ab4&imgtype=0&src=http%3A%2F%2Flc-mhke0kuv.cn-n1.lcfile.com%2F67cf9cbf2e6079ec1869.png" itemprop="contentUrl"/>
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537166948&di=f2cf726d1e0783bfeb981e4e57915c7d&imgtype=jpg&er=1&src=http%3A%2F%2Fs4.51cto.com%2Foss%2F201808%2F17%2Ff6c05ff14e2bb803dc3b11908a42f75d.jpg-wh_651x-s_378888502.jpg" itemprop="contentUrl"/>
               </a>
             
           
@@ -413,16 +413,26 @@
         <h1 id="为什么要日志收集"><a href="#为什么要日志收集" class="headerlink" title="为什么要日志收集"></a>为什么要日志收集</h1><p>日志是为了检查服务的运行状态，在服务出现异常的时候，通过排查日志定位问题。无论是我们自己写日志还是服务自带的日志，其目的都是为了有迹可循，那么容器中日志我们为何要单独收集呢？</p>
 <p>这是因为，容器运行之后可以看做一个微型的虚拟机，如果需要查看日志，按照正常思路是进入容器查看日志，在一个不部署容器集群里是可以的。但是如果你是通过编排工具启动容器集群的话，容器运行所在的物理机是变动的，而且容器是动态的扩展收缩的，这种情况下我们是无法直接进入相应的容器去查看容器的日志的，所以日志收集一定要进行方案设计。</p>
 <h1 id="常见的日志收集方案"><a href="#常见的日志收集方案" class="headerlink" title="常见的日志收集方案"></a>常见的日志收集方案</h1><p>常用的docker的日志收集方案大致是四种，docker原生的Docker logs；ELK; Fluentd; graylog。</p>
-<h1 id="Docker-logs"><a href="#Docker-logs" class="headerlink" title="Docker logs"></a>Docker logs</h1><p>docker默认会将日志发送到容器的STDOUT和STDERR，其实就是发送到标准输出设备和标准错误设备。我们在启动容器的时候会增加-itd参数：<br>-i 让容器的标准输出持续打开<br>-t 让docker分配一个伪终端，并绑定到容器的标准输出上<br>-d 让容器在后台以守护态形式运行</p>
-<p>所以不加参数d运行的话，我们就会在前台看见标准输出，如果加了参数d的话，我们可以选择进入容器查看标准输出，也可以选择docker logs查看标准输出。</p>
-<p>Docker支持很多种logging driver。</p>
-<p><img src="https://image.ipaiban.com/upload-ueditor-image-20171031-1509439261232024465.png" alt="111"></p>
-<p>我们可以通过命令查看你的logging driver，可以看到我的日志driver是journald。参考官方网站：<a href="https://docs.docker.com/config/containers/logging/journald/#options" target="_blank" rel="noopener">https://docs.docker.com/config/containers/logging/journald/#options</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker info | grep 'Logging Driver'</span><br><span class="line">Logging Driver: journald</span><br></pre></td></tr></table></figure>
-<p>根据journald driver编写log.py文件查看日志</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> systemd.journal</span><br><span class="line"></span><br><span class="line">reader = systemd.journal.Reader()</span><br><span class="line">container_name = raw_input(<span class="string">"&gt;&gt;&gt; please input your container_name:"</span>)</span><br><span class="line"><span class="comment">#raw_inputA=raw_input("pls input sth:")</span></span><br><span class="line">reader.add_match(<span class="string">'CONTAINER_NAME=%s'</span> % container_name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> msg <span class="keyword">in</span> reader:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'&#123;CONTAINER_ID_FULL&#125;: &#123;MESSAGE&#125;'</span>.format(**msg)</span><br></pre></td></tr></table></figure>
-<p>使用log.py文件交互输入容器名进行日志查询</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker ps -a</span><br><span class="line">python log.py</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; please input your container_name:container_name</span><br></pre></td></tr></table></figure>
+<h1 id="ELK"><a href="#ELK" class="headerlink" title="ELK"></a>ELK</h1><p>ELK是三个软件的合称，E代表的是elasticsearch，L代表的是logstash，K代表的是kibana。</p>
+<h2 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h2><p>我们常说的es全文搜索引擎，由于它可以处理和搜索海量数据并达到实时查询实时出结果，所以一般运用于大数据等业务中。</p>
+<h2 id="Logstash"><a href="#Logstash" class="headerlink" title="Logstash"></a>Logstash</h2><p>主要负责将原日志过滤分析后转发给ES组件，进行索引和存储。</p>
+<h2 id="Kibana"><a href="#Kibana" class="headerlink" title="Kibana"></a>Kibana</h2><p>web图形界面程序，可视化的展示ES的数据，直观的表现ES查询出来的数据。</p>
+<h2 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h2><p><img src="C:\Users\cgls\Pictures\头条\9.10\upload-ueditor-image-20171102-1509588061566063218.png" alt="elk flow path"></p>
+<p>Logstash读取容器的原日志进行过滤和分析之后，转发给ES进行索引和存储，最后由Kibana来进行图形化展示查询结果，方便分析数据。</p>
+<h2 id="搭建单机版ELK"><a href="#搭建单机版ELK" class="headerlink" title="搭建单机版ELK"></a>搭建单机版ELK</h2><h3 id="准备环境"><a href="#准备环境" class="headerlink" title="准备环境"></a>准备环境</h3><p>centos7 基础版系统，已安装1.12版本或者以上版本的docker ，防火墙开启，selinux禁用。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>打开要使用的防火墙端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=5601/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=9200/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=5044/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=4560/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=514/tcp --permanent</span><br><span class="line">firewall-cmd --zone=public --add-port=90/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br><span class="line">firewall-cmd --permanent --zone=public --list-ports</span><br></pre></td></tr></table></figure>
+<p>centos系统开启rsyslog服务，修改rsyslog.conf文件再重启服务，让rsyslog加载imtcp模块并监听514端口，然后将rsyslog中收集的数据转发到本地4560端口。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/rsyslog.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">####### ELK ##########</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash">ModLoad imtcp</span></span><br><span class="line"><span class="meta">$</span><span class="bash">InputTCPServerRun 514</span></span><br><span class="line">*.* @@localhost:4560</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">####### ELK #########</span></span></span><br><span class="line">systemctl restart rsyslog</span><br><span class="line">netstat -tnl | grep 514</span><br><span class="line">netstat -tnl | grep 4560</span><br></pre></td></tr></table></figure>
+<p>部署es容器，然后检查服务是否正常</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 9200:9200 -v /elasticsearch/data:/usr/share/elasticsearch/data --name elasticsearch elasticsearch</span><br><span class="line">curl http://172.16.1.127:9200</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\cgls\Pictures\头条\9.10\1.jpg" alt="1536563641546"></p>
+<p>创建logstash.conf文件，设置logstash从本地的rsyslog服务中取出应用日志数据，然后转发到ES。接下来启动logstash容器和kibana容器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mkdir /logstash</span><br><span class="line">vim /logstash/logstash.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#### logstash #####</span></span></span><br><span class="line">input &#123;</span><br><span class="line">  syslog &#123;</span><br><span class="line">    type =&gt; "rsyslog"</span><br><span class="line">    port =&gt; 4560</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">output &#123;</span><br><span class="line">  elasticsearch &#123;</span><br><span class="line">    hosts =&gt; [ "elasticsearch:9200" ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#### logstash #####</span></span></span><br><span class="line">docker run -d -p 4560:4560 -v /logstash/logstash.conf:/etc/logstash.conf --link elasticsearch:elasticsearch --name logstash logstash logstash -f /etc/logstash.conf</span><br><span class="line">docker run -d -p 5601:5601 --link elasticsearch:elasticsearch -e ELASTICSEARCH_URL=http://elasticsearch:9200 --name kibana kibana</span><br></pre></td></tr></table></figure>
+<p>最后启动nginx容器，来创造nginx日志，通过日志转发到本地syslog服务中，然后由syslog服务将数据转给Logstash进行收集，最后由kibana展示日志并分析。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 90:80 --log-driver syslog --log-opt syslog-address=tcp://localhost:514 --log-opt tag="nginx" --name nginx nginx</span><br><span class="line">curl http://172.16.1.127:90</span><br><span class="line">curl http://172.16.1.127:90</span><br></pre></td></tr></table></figure>
+<p>网页访问kibana，查看nginx日志，这里需要注意的是，要设置日志查看时间范围，不然数据很难刷出来。</p>
+<p><img src="C:\Users\cgls\Pictures\头条\9.10\2.jpg" alt="1536564420368"></p>
 
       
     </div>
@@ -455,8 +465,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/10/Docker-资源限制/" rel="next" title="Docker 资源限制">
-                <i class="fa fa-chevron-left"></i> Docker 资源限制
+              <a href="/2018/09/10/Docker logs 日志收集/" rel="next" title="Docker logs 日志收集">
+                <i class="fa fa-chevron-left"></i> Docker logs 日志收集
               </a>
             
           </div>
@@ -465,8 +475,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/10/Docker-ELK-日志收集/" rel="prev" title="Docker ELK 日志收集">
-                Docker ELK 日志收集 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/11/Docker-Volume数据共享/" rel="prev" title="Docker Volume数据共享">
+                Docker Volume数据共享 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -667,7 +677,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要日志收集"><span class="nav-number">1.</span> <span class="nav-text">为什么要日志收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的日志收集方案"><span class="nav-number">2.</span> <span class="nav-text">常见的日志收集方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-logs"><span class="nav-number">3.</span> <span class="nav-text">Docker logs</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要日志收集"><span class="nav-number">1.</span> <span class="nav-text">为什么要日志收集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的日志收集方案"><span class="nav-number">2.</span> <span class="nav-text">常见的日志收集方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ELK"><span class="nav-number">3.</span> <span class="nav-text">ELK</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Elasticsearch"><span class="nav-number">3.1.</span> <span class="nav-text">Elasticsearch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logstash"><span class="nav-number">3.2.</span> <span class="nav-text">Logstash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kibana"><span class="nav-number">3.3.</span> <span class="nav-text">Kibana</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理流程"><span class="nav-number">3.4.</span> <span class="nav-text">处理流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建单机版ELK"><span class="nav-number">3.5.</span> <span class="nav-text">搭建单机版ELK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备环境"><span class="nav-number">3.5.1.</span> <span class="nav-text">准备环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">3.5.2.</span> <span class="nav-text">安装</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
