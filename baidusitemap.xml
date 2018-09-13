@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/09/13/docker-compose-%E5%AE%B9%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/</loc>
+    <lastmod>2018-09-13T06:07:29.911Z</lastmod>
+    <data>
+        <display>
+        <title>docker-compose 容器自动化</title>
+        <pubTime>2018-09-13T05:59:14.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>日志收集</tag>
+         
+         
+           
+             
+              <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/09/10/Docker-ELK-%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</loc>
     <lastmod>2018-09-12T09:41:15.977Z</lastmod>
     <data>
