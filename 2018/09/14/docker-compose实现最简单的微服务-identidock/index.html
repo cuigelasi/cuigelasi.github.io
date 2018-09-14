@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="docker,云计算,kubernetes," />
+  <meta name="keywords" content="Docker,docker-compose,微服务," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="第一章 准备k8s环境系统环境：centos7 infor版kubernetes-1 172.16.1.101 kubernetes-2 172.16.1.102 kubernetes-3 172.16.1.103  sed -i &amp;quot;s/^SELINUX=.*/SELINUX=disabled/&amp;quot; /etc/selinux/config  hostnamectl set-hos">
-<meta name="keywords" content="docker,云计算,kubernetes">
+<meta name="description" content="什么是微服务顾名思义：指的是很小的独立服务。服务是什么呢？实现一个简单的业务逻辑既是一个服务。所以我们说微服务是指一个简单的业务逻辑用多个独立的小型服务实现。既然了解了什么是微服务，那我们今天就用docker按照微服务的设置思路来实现一个简单的业务逻辑。 业务逻辑简单说：需要一个web展示页面，访问这个web可以输入名字，根据输入的名字动态生成一个简易的像素图标作为这个名字的头像。复杂说：通过py">
+<meta name="keywords" content="Docker,docker-compose,微服务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kubernetes入门与实战">
-<meta property="og:url" content="http://yoursite.com/2018/08/04/kubernetes入门与实战/index.html">
+<meta property="og:title" content="docker-compose 实现最简单的微服务架构">
+<meta property="og:url" content="http://yoursite.com/2018/09/14/docker-compose实现最简单的微服务-identidock/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="第一章 准备k8s环境系统环境：centos7 infor版kubernetes-1 172.16.1.101 kubernetes-2 172.16.1.102 kubernetes-3 172.16.1.103  sed -i &amp;quot;s/^SELINUX=.*/SELINUX=disabled/&amp;quot; /etc/selinux/config  hostnamectl set-hos">
+<meta property="og:description" content="什么是微服务顾名思义：指的是很小的独立服务。服务是什么呢？实现一个简单的业务逻辑既是一个服务。所以我们说微服务是指一个简单的业务逻辑用多个独立的小型服务实现。既然了解了什么是微服务，那我们今天就用docker按照微服务的设置思路来实现一个简单的业务逻辑。 业务逻辑简单说：需要一个web展示页面，访问这个web可以输入名字，根据输入的名字动态生成一个简易的像素图标作为这个名字的头像。复杂说：通过py">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533376814309&di=4f53fa4e18f374806eb446b0f7100a4b&imgtype=0&src=http%3A%2F%2Fimg.mp.sohu.com%2Fupload%2F20170703%2Faad7c33d04b74325b187265a2f3698fa_th.png">
-<meta property="og:updated_time" content="2018-08-04T07:12:27.079Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536924222884&di=edc6b743f2eae188f67c5740728f8364&imgtype=0&src=http%3A%2F%2Fupload-images.jianshu.io%2Fupload_images%2F1293367-cf8e878247d3944e.png">
+<meta property="og:updated_time" content="2018-09-14T08:36:26.503Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kubernetes入门与实战">
-<meta name="twitter:description" content="第一章 准备k8s环境系统环境：centos7 infor版kubernetes-1 172.16.1.101 kubernetes-2 172.16.1.102 kubernetes-3 172.16.1.103  sed -i &amp;quot;s/^SELINUX=.*/SELINUX=disabled/&amp;quot; /etc/selinux/config  hostnamectl set-hos">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533376814309&di=4f53fa4e18f374806eb446b0f7100a4b&imgtype=0&src=http%3A%2F%2Fimg.mp.sohu.com%2Fupload%2F20170703%2Faad7c33d04b74325b187265a2f3698fa_th.png">
+<meta name="twitter:title" content="docker-compose 实现最简单的微服务架构">
+<meta name="twitter:description" content="什么是微服务顾名思义：指的是很小的独立服务。服务是什么呢？实现一个简单的业务逻辑既是一个服务。所以我们说微服务是指一个简单的业务逻辑用多个独立的小型服务实现。既然了解了什么是微服务，那我们今天就用docker按照微服务的设置思路来实现一个简单的业务逻辑。 业务逻辑简单说：需要一个web展示页面，访问这个web可以输入名字，根据输入的名字动态生成一个简易的像素图标作为这个名字的头像。复杂说：通过py">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536924222884&di=edc6b743f2eae188f67c5740728f8364&imgtype=0&src=http%3A%2F%2Fupload-images.jianshu.io%2Fupload_images%2F1293367-cf8e878247d3944e.png">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/04/kubernetes入门与实战/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/14/docker-compose实现最简单的微服务-identidock/"/>
 
 
 
 
 
-  <title>kubernetes入门与实战 | CGLS 的博客</title>
+  <title>docker-compose 实现最简单的微服务架构 | CGLS 的博客</title>
   
 
 
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/04/kubernetes入门与实战/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/14/docker-compose实现最简单的微服务-identidock/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cuijianmin">
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">kubernetes入门与实战</h1>
+          <h1 class="post-title" itemprop="name headline">docker-compose 实现最简单的微服务架构</h1>
         
 
         <div class="post-meta">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-04T15:09:44+08:00">
-                2018-08-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T15:28:21+08:00">
+                2018-09-14
               </time>
             
 
@@ -344,6 +344,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Base/" itemprop="url" rel="index">
+                    <span itemprop="name">Base</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -375,9 +397,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533376814309&di=4f53fa4e18f374806eb446b0f7100a4b&imgtype=0&src=http%3A%2F%2Fimg.mp.sohu.com%2Fupload%2F20170703%2Faad7c33d04b74325b187265a2f3698fa_th.png" rel="gallery_cjm1r5oph0018jwcxseikny93"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536924222884&di=edc6b743f2eae188f67c5740728f8364&imgtype=0&src=http%3A%2F%2Fupload-images.jianshu.io%2Fupload_images%2F1293367-cf8e878247d3944e.png" rel="gallery_cjm1r5oor000djwcx7er8zbi5"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1533376814309&di=4f53fa4e18f374806eb446b0f7100a4b&imgtype=0&src=http%3A%2F%2Fimg.mp.sohu.com%2Fupload%2F20170703%2Faad7c33d04b74325b187265a2f3698fa_th.png" itemprop="contentUrl"/>
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1536924222884&di=edc6b743f2eae188f67c5740728f8364&imgtype=0&src=http%3A%2F%2Fupload-images.jianshu.io%2Fupload_images%2F1293367-cf8e878247d3944e.png" itemprop="contentUrl"/>
               </a>
             
           
@@ -388,78 +410,26 @@
       
 
       
-        <h1 id="第一章-准备k8s环境"><a href="#第一章-准备k8s环境" class="headerlink" title="第一章 准备k8s环境"></a>第一章 准备k8s环境</h1><h2 id="系统环境：centos7-infor版"><a href="#系统环境：centos7-infor版" class="headerlink" title="系统环境：centos7 infor版"></a>系统环境：centos7 infor版</h2><pre><code>kubernetes-1 172.16.1.101
-kubernetes-2 172.16.1.102
-kubernetes-3 172.16.1.103
+        <h1 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h1><p>顾名思义：指的是很小的独立服务。服务是什么呢？实现一个简单的业务逻辑既是一个服务。所以我们说微服务是指一个简单的业务逻辑用多个独立的小型服务实现。既然了解了什么是微服务，那我们今天就用docker按照微服务的设置思路来实现一个简单的业务逻辑。</p>
+<h1 id="业务逻辑"><a href="#业务逻辑" class="headerlink" title="业务逻辑"></a>业务逻辑</h1><p>简单说：需要一个web展示页面，访问这个web可以输入名字，根据输入的名字动态生成一个简易的像素图标作为这个名字的头像。<br>复杂说：通过python Flask创建一个网页，要有输入框和提交按钮，通过Flask的response返回头像；当我们输入名字之后交于dnmonster容器处理，这个容器返回一个头像给Flask 网页；使用Redis缓存技术，当输入的名字已经在缓存中不再重新请求dnmonster容器，直接返回头像。</p>
+<h1 id="业务实现"><a href="#业务实现" class="headerlink" title="业务实现"></a>业务实现</h1><p>编写python文件 identidock.py</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p identidock/app</span><br><span class="line">cd identidock/app</span><br><span class="line">vim identidock/app/identidock.py</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! coding=utf-8</span></span><br><span class="line"><span class="comment"># 导入要用到的模块</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, Response, request</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"><span class="comment"># 建立redis缓存，连接到redis</span></span><br><span class="line">cache = redis.StrictRedis(host=<span class="string">'redis'</span>, port=<span class="number">6379</span>, db=<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 定义salt值，salted = salt + name</span></span><br><span class="line">salt = <span class="string">"UNIQUE_SALT"</span></span><br><span class="line">default_name = <span class="string">'CGLS Blog'</span></span><br><span class="line"><span class="comment"># 设置route支持get和post两种请求</span></span><br><span class="line"><span class="meta">@app.route('/', methods=['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mainpage</span><span class="params">()</span>:</span></span><br><span class="line">    name = default_name</span><br><span class="line">    <span class="comment"># 提交姓名</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        name = request.form[<span class="string">'name'</span>]</span><br><span class="line">    salted_name = salt + name</span><br><span class="line">    <span class="comment"># 对姓名进行SHA256加密运算</span></span><br><span class="line">    name_hash = hashlib.sha256(salted_name.encode()).hexdigest()</span><br><span class="line">    header = <span class="string">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Identidock&lt;/title&gt;&lt;/head&gt;&lt;body&gt;'</span></span><br><span class="line">    body = <span class="string">'''&lt;form method="POST"&gt;</span></span><br><span class="line"><span class="string">              Hello &lt;input type="text" name="name" value="&#123;0&#125;"&gt;</span></span><br><span class="line"><span class="string">              &lt;input type="submit" value="submit"&gt;</span></span><br><span class="line"><span class="string">              &lt;/form&gt;</span></span><br><span class="line"><span class="string">              &lt;p&gt;You look like a:</span></span><br><span class="line"><span class="string">              &lt;img src="/monster/&#123;1&#125;"/&gt;</span></span><br><span class="line"><span class="string">              '''</span>.format(name, name_hash)</span><br><span class="line">    footer = <span class="string">'&lt;/body&gt;&lt;/html&gt;'</span></span><br><span class="line">    <span class="comment"># 返回web页面</span></span><br><span class="line">    <span class="keyword">return</span> header + body + footer</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/monster/&lt;name&gt;')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_identicon</span><span class="params">(name)</span>:</span></span><br><span class="line">    <span class="comment"># 检查姓名是否在缓存中</span></span><br><span class="line">    image = cache.get(name)</span><br><span class="line">    <span class="keyword">if</span> image <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">print</span> (<span class="string">"Cache miss"</span>, flush=<span class="keyword">True</span>)</span><br><span class="line">        <span class="comment"># 获取相应的头像</span></span><br><span class="line">        r = requests.get(<span class="string">'http://dnmonster:8080/monster/'</span> + name + <span class="string">'?size=80'</span>)</span><br><span class="line">        image = r.content</span><br><span class="line">        <span class="comment"># 将姓名和头像一起写到缓存中</span></span><br><span class="line">        cache.set(name, image)</span><br><span class="line">    <span class="comment"># 返回头像</span></span><br><span class="line">    <span class="keyword">return</span> Response(image, mimetype=<span class="string">'image/png'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(debug=<span class="keyword">True</span>, host=<span class="string">'0.0.0.0'</span>)</span><br></pre></td></tr></table></figure>
+<p>编写cmd.sh文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim identidock/cmd.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">set -e</span><br><span class="line"></span><br><span class="line">if [ "$ENV" = 'DEV' ]; then</span><br><span class="line">  echo "Running Development Server"</span><br><span class="line">  exec python "identidock.py"</span><br><span class="line">else</span><br><span class="line">  echo "Running Production Server"</span><br><span class="line">  exec uwsgi --http 0.0.0.0:9090 --wsgi-file /app/identidock.py --callable app --stats 0.0.0.0:9191</span><br></pre></td></tr></table></figure>
+<p>编写Dockerfile</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim Dockerfile</span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> python:<span class="number">3.4</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span> groupadd -r uwsgi &amp;&amp; useradd -r -g uwsgi uwsgi</span><br><span class="line">RUN pip install Flask==0.10.1 uWSGI requests==2.5.1 redis==2.10.3</span><br><span class="line">WORKDIR /app</span><br><span class="line">COPY app /app</span><br><span class="line">COPY cmd.sh /</span><br><span class="line">RUN chmod +x /cmd.sh</span><br><span class="line">EXPOSE 9090 9191</span><br><span class="line">USER uwsgi</span><br><span class="line"></span><br><span class="line">CMD ["/cmd.sh"]</span><br></pre></td></tr></table></figure>
+<p>编写docker-compose.yml</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">identidock:</span></span><br><span class="line"><span class="attr">  build:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="bullet">   -</span> <span class="string">"5000:5000"</span></span><br><span class="line"><span class="attr">  environment:</span></span><br><span class="line"><span class="attr">    ENV:</span> <span class="string">DEV</span> </span><br><span class="line"><span class="attr">  volumes:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">./app:/app</span></span><br><span class="line"><span class="attr">  links:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">dnmonster</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">redis</span></span><br><span class="line"></span><br><span class="line"><span class="attr">dnmonster:</span></span><br><span class="line"><span class="attr">  image:</span> <span class="string">amouat/dnmonster:1.0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">redis:</span></span><br><span class="line"><span class="attr">  image:</span> <span class="attr">redis:3.0</span></span><br></pre></td></tr></table></figure>
+<p>简单说一下上面几个文件之间的关系</p>
+<p>docker-compose.yml自动化管理Dockerfile创建docker identidock镜像并控制运行identidock容器，dnmonster容器，redis容器。Dockerfile是为了创建identidock镜像，它用到了cmd.sh脚本，并且使用了identidock.py文件。cmd.sh文件是判断环境是调试环境还是生产环境，根据环境不同启用不同的命令。identidock.py文件是为了实现web页面，并使用redis容器的缓存存储功能和dnmonster容器的返回头像功能。</p>
+<p>接下来就是生成容器集群了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 创建需要的identidock镜像</span><br><span class="line">cd identidock</span><br><span class="line">docker-compose build</span><br><span class="line"><span class="meta">#</span> 生成并启动容器集群</span><br><span class="line">docker-compose up -d</span><br><span class="line"><span class="meta">#</span> 查看自己的集群，如果你开启了防火墙记得打开5000端口</span><br><span class="line">docker-compose ps</span><br><span class="line">浏览器访问http://&lt;localhost_ip&gt;:5000</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们创建的业务逻辑应用，使用到了三个微型服务，分别是web服务提供web页面；nodejs服务提供返回头像；redis服务提供缓存存储。通过docker自动化工具docker-compose进行管理，根据实际情况我们可以对这几个服务进行动态扩展。</p>
 
-sed -i &quot;s/^SELINUX=.*/SELINUX=disabled/&quot; /etc/selinux/config 
-hostnamectl set-hostname kubernetes-1 --static
-hostnamectl set-hostname kubernetes-1 --transient
-hostnamectl set-hostname kubernetes-1 --pretty
-reboot
-
-sed -i &quot;s/^SELINUX=.*/SELINUX=disabled/&quot; /etc/selinux/config 
-hostnamectl set-hostname kubernetes-2 --static
-hostnamectl set-hostname kubernetes-2 --transient
-hostnamectl set-hostname kubernetes-2 --pretty
-reboot
-
-sed -i &quot;s/^SELINUX=.*/SELINUX=disabled/&quot; /etc/selinux/config 
-hostnamectl set-hostname kubernetes-3 --static
-hostnamectl set-hostname kubernetes-3 --transient
-hostnamectl set-hostname kubernetes-3 --pretty
-reboot
-</code></pre><h2 id="安装docker、etcd-、kubernetes"><a href="#安装docker、etcd-、kubernetes" class="headerlink" title="安装docker、etcd 、kubernetes"></a>安装docker、etcd 、kubernetes</h2><pre><code>yum -y install docker etcd kubernetes
-</code></pre><h2 id="修改kubenetes配置文件"><a href="#修改kubenetes配置文件" class="headerlink" title="修改kubenetes配置文件"></a>修改kubenetes配置文件</h2><pre><code>sed -i &quot;s/--admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota/--admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ResourceQuota/g&quot; /etc/kubernetes/apiserver
-</code></pre><h2 id="按照顺序启动服务"><a href="#按照顺序启动服务" class="headerlink" title="按照顺序启动服务"></a>按照顺序启动服务</h2><pre><code>systemctl start etcd docker kube-apiserver kube-controller-manager kube-scheduler kubelet kube-proxy    
-</code></pre><h2 id="获取pause容器"><a href="#获取pause容器" class="headerlink" title="获取pause容器"></a>获取pause容器</h2><pre><code>先从docker hub上获取一个谷歌pause容器，然后修改镜像名并上传到私有仓库上
-docker pull kubernetes/pause
-docker tag docker.io/kubernetes/pause 172.16.1.150:5000/google_containers/pause-amd64.3.0
-docker push 172.16.1.150:5000/google_containers/pause-amd64.3.0
-</code></pre><h2 id="确保安装了kubernetes的物理机可以从私有仓库上下载镜像"><a href="#确保安装了kubernetes的物理机可以从私有仓库上下载镜像" class="headerlink" title="确保安装了kubernetes的物理机可以从私有仓库上下载镜像"></a>确保安装了kubernetes的物理机可以从私有仓库上下载镜像</h2><pre><code>docker pull 172.16.1.150:5000/google_containers/pause-amd64.3.0
-</code></pre><h2 id="修改kubernetes配置文件"><a href="#修改kubernetes配置文件" class="headerlink" title="修改kubernetes配置文件"></a>修改kubernetes配置文件</h2><pre><code>sed -i &apos;s/KUBELET_ARGS=&quot;&quot;/KUBELET_ARGS=&quot;--pod_infra_container_image=172.16.1.150:5000\/google_containers\/pause-amd64.3.0&quot;/&apos; /etc/kubernetes/kubelet
-</code></pre><h2 id="重启相关服务"><a href="#重启相关服务" class="headerlink" title="重启相关服务"></a>重启相关服务</h2><pre><code>systemctl restart etcd docker kube-apiserver kube-controller-manager kube-scheduler kubelet kube-proxy    
-</code></pre><h1 id="第二章-实例练习"><a href="#第二章-实例练习" class="headerlink" title="第二章 实例练习"></a>第二章 实例练习</h1><h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><pre><code>为mysql服务创建一个RC文件
-mkdir -p /root/yaml/mysql
-touch /root/yaml/mysql/mysql-rc.yaml
-cat &lt;&lt; EOF &gt; /root/yaml/mysql/mysql-rc.yaml
-apiVersion: v1
-kind: ReplicationController
-metadata:
-  name: mysql
-spec:
-  replicas: 1
-  selector:
-    app: mysql
-  template:
-    metadata:
-      labels:
-        app: mysql
-    spec:
-      containers:
-      - name: mysql
-        image: mysql
-        ports:
-        - containerPort: 3306
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: &quot;123456&quot;
-EOF
-
-master节点执行：
-kubectl create -f /root/yaml/mysql/mysql-rc.yaml
-将mysql-rc发布到kubernetes中；
-查看创建的RC
-kubectl get rc
-</code></pre><h1 id="第三章-基本概念"><a href="#第三章-基本概念" class="headerlink" title="第三章 基本概念"></a>第三章 基本概念</h1><pre><code>kubernetes: 是基于容器技术的分布式架构方案。
-service: 服务。（拥有唯一的名字；拥有虚拟IP和端口号；可提供远程服务；被映射到提供这种服务能力的一组容器应用上。）
-Pod: (内部运行Pause容器和业务容器，业务容器共享Pause容器的网络栈和数据卷)
-
-Master: 运行了kube-apiserver;kube-controller-manager;kube-scheduler
-Node:    运行了kubelet;kube-proxy
-
-RC(replication controller): (目标Pod的定义；目标Pod的运行副本数；要监控的Pod的标签)
-</code></pre>
       
     </div>
     
@@ -476,11 +446,11 @@ RC(replication controller): (目标Pod的定义；目标Pod的运行副本数；
       
         <div class="post-tags">
           
-            <a href="/tags/docker/" rel="tag"># docker</a>
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
           
-            <a href="/tags/云计算/" rel="tag"># 云计算</a>
+            <a href="/tags/docker-compose/" rel="tag"># docker-compose</a>
           
-            <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+            <a href="/tags/微服务/" rel="tag"># 微服务</a>
           
         </div>
       
@@ -493,8 +463,8 @@ RC(replication controller): (目标Pod的定义；目标Pod的运行副本数；
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/04/humpback容器管理平台/" rel="next" title="humpback容器管理平台">
-                <i class="fa fa-chevron-left"></i> humpback容器管理平台
+              <a href="/2018/09/13/docker-compose-容器自动化/" rel="next" title="docker-compose 容器自动化">
+                <i class="fa fa-chevron-left"></i> docker-compose 容器自动化
               </a>
             
           </div>
@@ -502,10 +472,6 @@ RC(replication controller): (目标Pod的定义；目标Pod的运行副本数；
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/04/每天5分钟玩转openstack/" rel="prev" title="每天5分钟玩转openstack">
-                每天5分钟玩转openstack <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -705,7 +671,7 @@ RC(replication controller): (目标Pod的定义；目标Pod的运行副本数；
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-准备k8s环境"><span class="nav-number">1.</span> <span class="nav-text">第一章 准备k8s环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统环境：centos7-infor版"><span class="nav-number">1.1.</span> <span class="nav-text">系统环境：centos7 infor版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装docker、etcd-、kubernetes"><span class="nav-number">1.2.</span> <span class="nav-text">安装docker、etcd 、kubernetes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改kubenetes配置文件"><span class="nav-number">1.3.</span> <span class="nav-text">修改kubenetes配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按照顺序启动服务"><span class="nav-number">1.4.</span> <span class="nav-text">按照顺序启动服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取pause容器"><span class="nav-number">1.5.</span> <span class="nav-text">获取pause容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确保安装了kubernetes的物理机可以从私有仓库上下载镜像"><span class="nav-number">1.6.</span> <span class="nav-text">确保安装了kubernetes的物理机可以从私有仓库上下载镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改kubernetes配置文件"><span class="nav-number">1.7.</span> <span class="nav-text">修改kubernetes配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启相关服务"><span class="nav-number">1.8.</span> <span class="nav-text">重启相关服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-实例练习"><span class="nav-number">2.</span> <span class="nav-text">第二章 实例练习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">2.1.</span> <span class="nav-text">mysql</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-基本概念"><span class="nav-number">3.</span> <span class="nav-text">第三章 基本概念</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是微服务"><span class="nav-number">1.</span> <span class="nav-text">什么是微服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#业务逻辑"><span class="nav-number">2.</span> <span class="nav-text">业务逻辑</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#业务实现"><span class="nav-number">3.</span> <span class="nav-text">业务实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

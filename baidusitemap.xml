@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/09/14/docker-compose%E5%AE%9E%E7%8E%B0%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1-identidock/</loc>
+    <lastmod>2018-09-14T08:36:26.503Z</lastmod>
+    <data>
+        <display>
+        <title>docker-compose 实现最简单的微服务架构</title>
+        <pubTime>2018-09-14T07:28:21.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>docker-compose</tag>
+         
+        <tag>微服务</tag>
+         
+         
+           
+             
+              <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/09/13/docker-compose-%E5%AE%B9%E5%99%A8%E8%87%AA%E5%8A%A8%E5%8C%96/</loc>
     <lastmod>2018-09-13T06:07:29.911Z</lastmod>
     <data>
@@ -228,9 +252,9 @@
         <title>了解Docker镜像的分层结构</title>
         <pubTime>2018-08-31T06:09:54.000Z</pubTime>
         
-        <tag>镜像</tag>
-         
         <tag>docker</tag>
+         
+        <tag>镜像</tag>
          
          
            
