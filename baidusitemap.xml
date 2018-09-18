@@ -4,11 +4,35 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/09/14/docker-ambassador-%E5%AE%B9%E5%99%A8/</loc>
-    <lastmod>2018-09-17T08:54:36.032Z</lastmod>
+    <loc>http://yoursite.com/2018/09/18/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0docker%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    <lastmod>2018-09-18T07:18:18.389Z</lastmod>
     <data>
         <display>
-        <title>docker ambassador 容器</title>
+        <title>docker服务发现方案etcd</title>
+        <pubTime>2018-09-18T06:13:01.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>etcd</tag>
+         
+        <tag>服务发现</tag>
+         
+         
+           
+             
+              <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/14/docker-ambassador-%E5%AE%B9%E5%99%A8/</loc>
+    <lastmod>2018-09-18T02:29:57.606Z</lastmod>
+    <data>
+        <display>
+        <title>docker ambassador 大使容器</title>
         <pubTime>2018-09-14T09:01:31.000Z</pubTime>
         
         <tag>Docker</tag>
@@ -132,21 +156,6 @@
              
               <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/08/30/Docker-%E5%AE%B9%E5%99%A8%E4%BA%91%E5%B9%B3%E5%8F%B0openshfit/</loc>
-    <lastmod>2018-09-10T05:53:53.434Z</lastmod>
-    <data>
-        <display>
-        <title>Docker 容器云平台openshfit</title>
-        <pubTime>2018-08-30T06:53:20.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>

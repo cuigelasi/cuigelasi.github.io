@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/09/18/%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0docker%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
+    
+    <lastmod>2018-09-18T07:18:18.389Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/09/14/docker-ambassador-%E5%AE%B9%E5%99%A8/</loc>
     
-    <lastmod>2018-09-17T08:54:36.032Z</lastmod>
+    <lastmod>2018-09-18T02:29:57.606Z</lastmod>
     
   </url>
   
@@ -40,13 +47,6 @@
     <loc>http://yoursite.com/2018/09/10/Docker%20logs%20%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</loc>
     
     <lastmod>2018-09-10T06:50:08.607Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/08/30/Docker-%E5%AE%B9%E5%99%A8%E4%BA%91%E5%B9%B3%E5%8F%B0openshfit/</loc>
-    
-    <lastmod>2018-09-10T05:53:53.434Z</lastmod>
     
   </url>
   
