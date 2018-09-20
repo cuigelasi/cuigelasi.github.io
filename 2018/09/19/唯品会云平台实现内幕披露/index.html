@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,云平台," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1 唯品会Noah云平台的构建历程1.1 发展历程Noah云平台从2017年初开始调研，3月份确定选型和架构，7月份已经开始接入业务，到现在已经研发了1年半时间，现在部署了5个IDC，共9个K8S集群（有些IDC部署了两套K8S集群），其中两套K8S集群供AI使用。 2 云平台的目标这里讲些我们建设云平台的目标，主要从资源利用率提升，开发测试运维一致性和对DevOps的进化三个目标，其实就是提高人">
+<meta name="keywords" content="docker,云平台">
+<meta property="og:type" content="article">
+<meta property="og:title" content="唯品会云平台实现内幕披露">
+<meta property="og:url" content="http://yoursite.com/2018/09/19/唯品会云平台实现内幕披露/index.html">
+<meta property="og:site_name" content="CGLS 的博客">
+<meta property="og:description" content="1 唯品会Noah云平台的构建历程1.1 发展历程Noah云平台从2017年初开始调研，3月份确定选型和架构，7月份已经开始接入业务，到现在已经研发了1年半时间，现在部署了5个IDC，共9个K8S集群（有些IDC部署了两套K8S集群），其中两套K8S集群供AI使用。 2 云平台的目标这里讲些我们建设云平台的目标，主要从资源利用率提升，开发测试运维一致性和对DevOps的进化三个目标，其实就是提高人">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537445777486&di=ca8cd57d3ee8f365ed09e942f56b4874&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170417%2F02a4d660b41c4012aee02656be71c704_th.jpg">
+<meta property="og:updated_time" content="2018-09-20T09:28:59.192Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="唯品会云平台实现内幕披露">
+<meta name="twitter:description" content="1 唯品会Noah云平台的构建历程1.1 发展历程Noah云平台从2017年初开始调研，3月份确定选型和架构，7月份已经开始接入业务，到现在已经研发了1年半时间，现在部署了5个IDC，共9个K8S集群（有些IDC部署了两套K8S集群），其中两套K8S集群供AI使用。 2 云平台的目标这里讲些我们建设云平台的目标，主要从资源利用率提升，开发测试运维一致性和对DevOps的进化三个目标，其实就是提高人">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537445777486&di=ca8cd57d3ee8f365ed09e942f56b4874&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170417%2F02a4d660b41c4012aee02656be71c704_th.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/19/唯品会云平台实现内幕披露/"/>
+
+
+
+
+
+  <title>唯品会云平台实现内幕披露 | CGLS 的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9bd817c58745d5357bf7510922c22f7a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CGLS 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">every minute counts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/唯品会云平台实现内幕披露/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">唯品会云平台实现内幕披露</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-19T09:44:04+08:00">
+                2018-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Share/" itemprop="url" rel="index">
+                    <span itemprop="name">Share</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537445777486&di=ca8cd57d3ee8f365ed09e942f56b4874&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170417%2F02a4d660b41c4012aee02656be71c704_th.jpg" rel="gallery_cjmaejl2o001yikcxsk3wccn5"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537445777486&di=ca8cd57d3ee8f365ed09e942f56b4874&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170417%2F02a4d660b41c4012aee02656be71c704_th.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="1-唯品会Noah云平台的构建历程"><a href="#1-唯品会Noah云平台的构建历程" class="headerlink" title="1 唯品会Noah云平台的构建历程"></a>1 唯品会Noah云平台的构建历程</h1><h2 id="1-1-发展历程"><a href="#1-1-发展历程" class="headerlink" title="1.1 发展历程"></a>1.1 发展历程</h2><p>Noah云平台从2017年初开始调研，3月份确定选型和架构，7月份已经开始接入业务，到现在已经研发了1年半时间，现在部署了5个IDC，共9个K8S集群（有些IDC部署了两套K8S集群），其中两套K8S集群供AI使用。</p>
+<h1 id="2-云平台的目标"><a href="#2-云平台的目标" class="headerlink" title="2 云平台的目标"></a>2 云平台的目标</h1><p>这里讲些我们建设云平台的目标，主要从资源利用率提升，开发测试运维一致性和对DevOps的进化三个目标，其实就是提高人效和机器效率。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/e496d2f02ff54c798db259c8a8beaeb9/80919101738.jpeg" alt="img"></p>
+<h1 id="3-Noah云平台整体架构"><a href="#3-Noah云平台整体架构" class="headerlink" title="3 Noah云平台整体架构"></a>3 Noah云平台整体架构</h1><p>Noah云平台整体架构按架构层次，分为主机层，容器层，云平台层（后面说的Noah Server），其中容器调度使用了业界开源的Kubernetes 1.9.8版本，容器层使用Docker 1.13.1版本，容器网络使用Contiv＋Netplugin方案。</p>
+<p>Noah云平台层（Noah Server），后面会说到，它是整个Noah云平台的粘合层，对外提供容器Lifecycle管理和集群管理，网络管理等API和UI。</p>
+<p>Noah云平台也包括了CI／CD流水线，负责业务镜像的构建，提供功能联调环境（Pandora）测试，它支持业务开发快速创建自己的测试环境，把依赖的服务快速拉起。目的是提高业务测试的效率。</p>
+<p>Noah云平台也提供了基础镜像和镜像存储。</p>
+<p>运维的发布系统，CMDB，ITIL（变更系统），都会对接Noah云平台相关API或UI做集群和容器的相关操作。</p>
+<p>Noah云平台也部署了一套跟生产完全一样的Noah Staging环境，只是规模不一样而已。它提供了业务镜像上线前的集成测试。</p>
+<p>这是我们的整体架构。</p>
+<h1 id="4-云平台层-Noah-Server-详解"><a href="#4-云平台层-Noah-Server-详解" class="headerlink" title="4 云平台层(Noah Server)详解"></a>4 云平台层(Noah Server)详解</h1><h2 id="4-1-Kubernetes-不是万能"><a href="#4-1-Kubernetes-不是万能" class="headerlink" title="4.1 Kubernetes 不是万能"></a>4.1 Kubernetes 不是万能</h2><p>Noah云平台是基于Kubernetes＋Docker技术框架构造的［Kubernetes后面简称K8S］，虽K8S已经成为容器编排的胜出者，但真正使用过程中，还是需要结合公司的实际情况使用。比如：</p>
+<p>－过于Cloud Native化</p>
+<p>K8S，包括CNCF下的开源项目，都是以Cloud Native为方向，而对于企业来说，都有历史包袱，比如物理机／VM 和容器混布一段时间，比如有自己的服务化框架和日志监控系统，容器化必须与公司的基础设施打通</p>
+<p>－功能复杂，偏分布式应用开发者</p>
+<p>提供基于yaml文件的声明式API，运维和开发使用起来比较复杂，容易出错K8S 提供丰富的功能，但都需要深入了解才能用好，对运维和开发要求高</p>
+<p>－功能很完美，但现实很骨感</p>
+<p>K8S Deployment的rolling upgrade策略不适用唯品会的发布流程多集群管理Federation还不完善，Federation现在还处于Alpha阶段，不太稳定。依赖CoreDNS和ETCD，增加系统部署的复杂度。不支持Pod信息的聚合，不方便做watch</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/79db90e4516645f49b8aefc133bb60b0/80919101836.jpeg" alt="img"></p>
+<h2 id="4-2-Noah-Server的定位"><a href="#4-2-Noah-Server的定位" class="headerlink" title="4.2 Noah Server的定位"></a>4.2 Noah Server的定位</h2><p>摆在我们面前两条路，一个是修改K8S源码支持我们的需求，但这会跟社区分岔路会走得越来越远，享受不了开源社区给我们带来的好处。因此我们在K8S上构建一套Noah Server，来标准化和简化K8S的使用。我们定义它为Noah云平台的粘合层。</p>
+<p>我们的思路，跟来自张磊的《Kubernetes项⽬目与基础设施“⺠民主化”的探索》workshop结语说的有点像，走扩展，组合机制，而不是硬改代码的机制Noah Server主要解决以下问题：</p>
+<p>UI支持，标准化使用流程多机房多集群管理，同机房两套集群灰度分批分部署池发布（每套K8S集群相当于一个部署池，为了减少新版本发布导致的问题，使用分批发布分批验证）与公司的发布系统和变更系统深度集成，提高运维操作的效率容器生命周期管理（摘流量，隔离，Debug）提供统一的注册发现机制，对业务透明支持多种应用类型的Health Check支持容器部署的高可用支持一键容灾迁移（若某个集群不可用，可快速把该机房的容器迁移到其他机房）</p>
+<h2 id="4-3-镜像"><a href="#4-3-镜像" class="headerlink" title="4.3 镜像"></a>4.3 镜像</h2><h3 id="4-3-1-基础镜像"><a href="#4-3-1-基础镜像" class="headerlink" title="4.3.1 基础镜像"></a>4.3.1 基础镜像</h3><p>Noah云平台提供了唯品会所有应用类型的基础镜像，OSP（唯品会服务化框架）应用，Tomcat应用，PHP应用等，云平台提供CI流水线让业务自己构建镜像，CI流水线自动根据应用类型选择最新发布的基础镜像来构建。</p>
+<p>基础镜像的初始化脚步基于my_init开发了vip_init脚本，来管理基础镜像运行的service。以下是容器启动和销毁的流程。包括了容器启动和关闭的关键步骤。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/2af7ccf915d3413d9dc373ed19d591ee/80919101857.jpeg" alt="img"></p>
+<p>Noah镜像都是按照Docker的镜像分层来构建，基础镜像＋业务镜像＋配置 ＝ 业务容器，Noah云平台调用唯品会运维的crab系统获取容器的运行时配置信息［环境变量配置］。</p>
+<p>下图简单介绍了基础镜像层的分层结构：</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/ad3a7b74b84841098dd1f9bd111355d3/80919101926.jpeg" alt="img"></p>
+<h3 id="4-3-2-镜像仓库"><a href="#4-3-2-镜像仓库" class="headerlink" title="4.3.2 镜像仓库"></a>4.3.2 镜像仓库</h3><p>我们在开源的harbor上做了二次开发，支持多机房同步，支持唯品会的分布式存储VOS存储镜像，支持镜像同步监控等功能。</p>
+<p>镜像发布流程是这样的：</p>
+<p>－测试环境部署Harbor A，准备release的镜像发布到Harbor A，Harbor A也会存储测试的镜像－各机房部署Harbor B，但网络安全只开通gd9机房的Harbor B与测试环境的Harbor A相通－其他机房通过分布式存储VOS做镜像同步</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/625b64f9f78349098765cf8a99b339ca/80919102000.jpeg" alt="img"></p>
+<h3 id="4-3-3-灰度分批发布"><a href="#4-3-3-灰度分批发布" class="headerlink" title="4.3.3 灰度分批发布"></a>4.3.3 灰度分批发布</h3><p>灰度发布是减少发布故障的主要手段，K8S管理的资源对象，如Deployment，StatefulSet等都提供了滚动升级的策略，但K8S暂时不支持分批的滚动，因为每发布批次都需要验收测试。举个例子，比如说某个域有10个容器，我们希望能够分3批来发布，第一批发布容器个数为1，第二批为4，第三批为5，每批次都需要业务方确认没问题，再继续执行下一批操作。</p>
+<p>我们也从京东了解过，他们修改了K8S代码，增加了group controller来支持这种分批暂停的验证。但我们考虑以后Merge代码的复杂性，所以对于这个功能没有修改K8S的代码，而是使用了下面介绍的方式。</p>
+<p>下面我们介绍下我们灰度分批的方案，其实很简单，就是两个Deployment，一个Running Deployment，一个新版本Cannary Deployment。Running Deployment做scale down，Cannary Deployment做scale up，最后发布完成，删除旧的Running Deployment。若在发布中发现有问题，需要回滚，那做反操作即可。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/e68a63c000744f5a9d9525b7ca38dc88/80919102032.jpeg" alt="img"></p>
+<h3 id="4-3-4-容器Auto-Scaling"><a href="#4-3-4-容器Auto-Scaling" class="headerlink" title="4.3.4 容器Auto Scaling"></a>4.3.4 容器Auto Scaling</h3><p>使用容器后的另一个好处是容器可以很方便的做伸缩，但其实有更高级的实现是Auto Scaling。</p>
+<p>K8S提供了HPA功能，是K8S Controller Manager的一个组件，但使用HPA有些Limitation：</p>
+<p>HPA依赖Heapster服务来获取容器的资源使用情况，而我们已经有自己的监控系统提供Custom Metric的接入方式，但引入了Custom Metric Server后，需要在K8S Controller Manager和K8S API Server直接部署kube-aggregator（Reserve Proxy）组件， 对 /apis/* 请求，转发到 API Server 上。对于apis/custom-metrics.metrics.k8s.io/v1alpha1 请求， 转发到后端的 Custom Metric Server，这样增加了部署的复杂度</p>
+<p>由于HPA有以上的Limitation，然后调研K8S的HPA算法，我们决定自己做容器的HPA。</p>
+<p>Noah云平台的HPA实现：</p>
+<p>－支持多种策略（CPU，IO）－多种策略同时计算，选最优的策略执行－支持多种因子    － Cold down window（扩容冷却时间为3分钟，缩容为5分钟）    － Tolerable factor (容忍Metric值上下波动5%)    － Frustrated level (以Target值的1.4倍作为警戒线，若超出警戒线，忽略Cold down window继续扩容)</p>
+<p>计算公式：TargetNumOfPods = ceil(sum(CurrentPodsCPUUtilization) / Target) ，Target为HPA规则设置的目标触发值。比如cpu usage &gt; 50%</p>
+<h3 id="4-3-5-集群节点管理"><a href="#4-3-5-集群节点管理" class="headerlink" title="4.3.5 集群节点管理"></a>4.3.5 集群节点管理</h3><p>集群管理很多节点，所有操作多为批量操作</p>
+<p>－Node Label自动同步   － 每台节点都需要打上node label，如rack信息，machine-type等。云平台从CMDB系统同步信息自动打上rack，machine-type等node label－批量查询／调整 节点上所有容器的流量权重－批量上／下线节点</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/812401689aee4082babe53b6e31e9f4c/80919102056.jpeg" alt="img"></p>
+<h3 id="4-3-6-多集群事件监控"><a href="#4-3-6-多集群事件监控" class="headerlink" title="4.3.6 多集群事件监控"></a>4.3.6 多集群事件监控</h3><p>Noah云平台管理了多套K8S集群，因此需要watch每个集群的K8S事件，监控这些事件做什么？因为唯品会的其他运维系统需要容器的实时信息，比如容器的IP，容器个数等。</p>
+<p>我们参考了K8S Informer的实现，自研了多集群watch的机制。只有Leader角色的Noah Server才做事件监控。Leader watch多个K8S集群的事件，然后publish到唯品会的消息系统平台，其他系统统一到消息系统消费这些事件。</p>
+<p>比如Noah Server会上报容器的新增或删除的IP到CMDB系统，容器IP冲突会告警等。</p>
+<h3 id="4-3-7-容器Web-Console"><a href="#4-3-7-容器Web-Console" class="headerlink" title="4.3.7 容器Web Console"></a>4.3.7 容器Web Console</h3><p>唯品会业务在使用Noah云平台前，代码都是部署到物理机或者VM上，业务人员需要通过堡垒机登陆到机器上查询日志等信息。但容器后，就没有固定的机器了，业务人员怎样办，因此Noah云平台必须实现容器的web console，直接登录到业务容器。</p>
+<p>K8S提供了exec接口， 允许用户登录容器执行命令。 exec接口底层是通过调用docker exec来执行的， 网络协议是使用web socket， 能支持客户端和容器之间双向推送消息。基于此，我们开发了登陆容器web console功能。</p>
+<p>但K8S的exec接口只能针对单个Pod进行操作， 这对于运维人员来说是不足够的。 在日常的工作中，他们经常要对多个容器批量下发命令， 例如他们需要同时查看deployment下所有Pod的某个文件的状态。</p>
+<p>为了满足这方面的需求， 我们提供了对多个Pod批量执行命令的功能。 这个功能的实现可以归纳为2个部分：－ 使用websocket分别连接多个Pod下发命令－ Noah Server对命令的输出，按容器名称进行聚合并返回</p>
+<p>此外k8s的exec命令是无法指定执行用户的， 而在生产环境中，我们往往需要对开发和运维人员， 划分不同的用户权限进行操作的。幸好，docker的exec命令是支持使用-u参数指定执行用户的； 所以我们对k8s的exec命令做了一定改造，把登录用户的参数最终透传给了docker命令。</p>
+<h1 id="5-服务注册发现"><a href="#5-服务注册发现" class="headerlink" title="5 服务注册发现"></a>5 服务注册发现</h1><p>容器化后，必须要支持动态的服务注册与发现。K8S 提供了Service机制来实现，但Service 刚开始使用iptables，但iptables的规则匹配是线性的，匹配的时间复杂度是O(N)，规则更新是非增量式的，哪怕增加/删除一条规则，也是整体修改 Netfilter 规则表。另外一个问题是性能问题，当iptables数据量很大的时候，更新会非常慢。</p>
+<p>由于K8S Service存在的一些问题，加上唯品会大部分业务都服务化了，Noah云平台考虑支持HTTP服务就可以，因此Noah云平台暂时没有使用K8S Service。</p>
+<h2 id="5-1-OSP-服务"><a href="#5-1-OSP-服务" class="headerlink" title="5.1 OSP 服务"></a>5.1 OSP 服务</h2><p>唯品会也有自研的服务化框架OSP（Open Service Platform），所有核心业务，在16年就做了大重构－－服务化。因此对OSP应用，服务注册发现已经支持，从物理机迁移到容器是非常简单的。</p>
+<p>如果大家对OSP有兴趣的话，请移步江南白衣的blog：唯品会的Service Mesh三年进化史</p>
+<h3 id="5-1-1-OSP-Proxy容器化"><a href="#5-1-1-OSP-Proxy容器化" class="headerlink" title="5.1.1 OSP Proxy容器化"></a>5.1.1 OSP Proxy容器化</h3><p>其实OSP是类似现在一直在推崇的Service Mesh，也就是有一个OSP Proxy，如果用sidecar模式，由于OSP Proxy是java的，堆内和堆外内存吃得有点多，而且OSP Proxy升级，必须依赖业务域发布。</p>
+<p>所以，我们选择了DaemonSet的形式，每台宿主机上只运行一个Proxy，Proxy启动时把自己的IP写在一个共享文件里，这个文件也Mount进各个容器里面，各个客户端会监听这个文件的变化。</p>
+<p>大家可能会想到，一台OSP Proxy顶多个业务容器的请求转发，会不会某个业务域的bug，把OSP Proxy压死啊？其实在做这方案前我们也考虑到，所以OSP Proxy做了些改造。Proxy加了个来源IP的限流，效果就是单个容器的调用高于2万QPS时，第二万零一个请求开始就把它临时重定向到Remote Proxy集群。 十秒钟后再重试本地Proxy，如果还是高，又继续转到Remote Proxy集群。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/4ab9ca0a2db64c7b9a2b4ad80e7eeb80/80919102148.jpeg" alt="img"></p>
+<h2 id="5-2-HTTP-服务"><a href="#5-2-HTTP-服务" class="headerlink" title="5.2 HTTP 服务"></a>5.2 HTTP 服务</h2><p>其他非OSP服务（Http服务）怎么办？其实业界上有很多解决方案，比如confd，bamboo动态更新HaProxy或Nginx等。唯品会选择了Etcd + Confd＋HAProxy。</p>
+<p>－何时注册／销毁   － 我们使用了K8S 的poststart和prestop的钩子   － 容器启动时，会调用我们定义的poststart脚本，该脚本定期检查容器Health Check，若通过后，就通过Confd更新HaProxy和reload，上线容器   － 容器销毁时，会调用prestop脚本，该脚本通过Confd更新HaProxy和reload，下线容器</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/14901dc595aa42ab9129cea9efe037af/80919094543.jpeg" alt="img"></p>
+<h1 id="6-节点资源优化"><a href="#6-节点资源优化" class="headerlink" title="6 节点资源优化"></a>6 节点资源优化</h1><p>K8S在容器调度是最核心的一个功能，k8s的scheduler是通过plugin的方式编写，我们可以很灵活编写自己的调度算法，而对k8s源码没有侵入性，其中调度算法分为两个阶段，Predicate（过滤）和 Priorities(优选），Noah云平台使用了K8S的Node Selector，Node Affinity／anti-affinity, Pod Affinity／anti-affinity来对容器进行调度，使用request和limit对容器资源进行资源限定。</p>
+<p>但实际运行过程中，资源并没有达到充分利用，我们需要更高效的利用率。因此我们考虑应用画像的调度算法。</p>
+<h1 id="6-1-应用画像"><a href="#6-1-应用画像" class="headerlink" title="6.1 应用画像"></a>6.1 应用画像</h1><p>大家对用户画像并不陌生，其实应用画像也是类似，实现原理是分析应用N天的性能数据，计算出两个维度的数据。</p>
+<p>两个应用画像维度：－ 一个维度是计算应用属于计算密集型、内存密集型、IO密集型，这一维度的数据是供我们做容器与节点（Node Selector）调度使用－另一个维度是应用跟应用直接的亲和度，这里举个例子，A，B两个应用都属于计算密集型应用，理论上它们应该部署到不同的节点，但A应用是白天忙，B应用是晚上忙，那其实它们是可以部署在一起，这样资源的使用率会更高应用画像实现算法：</p>
+<p>计算应用属于哪种类型－ 云平台从唯品会容器监控系统获取容器的不同Metric，然后使用正态发布算法，计算得出应用的类型－ 使用K8S的Node Affinity来完成最后的容器调度</p>
+<p>计算应用与应用间的亲和度－通过欧式距离（常用于机器学习中聚类算法的相似性度量）计算应用与应用间的相似度，越相似的应用越不能部署在一起－使用K8S的Pod affinity和anti-affinity来完成最后的容器调度－Pod Affinity实现上有性能瓶颈，因此在设置Pod affinity的value值的时候只取排名靠前N个域名。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/caa78052f9ee4f2fb9373580ecbd31c0/80919094828.jpeg" alt="img"></p>
+<h2 id="6-2-超配"><a href="#6-2-超配" class="headerlink" title="6.2 超配"></a>6.2 超配</h2><p>我们根据线上运行的数据，发现机器的CPU使用率只有30％，经过分析因为Noah云平台采用核心域与非核心域混布的方式，也就是说一台物理机上会部署多个非核心域和核心域。这样部署的目的是想核心域能瞬时使用非核心域的资源，所以核心域的limit cpu是request cpu的1.5倍。但这样还不能达到资源使用率的提升。</p>
+<p>根据下面的公式，我们推算出超配系数为3，也就是每台机器可以超配3倍。我们修改了kubelet，增加了–cpu-overcommit-times 启动参数，kubelet 上报cpu核数会乘以超卖系数。</p>
+<p>如果大家有cgroup的知识背景，了解cpu share和cpu quota的区别，就会懂的配置超配系数后，如果不是极端情况（机器上跑的所有容器都100% cpu usage），业务域容器承诺的limit cpu是可以保证的。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/d7a81ec794d7490fbe6735b4120940a5/80919094930.jpeg" alt="img"></p>
+<p>BTW，我们还在尝试使用应用画像，计算业务容器的request cpu，这样比超配方案更精确。因为超配方案是针对所有域的容器，粗粒度，应变快，而应用画像是根据历史数据计算，细粒度，但需要业务重新发布。</p>
+<h1 id="7-容器隔离性"><a href="#7-容器隔离性" class="headerlink" title="7 容器隔离性"></a>7 容器隔离性</h1><h2 id="7-1-Disk-Network-IO使用限制"><a href="#7-1-Disk-Network-IO使用限制" class="headerlink" title="7.1 Disk/Network IO使用限制"></a>7.1 Disk/Network IO使用限制</h2><p>容器的磁盘和网络隔离是大家最头疼的一个问题，暂时只能限制使用量，防止某些业务容器有bug，导致狂写磁盘或打满网卡，影响同一台机器的其他容器。</p>
+<p>Noah云平台是这样做的：</p>
+<p>－使用K8S ConfigMap 配置docker IO options和 network options，docker options在K8S启动Docker容器的时候传递参数，network options在K8S调用CNI接口时传递</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/6fca1f89af2b4b30ac691ae894e5857a/80919095036.jpeg" alt="img"></p>
+<p>－ 支持全局／按机器类型／按应用类型／按域 四种级别的配置。e.g. 不同机器类型，docker IO options不一样</p>
+<p>－ 修改K8S 代码支持从ConfigMap读取配置并传递options参数、</p>
+<p>该方案的限制：－ 只能限制单个容器最大值，肯定是超卖的－ Disk IO 只能限制Direct IO，不能限制Buffer IO</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/d1f514d0d1f94bdf9f13fccbf29f8401/80919095140.jpeg" alt="img"></p>
+<h2 id="7-2-容器日志不落盘"><a href="#7-2-容器日志不落盘" class="headerlink" title="7.2 容器日志不落盘"></a>7.2 容器日志不落盘</h2><p>日志采集方案在业界大部分都是考虑先写文件，然后通过Agent收集到中央，这样应用可以解耦。但这种方式，花费了Disk IO和网络IO，而且容器化后，日志量比物理机／VM的时代多了很多，对IO造成了一定的压力。因此业界也开始使用Log Appender直接发送的方式。</p>
+<p>业界阿里云的例子</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/babb6d94f00b479abb4b34ed8f214622/80919095250.jpeg" alt="img"></p>
+<p>Noah云平台使用了类似的方式，开发日志不落盘的Log Appender，支持logback，log4j和log4j2三种log框架, 支持两种模式，模式1:是先落盘，超过rate limit（限流）后才发送到kafka，模式2：是先发送到kafka，超过rate limit后再落盘，默认使用模式2。</p>
+<p>因为日志不落盘Log Appender是以jar包形式给业务域使用，因此如何动态变更Log Appender是必须要做的，我们通过watch yaml格式的配置文件［容器通过mount物理机上的这个yaml文件］，动态调整参数，比如rate limit值，kafka地址，kafka topic名称，message压缩算法，partition key等参数。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/cc07cf337652460f97a63f14d0321fc4/80919095434.jpeg" alt="img"></p>
+<h1 id="8-单机房多集群"><a href="#8-单机房多集群" class="headerlink" title="8 单机房多集群"></a>8 单机房多集群</h1><p>为了实现集群的高可用，Noah云平台提供多个IDC部署，业务可以同时部署到不同的IDC的K8S集群，但核心业务对延时要求非常敏感，业务容器依赖的第三方服务还没有做到MHA，如数据库Mysql，Redis。这样容器多机房部署后，容器调用就变成跨机房调用。</p>
+<p>为了提高集群的高可用，同时也防止跨机房调用，Noah云平台把一个IDC的大集群，拆成两个小集群，业务容器只需部署到同机房的两个集群，这样不单可以解决跨机房调用问题，也可以防止K8S集群过大导致的调度性能问题。</p>
+<p>聪明的你也会问，如果整个IDC都不可用怎么办？Noah云平台其实也提供了解决办法</p>
+<p>－多IDC网络形成环路，避免光纤被挖断的尴尬－提供一键容灾迁移功能，快速迁移业务域的容器到其他机房（有几分钟的服务不可用）</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/7d74614b8338444abd573341a030467d/80919095552.jpeg" alt="img"></p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/bcd0d70c2f4c4ef783415468d31b991e/80919095556.jpeg" alt="img"></p>
+<h1 id="9-容器网络"><a href="#9-容器网络" class="headerlink" title="9 容器网络"></a>9 容器网络</h1><p>容器网络也是Noah云平台最重要的一环了，容器网络的互通性，性能是保证容器化推进顺利催化剂。因此我们的网络方案也做了很多调研和优化。容器网络方案使用K8S CNI模型。</p>
+<p>对比不同的容器网络类型：隧道方案 vs VLAN方案 vs 路由方案，我们最后选型的是Contiv Netplugin。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/c8c666c51f4341cbbc76914b5ea7f7d5/80919095646.jpeg" alt="img"></p>
+<p>这里说下我们网络方案优化的地方，为了让新增容器业务不增加现有核心ARP表压力，网关下移至TOR交换机，核心/汇聚交换机无需承载ARP，仅需运行路由协议或静态路由，可增加核心可靠性。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/9be96db49208441cb27b1d6866a3771d/80919095732.jpeg" alt="img"></p>
+<p>各组件的职责</p>
+<p>－Netmaster     －统一分配，管理子网与IP地址池，管理Docker网络，配置数据同步更新etcd－netplugin    －通过CNI接口与kubelet交互向netmaster申请IP、MAC等网络资源    －创建veth pair ，为容器设置nic, ip addr, ip路由信息    －管理OVS端，设置port\vlan\qos\流规则等信息    －监听etcd，实时更新网络信息缓存    －Endpoint 和 IP 地址池清理－OpenvSwitch   －桥接容器与物理网口，承载来自容器业务流量转发   －ACL访问控制和QoS限流－Etcd   －存储contiv网络数据模型，包括网络名，endpoint,ip地址池等信息，传递网络状态更新事件</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/ed0e3aae389343ee8065bc367a2b3681/80919095841.jpeg" alt="img"></p>
+<h1 id="10-日志与监控"><a href="#10-日志与监控" class="headerlink" title="10 日志与监控"></a>10 日志与监控</h1><p>唯品会早就已经有自己的日志监控（Dragonfly），业务监控（Mercury）和物理机监控（Falcon）系统。但它们也需要监控容器，因此也做不少工作。</p>
+<p>我们在filebeat的基础上，开发了vfilebeat agent，日志采集性能比Logstash提高5倍。因为vfilebeat部署在宿主机上收集多个容器的日志，Logstash不能满足日志采集性能需求。vfilebeat把日志上报到kafka集群，elasticsearch做日志索引，最后在dragonfly UI上供业务查询。</p>
+<p>容器指标，我们开发了smart agent，它除了收集业务的trace log日志外，还收集业务自定义的metric指标，容器性能指标等。同时它也会触发告警，我们在告警时增加了命令执行钩子，这样可以在发生告警时做一些action，比如收集当时的dstat，收集容器进程的vjdump和火焰图等。</p>
+<p>由于本文关注的是Noah云平台，因此这里就不详细展开日志和监控系统的架构了。</p>
+<h1 id="11-一些小技巧"><a href="#11-一些小技巧" class="headerlink" title="11 一些小技巧"></a>11 一些小技巧</h1><h2 id="11-1-容器重启保留现场"><a href="#11-1-容器重启保留现场" class="headerlink" title="11.1 容器重启保留现场"></a>11.1 容器重启保留现场</h2><p>K8S提供了Liveness Prob，如果Health Check不过，容器会自动重启，但这样就没有现场了，业务就比较困难定位问题，所以Noah云平台在容器Health Check不过导致的容器重启，会自动执行唯品会开源的vjtools工具的vjdump命令，抓取当前的snapshot。</p>
+<p>如何实现：</p>
+<p>－还是使用prestop的钩子，在prestop的脚本检查下容器的Health Check接口，如果不过，则执行vjdump</p>
+<h2 id="11-2-日志Mount路径"><a href="#11-2-日志Mount路径" class="headerlink" title="11.2 日志Mount路径"></a>11.2 日志Mount路径</h2><p>唯品会有日志收集系统Dragonfly，在物理机／VM的时代，Dragonfly的vfilebeat agent会收集业务域目录下指定文件，如/apps/logs/log_receiver/{domain-name}/xxxx.log，但容器化后，同一个业务容器可能跑到同一台宿主机上，如果按照原来的log路径mount到宿主机的话，会导致两个容器同时写同一个日志问题，导致log错乱等问题。</p>
+<p>如何实现：</p>
+<p>－容器日志mount到宿主机上，增加PodName做为Path的一部分，如: /apps/logs/logreceiver/{domain-name}/{pod_name}/trace/trace.out－在容器初始化脚本通过软链接的方式，把容器/apps/logs目录link到/docker/logs/${PODNAME}， 其中PODNAME环境变量是kubernetes设置到容器里面的，是唯一的名称</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/67000ed998f54914a563a0643465f618/80919100053.jpeg" alt="img"></p>
+<p>容器发布的时候，把容器里面的/docker/logs目录mount到宿主机的/apps/logs目录</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/7b57f6cc2b544302805508690a906280/80919100121.jpeg" alt="img"></p>
+<h2 id="11-3-隔离某个容器定位问题"><a href="#11-3-隔离某个容器定位问题" class="headerlink" title="11.3 隔离某个容器定位问题"></a>11.3 隔离某个容器定位问题</h2><p>如果业务需要线上容器来定位问题，可以先把某个容器的流量摘掉就可以了，但若想保证容器的instance数量，怎么做呢？Noah云平台使用了K8S ReplicaSet Selctor的特性，如RS有selector：[a=b, c=d]，则含有且不限于label：[a=b, c=d]的pod，且pod的metadata.ownerReferences有指向此RS的引用，那么这个pod就被视为被RS管理。</p>
+<p>鉴于此特性，如果想将某个容器隔离出当前的RS，只需要修改此容器的label即可，为了能够方便查询被隔离的容器，Noah云平台把label修改为[name-bk=deployName，pod-status=isolate]的方式。</p>
+<h2 id="11-4-巧用Pod中断预算-Pod-Disruption-Budget"><a href="#11-4-巧用Pod中断预算-Pod-Disruption-Budget" class="headerlink" title="11.4 巧用Pod中断预算(Pod Disruption Budget)"></a>11.4 巧用Pod中断预算(Pod Disruption Budget)</h2><p>Pod中断预算是K8S用来保证应用的高可用的，对那些Voluntary（自愿的）Disruption做好Budgets(预算方案)，这里说到PDB是解决Voluntary Disruption，不解决Involuntary的场景。</p>
+<p>官方文档已经有说什么叫Voluntary和Involuntary场景，我这里就不在多说了： K8S Pod Disruption Budget</p>
+<p>我这里说下Noah云平台怎样巧用PDB。在我们做集群机器的内核升级过程中（需重启机器），为了保证升级过程不中断业务，运维必须按机柜来重启机器，因为如果多机柜同时操作的话，如果某个业务域的容器刚好都在这批重启的机柜上，那这服务就中断了。</p>
+<p>这时，我们使用PDB。在升级前，为K8S集群中每个Deployment创建PDB［一个脚本搞定］，然后运维升级内核重启机器就不需要按机柜逐个做了，就把大集群的机器分多批来做，在执行kubectl drain命令的时候，PDB会产生效果，保证业务容器的最低Running Instance个数，如果少于最低Running Instance，则drain命令会block，直到符合PDB要求，才继续。</p>
+<p>我们使用这种方式，以前几百台机器都要升级一个下午，现在基本1小时能够完成上千台机器的内核升级重启。当然这是我们使用PDB的例子，但其实也有很多地方可以使用的，比如zookeeper，etcd要保证最少容器数等。</p>
+<h1 id="12-解决过的问题"><a href="#12-解决过的问题" class="headerlink" title="12 解决过的问题"></a>12 解决过的问题</h1><h2 id="12-1-操作系统参数调整"><a href="#12-1-操作系统参数调整" class="headerlink" title="12.1 操作系统参数调整"></a>12.1 操作系统参数调整</h2><h3 id="12-1-1-CPU开启Performance模式"><a href="#12-1-1-CPU开启Performance模式" class="headerlink" title="12.1.1 CPU开启Performance模式"></a>12.1.1 CPU开启Performance模式</h3><p>生产服务器默认都调整为Performance模式的，但在CPU是E5-2630 v4这个型号的华为机器不生效。这里分享下我们的经验。</p>
+<p>系统交付时，检查/proc/cpuinfo的cpu主频是否跟硬件主频一致监控容器的cpu throttled number和cpu throttled time指标，如发生throttling，要double check一下机器的CPU主频</p>
+<h3 id="12-1-2-设置Dirty-Backgroup-Bytes"><a href="#12-1-2-设置Dirty-Backgroup-Bytes" class="headerlink" title="12.1.2 设置Dirty Backgroup Bytes"></a>12.1.2 设置Dirty Backgroup Bytes</h3><p>在系统高IO的情况下，如果不设置dirtybackgroundbytes，默认使用dirtybackgroundratio的设置，默认是10，在现在动不动几十G内存的机器，值非常大，当把这么大量的page cache数据刷到磁盘上的时候会超过普通磁盘的iops。因此我们设置这个参数，满100M就刷盘。</p>
+<p>vm.dirtybackgroundbytes = 104857600</p>
+<p>高IO的场景，也会影响JVM进入Stop the world的时间，因为JVM经常会默默的在/tmp/hperf 目录写上一点statistics数据，如果刚好遇到PageCache刷盘，把文件阻塞了，就不能结束这个Stop the World的安全点了。因此我们在JVM启动参数增加了-XX:+PerfDisableSharedMem。</p>
+<p>高IO的场景，也会Block GC Log打印，从而Block Stop the World的过程，因为打印GC log是用VM Thread来做的，JVM虚拟机只有一条VM Thread，所以当这条线程在安全点内被BLOCK住，Stop the World问题就比较严重。因此我们把JVM的gc log打印到/dev/shm/ 目录下，如果进程重启，stop脚本会把ram disk的gc log move到磁盘保存。</p>
+<h3 id="12-1-3-设置swapniess"><a href="#12-1-3-设置swapniess" class="headerlink" title="12.1.3 设置swapniess"></a>12.1.3 设置swapniess</h3><p>操作系统OS的swapniess默认是60，这是Linux在很久的时候设置的默认值，可能当时内存容量没现在这么大吧，但现在这个默认值已经不合适了。如果不修改，那内存剩下很多就开始用swap了，用了swap，各种超时就出来了。因为容器的内存是根据JVM Heap计算出来的，通常都比JVM Heap要大，因此我们把swapiness修改为0。</p>
+<p>vm.swappiness = 0</p>
+<h3 id="12-1-4-设置fs-inotifyK8S"><a href="#12-1-4-设置fs-inotifyK8S" class="headerlink" title="12.1.4 设置fs.inotifyK8S"></a>12.1.4 设置fs.inotifyK8S</h3><p>kubelet会watch一些文件，如果不设置该值，当节点容器数量比较多的情况下，会报no space left on device。</p>
+<p>当然我们的节点不但只有kubelet，还有一些agent，比如日志收集agent，监控agent都会watch 文件，也会用到inotify的watch数量。</p>
+<p>fs.inotify.maxuserwatches = 24576</p>
+<h2 id="12-2-容器线程数过多的问题"><a href="#12-2-容器线程数过多的问题" class="headerlink" title="12.2 容器线程数过多的问题"></a>12.2 容器线程数过多的问题</h2><p>业务容器化后，运行时线程数暴涨，后来分析后，根本原因是很多框架或第三方库，都是通过Runtime.getRuntime().availableProcessors()获取CPU核数来计算线程数，很悲剧的是，JDK 1.9以下版本都只能获取物理机的核数，这样导致线程数超多，由于容器的CPU资源受限，因此这么多线程数，导致Context Switch增大，从而消耗cpu和影响性能。</p>
+<p>发现jdk已经有个bug跟进JDK-6515172。但业务大部分都是JDK7 和 JDK8的。我们使用了libsysconfcpus去拦截_SC_NPROCESSORSCONF和 _SC_NPROCESSORSONLN 系统调用，返回容器分配的CPU值。</p>
+<p>在容器启动脚本 export LDPRELOAD=”/usr/local/lib/libsysconfcpus.so:$LDPRELOAD”，CONTAINERCORELIMIT是Noah云平台上每个容器都有设置的容器CPU Limit值。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/1aac0f53417d468587da1f0f450a0402/80919100543.jpeg" alt="img"></p>
+<h2 id="12-3-从K8S-1-6-4-升级到1-9-8版本后遇到的问题"><a href="#12-3-从K8S-1-6-4-升级到1-9-8版本后遇到的问题" class="headerlink" title="12.3 从K8S 1.6.4 升级到1.9.8版本后遇到的问题"></a>12.3 从K8S 1.6.4 升级到1.9.8版本后遇到的问题</h2><p>我们用的CentOS的内核版本是3.10.0-862.9.1。 但升级到1.9.8后，容器销毁会导致cgroup memory没有释放，最终导致启动新容器时报“no space left on device”。</p>
+<p>根本原因是1.9.8默认打开了OS的Kernel Memory，而我们用的内核版本的Kernel Memory是不稳定的。回想起问题定位过程，真的非常艰巨，连续几天披星戴月啊。。。。当然我们也总结了踩坑过程kubernetes 1.9 与 CentOS 7.3 内核兼容问题</p>
+<p>解决方法</p>
+<p>－升级内核到4.x版本风险大，最后折衷，通过修改了K8S一行代码，暂时关闭Kernel Memory功能，暂时解决这个问题。</p>
+<p>我们在kubernetes github上提的issue 61937，然后发现很多人都遇到相同</p>
+<p>最后，讲下我们正在做的事情，希望能引起一些大家的讨论。</p>
+<h1 id="13-CRD／Operator的应用"><a href="#13-CRD／Operator的应用" class="headerlink" title="13 CRD／Operator的应用"></a>13 CRD／Operator的应用</h1><p>Operator是由CoreOS开发的，用来扩展Kubernetes API，特定的应用程序控制器，它用来创建、配置和管理复杂的有状态应用。有些集群需要一些特殊操作才能构建起来，如ETCD，Redis Cluster，K8S提供的StatefulSet不能满足这些需求。因此K8S提供了CRD（自定义控制器）的方式，让我们可以扩展，其中Operator就是一系列应用程序特定的自定义控制器。</p>
+<p>Noah云平台使用Operator技术，构建了redis cluster，mysql cluster供测试环境使用。</p>
+<p>Operator构建方式：－使用Kubebuilder来构建Operator framework。</p>
+<p>Operator的工作流程:－ Operator与其他controller manager工作原理一样，以leader模式运行。（建议每个K8S集群部署3个operator）－ Operator使用Informer组件，监听资源状态。当资源发生变化时，根据事件类型调用对应的callback函数。－ Operator的任务是使Custom Resource的状态，和Spec定义保持一致。－ Custom Resource以json的格式保存在K8S ETCD中</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/0764dfb2b9d1468cbc5e2a8478f1c9b0/80919100727.jpeg" alt="img"></p>
+<h2 id="13-1基于Local-Storage的容器调度"><a href="#13-1基于Local-Storage的容器调度" class="headerlink" title="13.1基于Local Storage的容器调度"></a>13.1基于Local Storage的容器调度</h2><p>mysql operator的存储是使用了分布式ceph存储，性能方面不能满足生产需求，DBA希望mysql容器可以使用本地的SSD，因此我们需要基于Local Stroage的容器调度。</p>
+<p>K8S 1.9提供了VolumeScheduling，就是基于Local Storage的调度。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/e7e041417c0d4dc892980fe4fd0250e2/80919100756.jpeg" alt="img"></p>
+<p>CheckVolumnBinding的逻辑</p>
+<p>－已绑定PVC：对应PV.NodeAffinity需匹配候选Node，否则排除该节点－未绑定PVC：该PVC是否需要延时绑定，如需要，遍历未绑定PV，其NodeAffinity是否匹配候选Node，如满足，记录PVC和PV的映射关系到缓存bindingInfo中，留待节点最终选出来之后进行最终的绑定</p>
+<h2 id="13-2-容器本地rebuild-amp-容器固定IP"><a href="#13-2-容器本地rebuild-amp-容器固定IP" class="headerlink" title="13.2 容器本地rebuild &amp; 容器固定IP"></a>13.2 容器本地rebuild &amp; 容器固定IP</h2><p>有些业务希望容器能够在本地做patch重启，比如第一次发布根据调度规则把容器部署到不同的节点上，后面的新版本发布，他们希望新容器能够在以前的节点上重启容器。该需求的目的是容器与物理机相对固定，业务就可以做一些事情，比如一些降级文件可以只下载一次，不需要每次发布都下载一次降级文件（降级文件比较大），还有一些目的是加快容器启动速度，锁定容器资源，重用数据卷等。</p>
+<p>当然容器本地rebuild会丧失容器调度的能力，因此只会对某些域开放</p>
+<p>容器本地rebuild实现后，容器的IP相对就固定了，因为patch容器的时候，k8s pause容器没有被重启，只重启业务容器，因此容器的IP是不变的。我们在此基础上，结合我们容器网络拓扑的特殊性（因为网关下沉到机柜上，所以容器IP与机架必须对应），开发了容器固定IP。</p>
+<p>我们也是使用Operator框架，开发了ReusableSet Controller。</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/40073a41ecdb4042a6a55c5599efc047/80919100907.jpeg" alt="img"></p>
+<p>以上是唯品会Noah云平台在总体架构，它构建与开源的生态框架，但又做了一些二次开发来满足唯品会云平台的需求，本文通过云平台标配功能的实现细节，服务注册发现实现原理，资源优化方法，容器隔离方案，容器高可用性方案，容器网络方案，一些实现的小技巧和解决过的问题等维度做了比较详细的介绍，希望这些方案和实现细节，能帮助大家在实现自己的云平台有所帮助。</p>
+<p>讨论：</p>
+<p>Q：灰度发布时，两个应用前要加负载均衡吗？</p>
+<p>A：我在服务注册发现章节提到唯品会有自研的服务化框架，是通过服务化框架的proxy做LB的，LB是服务治理的一个重要功能。对于HTTP服务，最后还是注册到Haproxy的，因此还是通过它做LB的</p>
+<p>Q： 有状态的服务比如 ip固定的 不知道你们有没有这种服务 是怎么解决的？</p>
+<p>A：我们是有写有状态的服务，如redis 和mysql，是通过centos operator框架，自己编写operator解决的。固定IP 我们正在开发中，因为要结合唯品会的网络拓扑，实现起来稍微复杂点。还有，我们在做的rebuild方案，IP也是相对固定的，如果没有触发k8s的scheduler调度的话，比如node evict</p>
+<p>Q：请问，外部请求如何路由到K8s集群内，是使用的lngress吗？</p>
+<p>A：外部流量的接入，唯品会有VGW的gateway，通过app上的智能路由找到最优机房的vgw，然后一层一层到容器</p>
+<p><img src="file:///E:/youdaonote/cuijianmin@yeah.net/04b8a8c21eab4a37bf483199822b0115/80919101233.jpeg" alt="img"></p>
+<p>Q：Statefulset跟operator来做都可以吧</p>
+<p>A：可以啊，我们就是用operator来做实现的</p>
+<p>Q：有用到traefik吗</p>
+<p>A：唯品会有自研的VGW gateway</p>
+<p>Q：超配的情况下，如果各个pod load都增大，驱逐策略是怎样的？</p>
+<p>A：这里我没有讲细，你的问题很仔细啊，赞，我们开发了热点迁移容器的API，监控系统如果收到告警（比如CPU过高，IO过高），会调用我们API ，我们API获取实时的监控数据，根据某个算法，迁移走部分热点容器</p>
+<p>Q：自动缩容的时候是如何选择pod,如何保证数据不丢失呢</p>
+<p>A：自动缩容之针对无状态应用的，而且我们要求所有上云平台的应用，都支持graceful shutdown，由业务保证</p>
+<p>Q：机器计算，涉及到gpu,实例效果怎么样，贵司在这方面有做一些优化工作吗？</p>
+<p>A：我们在云平台的基础上，构建了AI平台，但不是我负责的，所以所做过的优化工作不能回答你啊</p>
+<p>Q：请问唯品会容器云平台如何与cmdb、itil和发布系统做深度集成，比如cmdb采集了容器云平台哪些配置项，这些配置有哪些消费场景？我们公司也有类似容器集群管理平台，但是游离于cmdb等工具体系之外，自成一体，请分享下这方面的建议和经验，谢谢！</p>
+<p>A：我刚才讲到，我们做了类似K8S informer 的机制监控多个k8s集群，我们监控容器的event，上报容器的IP数据到CMDB和消息系统平台。</p>
+<p>Q：tomcat类应用容器xmx内存分配多少比例合适，就是xmx使用百分多少容器内存合适</p>
+<p>A：JVM内存的计算包括了Heap＋Permgen＋线程数的stack（1M／per线程）＋堆外内存，所以我们监控容器的RSS数据，这是容器真实的内存占用</p>
+<p>Q：有使用容器dns吗，比如coredns</p>
+<p>A：我们都是使用服务注册发现的方式，所有没有用coredns，只有AI 平台使用了skydns</p>
+<p>Q：集群空闲率多少合适，我们的集群超过60% 上面的容器就不稳定了</p>
+<p>A：我们为了提高资源利用率，做了很多事情，上面有说到，你说的60%就不稳定，需要具体分析下，因为我们也踩过一些k8s和docker的坑，同时也需要优化好系统参数，有时候问题也跟内核版本有关</p>
+<p>Q：容器cpu内存监控是怎么做的，prometheus吗？</p>
+<p>A：不是，我们很早就开发了日志和trace监控系统，具体请翻阅下“日志与监控”这一说</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/云平台/" rel="tag"># 云平台</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/18/服务发现docker解决方案/" rel="next" title="docker服务发现方案etcd">
+                <i class="fa fa-chevron-left"></i> docker服务发现方案etcd
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/20/docker-图形页面管理工具介绍/" rel="prev" title="docker 图形页面管理工具集锦">
+                docker 图形页面管理工具集锦 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg"
+                alt="cuijianmin" />
+            
+              <p class="site-author-name" itemprop="name">cuijianmin</p>
+              <p class="site-description motion-element" itemprop="description">我哒哒的马蹄声是一个美丽的错误，我不是归人是过客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cuigelasi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cuigelasi?viewmode=contents" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/10178945/%E5%B4%94%E5%81%A5%E6%95%8F" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-唯品会Noah云平台的构建历程"><span class="nav-number">1.</span> <span class="nav-text">1 唯品会Noah云平台的构建历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-发展历程"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 发展历程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-云平台的目标"><span class="nav-number">2.</span> <span class="nav-text">2 云平台的目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Noah云平台整体架构"><span class="nav-number">3.</span> <span class="nav-text">3 Noah云平台整体架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-云平台层-Noah-Server-详解"><span class="nav-number">4.</span> <span class="nav-text">4 云平台层(Noah Server)详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Kubernetes-不是万能"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Kubernetes 不是万能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Noah-Server的定位"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 Noah Server的定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-镜像"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-基础镜像"><span class="nav-number">4.3.1.</span> <span class="nav-text">4.3.1 基础镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-镜像仓库"><span class="nav-number">4.3.2.</span> <span class="nav-text">4.3.2 镜像仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-灰度分批发布"><span class="nav-number">4.3.3.</span> <span class="nav-text">4.3.3 灰度分批发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-容器Auto-Scaling"><span class="nav-number">4.3.4.</span> <span class="nav-text">4.3.4 容器Auto Scaling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-5-集群节点管理"><span class="nav-number">4.3.5.</span> <span class="nav-text">4.3.5 集群节点管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-6-多集群事件监控"><span class="nav-number">4.3.6.</span> <span class="nav-text">4.3.6 多集群事件监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-7-容器Web-Console"><span class="nav-number">4.3.7.</span> <span class="nav-text">4.3.7 容器Web Console</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-服务注册发现"><span class="nav-number">5.</span> <span class="nav-text">5 服务注册发现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-OSP-服务"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 OSP 服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-OSP-Proxy容器化"><span class="nav-number">5.1.1.</span> <span class="nav-text">5.1.1 OSP Proxy容器化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-HTTP-服务"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 HTTP 服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-节点资源优化"><span class="nav-number">6.</span> <span class="nav-text">6 节点资源优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-1-应用画像"><span class="nav-number">7.</span> <span class="nav-text">6.1 应用画像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-超配"><span class="nav-number">7.1.</span> <span class="nav-text">6.2 超配</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-容器隔离性"><span class="nav-number">8.</span> <span class="nav-text">7 容器隔离性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1-Disk-Network-IO使用限制"><span class="nav-number">8.1.</span> <span class="nav-text">7.1 Disk/Network IO使用限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2-容器日志不落盘"><span class="nav-number">8.2.</span> <span class="nav-text">7.2 容器日志不落盘</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-单机房多集群"><span class="nav-number">9.</span> <span class="nav-text">8 单机房多集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-容器网络"><span class="nav-number">10.</span> <span class="nav-text">9 容器网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-日志与监控"><span class="nav-number">11.</span> <span class="nav-text">10 日志与监控</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-一些小技巧"><span class="nav-number">12.</span> <span class="nav-text">11 一些小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-1-容器重启保留现场"><span class="nav-number">12.1.</span> <span class="nav-text">11.1 容器重启保留现场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-2-日志Mount路径"><span class="nav-number">12.2.</span> <span class="nav-text">11.2 日志Mount路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-3-隔离某个容器定位问题"><span class="nav-number">12.3.</span> <span class="nav-text">11.3 隔离某个容器定位问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-4-巧用Pod中断预算-Pod-Disruption-Budget"><span class="nav-number">12.4.</span> <span class="nav-text">11.4 巧用Pod中断预算(Pod Disruption Budget)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-解决过的问题"><span class="nav-number">13.</span> <span class="nav-text">12 解决过的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#12-1-操作系统参数调整"><span class="nav-number">13.1.</span> <span class="nav-text">12.1 操作系统参数调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-1-CPU开启Performance模式"><span class="nav-number">13.1.1.</span> <span class="nav-text">12.1.1 CPU开启Performance模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-2-设置Dirty-Backgroup-Bytes"><span class="nav-number">13.1.2.</span> <span class="nav-text">12.1.2 设置Dirty Backgroup Bytes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-3-设置swapniess"><span class="nav-number">13.1.3.</span> <span class="nav-text">12.1.3 设置swapniess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-4-设置fs-inotifyK8S"><span class="nav-number">13.1.4.</span> <span class="nav-text">12.1.4 设置fs.inotifyK8S</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-2-容器线程数过多的问题"><span class="nav-number">13.2.</span> <span class="nav-text">12.2 容器线程数过多的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-3-从K8S-1-6-4-升级到1-9-8版本后遇到的问题"><span class="nav-number">13.3.</span> <span class="nav-text">12.3 从K8S 1.6.4 升级到1.9.8版本后遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-CRD／Operator的应用"><span class="nav-number">14.</span> <span class="nav-text">13 CRD／Operator的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#13-1基于Local-Storage的容器调度"><span class="nav-number">14.1.</span> <span class="nav-text">13.1基于Local Storage的容器调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-2-容器本地rebuild-amp-容器固定IP"><span class="nav-number">14.2.</span> <span class="nav-text">13.2 容器本地rebuild &amp; 容器固定IP</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云平台/">云平台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+    </div>
+    
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuijianmin</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <!--统计start-->
+      <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+      </script>
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+      <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  undefined
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
