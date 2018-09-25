@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/09/23/docker%20devicemapper%E9%A9%B1%E5%8A%A8%E4%B8%8B%E7%9A%84%E5%AD%98%E5%82%A8%E6%89%A9%E5%AE%B9/</loc>
+    <lastmod>2018-09-25T02:58:04.315Z</lastmod>
+    <data>
+        <display>
+        <title>docker devicemapper驱动下的存储扩容</title>
+        <pubTime>2018-09-23T08:08:09.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>存储扩容</tag>
+         
+         
+           
+             
+              <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/09/21/docker-%E5%9B%BE%E5%BD%A2%E9%A1%B5%E9%9D%A2%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Portainer/</loc>
+    <lastmod>2018-09-23T08:58:45.935Z</lastmod>
+    <data>
+        <display>
+        <title>docker 图形页面管理工具portainer</title>
+        <pubTime>2018-09-21T03:12:17.000Z</pubTime>
+        
+        <tag>Docker</tag>
+         
+        <tag>可视化工具Portainer</tag>
+         
+         
+           
+             
+              <breadCrumb title="Base" url="http://yoursite.com/categories/Base/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/09/20/docker-%E5%9B%BE%E5%BD%A2%E9%A1%B5%E9%9D%A2%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%E4%BB%8B%E7%BB%8D/</loc>
     <lastmod>2018-09-20T09:56:49.275Z</lastmod>
     <data>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,算法," />
+  <meta name="keywords" content="Docker,可视化工具Portainer," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="前言 我打江南走过那等在季节里的容颜如莲花的开落东风不来，三月的柳絮不飞你底心如小小寂寞的城恰若青石的街道向晚 音不响，三月的春帷不揭你底心是小小的窗扉紧掩我达达的马蹄是美丽的错误 我不是归人，是个过客……– [郑愁予]《错误》  邂逅是多么浪漫的事情，但是在现实生活中邂逅总是那么遥不可及，有人说邂逅不可求但是可以科学的设计。 准备设计邂逅算法，我们首先要准备好僚机。假设你有三个室友，让他们作为你">
-<meta name="keywords" content="python,算法">
+<meta name="description" content="前言上一篇文章，给大家介绍了常用的三种图形页面管理工具，DockerUI，Portainer，Shipyard。读者反馈最多的是对Potainer很感兴趣，其实我个人对比这三个工具后也是倾向于使用Portainer。    图形页面管理工具 DockerUI Shipyard Portainer     优点 部署方便， 基于docker api，支持容器管理和镜像管理，并且可动态显示各个容器之间">
+<meta name="keywords" content="Docker,可视化工具Portainer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python 邂逅算法的设计">
-<meta property="og:url" content="http://yoursite.com/2018/08/29/python-邂逅算法的设计/index.html">
+<meta property="og:title" content="docker 图形页面管理工具portainer">
+<meta property="og:url" content="http://yoursite.com/2018/09/21/docker-图形页面管理工具Portainer/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="前言 我打江南走过那等在季节里的容颜如莲花的开落东风不来，三月的柳絮不飞你底心如小小寂寞的城恰若青石的街道向晚 音不响，三月的春帷不揭你底心是小小的窗扉紧掩我达达的马蹄是美丽的错误 我不是归人，是个过客……– [郑愁予]《错误》  邂逅是多么浪漫的事情，但是在现实生活中邂逅总是那么遥不可及，有人说邂逅不可求但是可以科学的设计。 准备设计邂逅算法，我们首先要准备好僚机。假设你有三个室友，让他们作为你">
+<meta property="og:description" content="前言上一篇文章，给大家介绍了常用的三种图形页面管理工具，DockerUI，Portainer，Shipyard。读者反馈最多的是对Potainer很感兴趣，其实我个人对比这三个工具后也是倾向于使用Portainer。    图形页面管理工具 DockerUI Shipyard Portainer     优点 部署方便， 基于docker api，支持容器管理和镜像管理，并且可动态显示各个容器之间">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535541166024&di=72eaa24e36e1e897a15fedaa04e199da&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2FBOOK-Catalog%2FLiaoxiaojun%2FB0047ZFINI_02_AMZN.jpg">
-<meta property="og:updated_time" content="2018-08-29T09:18:10.047Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537509671188&di=795f68fe52d92837b8147b2e4e1eca11&imgtype=0&src=http%3A%2F%2Fimg1.tuicool.com%2F2aqeQva.png%2521web">
+<meta property="og:updated_time" content="2018-09-23T08:58:45.935Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python 邂逅算法的设计">
-<meta name="twitter:description" content="前言 我打江南走过那等在季节里的容颜如莲花的开落东风不来，三月的柳絮不飞你底心如小小寂寞的城恰若青石的街道向晚 音不响，三月的春帷不揭你底心是小小的窗扉紧掩我达达的马蹄是美丽的错误 我不是归人，是个过客……– [郑愁予]《错误》  邂逅是多么浪漫的事情，但是在现实生活中邂逅总是那么遥不可及，有人说邂逅不可求但是可以科学的设计。 准备设计邂逅算法，我们首先要准备好僚机。假设你有三个室友，让他们作为你">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535541166024&di=72eaa24e36e1e897a15fedaa04e199da&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2FBOOK-Catalog%2FLiaoxiaojun%2FB0047ZFINI_02_AMZN.jpg">
+<meta name="twitter:title" content="docker 图形页面管理工具portainer">
+<meta name="twitter:description" content="前言上一篇文章，给大家介绍了常用的三种图形页面管理工具，DockerUI，Portainer，Shipyard。读者反馈最多的是对Potainer很感兴趣，其实我个人对比这三个工具后也是倾向于使用Portainer。    图形页面管理工具 DockerUI Shipyard Portainer     优点 部署方便， 基于docker api，支持容器管理和镜像管理，并且可动态显示各个容器之间">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537509671188&di=795f68fe52d92837b8147b2e4e1eca11&imgtype=0&src=http%3A%2F%2Fimg1.tuicool.com%2F2aqeQva.png%2521web">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/29/python-邂逅算法的设计/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/21/docker-图形页面管理工具Portainer/"/>
 
 
 
 
 
-  <title>python 邂逅算法的设计 | CGLS 的博客</title>
+  <title>docker 图形页面管理工具portainer | CGLS 的博客</title>
   
 
 
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/python-邂逅算法的设计/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/21/docker-图形页面管理工具Portainer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cuijianmin">
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python 邂逅算法的设计</h1>
+          <h1 class="post-title" itemprop="name headline">docker 图形页面管理工具portainer</h1>
         
 
         <div class="post-meta">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T15:36:42+08:00">
-                2018-08-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T11:12:17+08:00">
+                2018-09-21
               </time>
             
 
@@ -357,8 +357,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/Base/" itemprop="url" rel="index">
+                    <span itemprop="name">Base</span>
                   </a>
                 </span>
 
@@ -397,9 +397,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535541166024&di=72eaa24e36e1e897a15fedaa04e199da&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2FBOOK-Catalog%2FLiaoxiaojun%2FB0047ZFINI_02_AMZN.jpg" rel="gallery_cjmh53aqg001u08cxx4x2q3wl"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537509671188&di=795f68fe52d92837b8147b2e4e1eca11&imgtype=0&src=http%3A%2F%2Fimg1.tuicool.com%2F2aqeQva.png%2521web" rel="gallery_cjmh53an9000v08cx5qx3w8ex"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535541166024&di=72eaa24e36e1e897a15fedaa04e199da&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2FBOOK-Catalog%2FLiaoxiaojun%2FB0047ZFINI_02_AMZN.jpg" itemprop="contentUrl"/>
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537509671188&di=795f68fe52d92837b8147b2e4e1eca11&imgtype=0&src=http%3A%2F%2Fimg1.tuicool.com%2F2aqeQva.png%2521web" itemprop="contentUrl"/>
               </a>
             
           
@@ -410,17 +410,67 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>我打江南走过<br>那等在季节里的容颜如莲花的开落<br>东风不来，三月的柳絮不飞<br>你底心如小小寂寞的城<br>恰若青石的街道向晚 音不响，三月的春帷不揭<br>你底心是小小的窗扉紧掩<br>我达达的马蹄是美丽的错误 我不是归人，是个过客……<br>– [郑愁予]《错误》</p>
-</blockquote>
-<p>邂逅是多么浪漫的事情，但是在现实生活中邂逅总是那么遥不可及，有人说邂逅不可求但是可以科学的设计。</p>
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>设计邂逅算法，我们首先要准备好僚机。假设你有三个室友，让他们作为你的僚机部署在女神必经的三条路上，当他们看到你的女神就立马微信联系你。这里我们梳理一下，你的三个僚机室友所处的位置为三个点，所以点位数是3。当僚机室友遇见了你的女神，他才是完成了使命的僚机，我们命名为有效点位。话说如果室友见到一个人就给你发一次消息，我们则定义你收到所有消息的次数是总次数，那其中含有女神的消息为有效消息。</p>
-<p>整理一下，我们现在有四个参数：总点位数，总次数，有效点位数，有效次数。</p>
-<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>当一切准备妥当之后，我们现在就缺算法设计了，设计好算法就可以实现邂逅啦。</p>
-<p>算法设计中权重必不可少，我们现有的四个参数其中总点位数和总次数是相同组数据，有效点位数和有效次数是相同组数据。相同组数据需要设置权重，于是我们设计点位权重是0.6，次数权重是0.4。还没结束哦，一般来说算法要符合实际，没有百分百的可能性，于是我们添加一个衰减因子（0.9），让我们的算法无论怎么算都不会超过百分百。</p>
-<p>算法的设计思想其实很简单：在有限区域内，女神出行必然选择区域内的某条行走路线，通过算法推断女神与你邂逅的概率。一般来说，我们的总点位要足够的多，总次数要足够多，所以你需要准备很多的僚机，让他们多多汇报情况。如果你只能出动三位僚机，那么算法的误差必然存在，需要运气加持。</p>
-<p>现在我列出我的邂逅算法吧，<br>$$<br>（点位权重<em>有效点位数/总点位数 + 次数权重</em>有效次数/总次数）*衰减因子<br>$$<br>算法已经设计好啦，现在要用实践来证明了！！！</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding = utf-8</span></span><br><span class="line"><span class="comment"># author:cgls</span></span><br><span class="line"><span class="comment"># 邂逅算法 </span></span><br><span class="line"><span class="comment"># 点位权重</span></span><br><span class="line">point_location_weight = <span class="number">0.6</span></span><br><span class="line"><span class="comment"># 次数权重</span></span><br><span class="line">num_weight = <span class="number">0.4</span></span><br><span class="line"><span class="comment"># 总次数</span></span><br><span class="line">all_num = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line"><span class="comment"># 有效次数</span></span><br><span class="line">effective_num = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line"><span class="comment"># 总点位数</span></span><br><span class="line">all_point = [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 有效点位数</span></span><br><span class="line">effective_point = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">data1 = []</span><br><span class="line">data2 = []</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">0</span>,len(all_point)):</span><br><span class="line">    a1 = a + <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> range(<span class="number">0</span>,a1):</span><br><span class="line">        b1 = b + <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> range(<span class="number">0</span>,len(all_num)):</span><br><span class="line">            c1 = c + <span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> d <span class="keyword">in</span> range(<span class="number">0</span>, c1):</span><br><span class="line">                d1 = d + <span class="number">1</span></span><br><span class="line">                h = str(all_point[a])+str(effective_point[b])+str(all_num[c])+str(effective_num[d])</span><br><span class="line">                data1.append(str(h))</span><br><span class="line">                aa = str(format(float(effective_num[d]) / float(all_num[c]), <span class="string">'.2f'</span>))</span><br><span class="line">                bb = str(format(float(effective_point[b]) / float(all_point[a]), <span class="string">'.2f'</span>))</span><br><span class="line">                cc = str(<span class="number">0.6</span>)</span><br><span class="line">                dd = str(<span class="number">0.4</span>)</span><br><span class="line">                data2.append(str(format((float(aa) * float(cc) + float(bb) * float(dd)) * <span class="number">0.9</span>, <span class="string">'.3f'</span>)))</span><br><span class="line"><span class="comment"># 总点位数，有效点位数，总次数，有效次数</span></span><br><span class="line">print(data1)</span><br><span class="line"><span class="comment"># 算法得出的百分比</span></span><br><span class="line">print(data2)</span><br></pre></td></tr></table></figure>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>上一篇文章，给大家介绍了常用的三种图形页面管理工具，DockerUI，Portainer，Shipyard。读者反馈最多的是对Potainer很感兴趣，其实我个人对比这三个工具后也是倾向于使用Portainer。</p>
+<table>
+<thead>
+<tr>
+<th>图形页面管理工具</th>
+<th>DockerUI</th>
+<th>Shipyard</th>
+<th>Portainer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优点</td>
+<td>部署方便， 基于docker api，支持容器管理和镜像管理，并且可动态显示各个容器之间关系。</td>
+<td>支持容器管理，镜像管理，集群，资源监控，用户管理，有中文版</td>
+<td>支持容器管理，镜像管理，集群，资源监控，用户管理，基于docker api安全而且消耗资源少</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>无登陆验证，无用户组概念，不支持集群，无控制台命令</td>
+<td>需要启动容器过多，占用资源多</td>
+<td>功能少，不能动态添加端口</td>
+</tr>
+<tr>
+<td>结论</td>
+<td>官方都放弃了，我也对它放弃吧</td>
+<td>前些天看它的维护者都快放弃了~~</td>
+<td>docker官方放弃了dockerui，全力去做portainer，值得使用</td>
+</tr>
+</tbody>
+</table>
+<h1 id="集群部署"><a href="#集群部署" class="headerlink" title="集群部署"></a>集群部署</h1><h2 id="前提条件-部署Swarm集群"><a href="#前提条件-部署Swarm集群" class="headerlink" title="前提条件 - 部署Swarm集群"></a>前提条件 - 部署Swarm集群</h2><p>控制节点：</p>
+<p>安装并启动docker服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# yum -y install docker</span><br><span class="line"></span><br><span class="line">[ root@controller ]# systemctl start docker</span><br></pre></td></tr></table></figure>
+<p>创建swarm集群设置主控制节点<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# docker swarm init --advertise-addr 172.16.2.234</span><br></pre></td></tr></table></figure></p>
+<p>设置防火墙规则，使得集群间通信正常<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# firewall-cmd --permanent --zone=public --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/tcp --add-port=4789/udp</span><br><span class="line"></span><br><span class="line">[ root@controller ]# firewall-cmd --reload</span><br><span class="line"></span><br><span class="line">[ root@controller ]# firewall-cmd --permanent --zone=public --list-ports</span><br></pre></td></tr></table></figure></p>
+<p>查看swarm集群<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# docker node ls</span><br></pre></td></tr></table></figure></p>
+<p>工作节点：</p>
+<p>安装并启动docker服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute1 ]# yum -y install docker</span><br><span class="line"></span><br><span class="line">[ root@compute1 ]# systemctl start docker</span><br></pre></td></tr></table></figure></p>
+<p>设置防火墙规则，使得集群间通信正常<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute1 ]# firewall-cmd --permanent --zone=public --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/tcp --add-port=4789/udp</span><br><span class="line"></span><br><span class="line">[ root@compute1 ]# firewall-cmd --reload</span><br><span class="line"></span><br><span class="line">[ root@compute1 ]# firewall-cmd --permanent --zone=public --list-ports</span><br></pre></td></tr></table></figure></p>
+<p>添加compute1到swarm集群中<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute1 ]# docker swarm join --token SWMTKN-1-3d0h25uee1kgtb16flo374zpfnr2v8ttz2mzy1zbjjjtutsk7g-5lf48tdr8z457ruuqh7bi8m3j 172.16.2.234:2377</span><br></pre></td></tr></table></figure></p>
+<p>安装并启动docker服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute2 ]# yum -y install docker</span><br><span class="line"></span><br><span class="line">[ root@compute2 ]# systemctl start docker</span><br></pre></td></tr></table></figure></p>
+<p>设置防火墙规则，使得集群间通信正常<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute2 ]# firewall-cmd --permanent --zone=public --add-port=2377/tcp --add-port=7946/tcp --add-port=7946/udp --add-port=4789/tcp --add-port=4789/udp</span><br><span class="line"></span><br><span class="line">[ root@compute2 ]# firewall-cmd --reload</span><br><span class="line"></span><br><span class="line">[ root@compute2 ]# firewall-cmd --permanent --zone=public --list-ports</span><br></pre></td></tr></table></figure></p>
+<p>添加compute2到swarm集群中<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@compute2 ]# docker swarm join --token SWMTKN-1-3d0h25uee1kgtb16flo374zpfnr2v8ttz2mzy1zbjjjtutsk7g-5lf48tdr8z457ruuqh7bi8m3j 172.16.2.234:2377</span><br></pre></td></tr></table></figure></p>
+<p>控制节点：</p>
+<p>查看swarm集群<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[ root@controller ]# docker node ls</span><br></pre></td></tr></table></figure></p>
+<h2 id="部署Portainer集群"><a href="#部署Portainer集群" class="headerlink" title="部署Portainer集群"></a>部署Portainer集群</h2><p>在Swarm集群中创建一个新的overlay网络 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create --driver overlay --attachable portainer_agent_network</span><br></pre></td></tr></table></figure>
+<p>将代理部署为集群中的全局服务 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker service create \</span><br><span class="line">    --name portainer_agent \</span><br><span class="line">    --network portainer_agent_network \</span><br><span class="line">    -e AGENT_CLUSTER_ADDR=tasks.portainer_agent \</span><br><span class="line">    --mode global \</span><br><span class="line">    --constraint 'node.platform.os == linux' \</span><br><span class="line">    --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock \</span><br><span class="line">    --mount type=bind,src=//var/lib/docker/volumes,dst=/var/lib/docker/volumes \</span><br><span class="line">    portainer/agent</span><br></pre></td></tr></table></figure>
+<p>将Portainer实例部署为服务 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker service create \</span><br><span class="line">   --name portainer \</span><br><span class="line">   --network portainer_agent_network \</span><br><span class="line">   --publish 9000:9000 \</span><br><span class="line">   --replicas=1 \</span><br><span class="line">   --constraint 'node.role == manager' \</span><br><span class="line">   portainer/portainer -H "tcp://tasks.portainer_agent:9001" --tlsskipverify</span><br></pre></td></tr></table></figure>
+<p>浏览器访问 <a href="http://172.16.2.234:9000" target="_blank" rel="noopener">http://172.16.2.234:9000</a> , 设置一个密码即可。</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1537436961300d5df7c8a14" alt=""></p>
+<p>现在就可以试用了。</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/153750984847929c97bca3e" alt=""></p>
+<p>我们这次搭建的是集群版，可以看到swarm集群中所有的容器资源。</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/153750987965703185d16c2" alt=""></p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/15375099158050c0c30fab8" alt=""></p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1537509904836712ffc5e09" alt=""></p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1537509928693d16ef7307f" alt=""></p>
 
       
     </div>
@@ -438,9 +488,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/可视化工具Portainer/" rel="tag"># 可视化工具Portainer</a>
           
         </div>
       
@@ -453,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/28/Docker-镜像制作dockerfile/" rel="next" title="Docker镜像制作 - dockerfile">
-                <i class="fa fa-chevron-left"></i> Docker镜像制作 - dockerfile
+              <a href="/2018/09/20/docker-图形页面管理工具介绍/" rel="next" title="docker 图形页面管理工具集锦">
+                <i class="fa fa-chevron-left"></i> docker 图形页面管理工具集锦
               </a>
             
           </div>
@@ -463,8 +513,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/29/python-邂逅算法绘图/" rel="prev" title="python 邂逅算法绘图">
-                python 邂逅算法绘图 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/23/docker devicemapper驱动下的存储扩容/" rel="prev" title="docker devicemapper驱动下的存储扩容">
+                docker devicemapper驱动下的存储扩容 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -665,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备"><span class="nav-number">2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计"><span class="nav-number">3.</span> <span class="nav-text">设计</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集群部署"><span class="nav-number">2.</span> <span class="nav-text">集群部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件-部署Swarm集群"><span class="nav-number">2.1.</span> <span class="nav-text">前提条件 - 部署Swarm集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Portainer集群"><span class="nav-number">2.2.</span> <span class="nav-text">部署Portainer集群</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="python,算法," />
+  <meta name="keywords" content="Docker,存储扩容," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="前言 我打江南走过那等在季节里的容颜如莲花的开落东风不来，三月的柳絮不飞你底心如小小寂寞的城恰若青石的街道向晚 音不响，三月的春帷不揭你底心是小小的窗扉紧掩我达达的马蹄是美丽的错误 我不是归人，是个过客……– [郑愁予]《错误》  邂逅是多么浪漫的事情，但是在现实生活中邂逅总是那么遥不可及，有人说邂逅不可求但是可以科学的设计。 准备设计邂逅算法，我们首先要准备好僚机。假设你有三个室友，让他们作为你">
-<meta name="keywords" content="python,算法">
+<meta name="description" content="分享主题：docker devicemapper驱动下的存储扩容 分享人： 崔格拉斯 分享时间：2018/9/23 第一次群分享圆满结束，相信在共同学习下，我会继续给大家带来更多优质的docker文章，同时非常感谢 Royal Never Give up 和易加武积极参与群分享，集思广益相信我们可以一同成长，fighting！ 1. docker的存储驱动类型docker存储类型主要是5类，我们平">
+<meta name="keywords" content="Docker,存储扩容">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python 邂逅算法的设计">
-<meta property="og:url" content="http://yoursite.com/2018/08/29/python-邂逅算法的设计/index.html">
+<meta property="og:title" content="docker devicemapper驱动下的存储扩容">
+<meta property="og:url" content="http://yoursite.com/2018/09/23/docker devicemapper驱动下的存储扩容/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="前言 我打江南走过那等在季节里的容颜如莲花的开落东风不来，三月的柳絮不飞你底心如小小寂寞的城恰若青石的街道向晚 音不响，三月的春帷不揭你底心是小小的窗扉紧掩我达达的马蹄是美丽的错误 我不是归人，是个过客……– [郑愁予]《错误》  邂逅是多么浪漫的事情，但是在现实生活中邂逅总是那么遥不可及，有人说邂逅不可求但是可以科学的设计。 准备设计邂逅算法，我们首先要准备好僚机。假设你有三个室友，让他们作为你">
+<meta property="og:description" content="分享主题：docker devicemapper驱动下的存储扩容 分享人： 崔格拉斯 分享时间：2018/9/23 第一次群分享圆满结束，相信在共同学习下，我会继续给大家带来更多优质的docker文章，同时非常感谢 Royal Never Give up 和易加武积极参与群分享，集思广益相信我们可以一同成长，fighting！ 1. docker的存储驱动类型docker存储类型主要是5类，我们平">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535541166024&di=72eaa24e36e1e897a15fedaa04e199da&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2FBOOK-Catalog%2FLiaoxiaojun%2FB0047ZFINI_02_AMZN.jpg">
-<meta property="og:updated_time" content="2018-08-29T09:18:10.047Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537854346896&di=78d2157a8511273d2cb795e858a57ae1&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D2885106932%2C2419639274%26fm%3D214%26gp%3D0.jpg">
+<meta property="og:updated_time" content="2018-09-25T02:58:04.315Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python 邂逅算法的设计">
-<meta name="twitter:description" content="前言 我打江南走过那等在季节里的容颜如莲花的开落东风不来，三月的柳絮不飞你底心如小小寂寞的城恰若青石的街道向晚 音不响，三月的春帷不揭你底心是小小的窗扉紧掩我达达的马蹄是美丽的错误 我不是归人，是个过客……– [郑愁予]《错误》  邂逅是多么浪漫的事情，但是在现实生活中邂逅总是那么遥不可及，有人说邂逅不可求但是可以科学的设计。 准备设计邂逅算法，我们首先要准备好僚机。假设你有三个室友，让他们作为你">
-<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535541166024&di=72eaa24e36e1e897a15fedaa04e199da&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2FBOOK-Catalog%2FLiaoxiaojun%2FB0047ZFINI_02_AMZN.jpg">
+<meta name="twitter:title" content="docker devicemapper驱动下的存储扩容">
+<meta name="twitter:description" content="分享主题：docker devicemapper驱动下的存储扩容 分享人： 崔格拉斯 分享时间：2018/9/23 第一次群分享圆满结束，相信在共同学习下，我会继续给大家带来更多优质的docker文章，同时非常感谢 Royal Never Give up 和易加武积极参与群分享，集思广益相信我们可以一同成长，fighting！ 1. docker的存储驱动类型docker存储类型主要是5类，我们平">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537854346896&di=78d2157a8511273d2cb795e858a57ae1&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D2885106932%2C2419639274%26fm%3D214%26gp%3D0.jpg">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/29/python-邂逅算法的设计/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/23/docker devicemapper驱动下的存储扩容/"/>
 
 
 
 
 
-  <title>python 邂逅算法的设计 | CGLS 的博客</title>
+  <title>docker devicemapper驱动下的存储扩容 | CGLS 的博客</title>
   
 
 
@@ -305,7 +305,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/python-邂逅算法的设计/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/23/docker devicemapper驱动下的存储扩容/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="cuijianmin">
@@ -322,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python 邂逅算法的设计</h1>
+          <h1 class="post-title" itemprop="name headline">docker devicemapper驱动下的存储扩容</h1>
         
 
         <div class="post-meta">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T15:36:42+08:00">
-                2018-08-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-23T16:08:09+08:00">
+                2018-09-23
               </time>
             
 
@@ -357,8 +357,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/Base/" itemprop="url" rel="index">
+                    <span itemprop="name">Base</span>
                   </a>
                 </span>
 
@@ -397,9 +397,9 @@
           
             <div class="post-gallery-row">
               <a class="post-gallery-img fancybox"
-                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535541166024&di=72eaa24e36e1e897a15fedaa04e199da&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2FBOOK-Catalog%2FLiaoxiaojun%2FB0047ZFINI_02_AMZN.jpg" rel="gallery_cjmh53aqg001u08cxx4x2q3wl"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537854346896&di=78d2157a8511273d2cb795e858a57ae1&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D2885106932%2C2419639274%26fm%3D214%26gp%3D0.jpg" rel="gallery_cjmh53am2000h08cxsiv3n8jt"
                  itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
-                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535541166024&di=72eaa24e36e1e897a15fedaa04e199da&imgtype=0&src=http%3A%2F%2Fg-ec4.images-amazon.com%2Fimages%2FG%2F28%2FBOOK-Catalog%2FLiaoxiaojun%2FB0047ZFINI_02_AMZN.jpg" itemprop="contentUrl"/>
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537854346896&di=78d2157a8511273d2cb795e858a57ae1&imgtype=jpg&src=http%3A%2F%2Fimg2.imgtn.bdimg.com%2Fit%2Fu%3D2885106932%2C2419639274%26fm%3D214%26gp%3D0.jpg" itemprop="contentUrl"/>
               </a>
             
           
@@ -410,17 +410,27 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
-<p>我打江南走过<br>那等在季节里的容颜如莲花的开落<br>东风不来，三月的柳絮不飞<br>你底心如小小寂寞的城<br>恰若青石的街道向晚 音不响，三月的春帷不揭<br>你底心是小小的窗扉紧掩<br>我达达的马蹄是美丽的错误 我不是归人，是个过客……<br>– [郑愁予]《错误》</p>
-</blockquote>
-<p>邂逅是多么浪漫的事情，但是在现实生活中邂逅总是那么遥不可及，有人说邂逅不可求但是可以科学的设计。</p>
-<h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><p>设计邂逅算法，我们首先要准备好僚机。假设你有三个室友，让他们作为你的僚机部署在女神必经的三条路上，当他们看到你的女神就立马微信联系你。这里我们梳理一下，你的三个僚机室友所处的位置为三个点，所以点位数是3。当僚机室友遇见了你的女神，他才是完成了使命的僚机，我们命名为有效点位。话说如果室友见到一个人就给你发一次消息，我们则定义你收到所有消息的次数是总次数，那其中含有女神的消息为有效消息。</p>
-<p>整理一下，我们现在有四个参数：总点位数，总次数，有效点位数，有效次数。</p>
-<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>当一切准备妥当之后，我们现在就缺算法设计了，设计好算法就可以实现邂逅啦。</p>
-<p>算法设计中权重必不可少，我们现有的四个参数其中总点位数和总次数是相同组数据，有效点位数和有效次数是相同组数据。相同组数据需要设置权重，于是我们设计点位权重是0.6，次数权重是0.4。还没结束哦，一般来说算法要符合实际，没有百分百的可能性，于是我们添加一个衰减因子（0.9），让我们的算法无论怎么算都不会超过百分百。</p>
-<p>算法的设计思想其实很简单：在有限区域内，女神出行必然选择区域内的某条行走路线，通过算法推断女神与你邂逅的概率。一般来说，我们的总点位要足够的多，总次数要足够多，所以你需要准备很多的僚机，让他们多多汇报情况。如果你只能出动三位僚机，那么算法的误差必然存在，需要运气加持。</p>
-<p>现在我列出我的邂逅算法吧，<br>$$<br>（点位权重<em>有效点位数/总点位数 + 次数权重</em>有效次数/总次数）*衰减因子<br>$$<br>算法已经设计好啦，现在要用实践来证明了！！！</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># encoding = utf-8</span></span><br><span class="line"><span class="comment"># author:cgls</span></span><br><span class="line"><span class="comment"># 邂逅算法 </span></span><br><span class="line"><span class="comment"># 点位权重</span></span><br><span class="line">point_location_weight = <span class="number">0.6</span></span><br><span class="line"><span class="comment"># 次数权重</span></span><br><span class="line">num_weight = <span class="number">0.4</span></span><br><span class="line"><span class="comment"># 总次数</span></span><br><span class="line">all_num = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line"><span class="comment"># 有效次数</span></span><br><span class="line">effective_num = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]</span><br><span class="line"><span class="comment"># 总点位数</span></span><br><span class="line">all_point = [<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 有效点位数</span></span><br><span class="line">effective_point = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">data1 = []</span><br><span class="line">data2 = []</span><br><span class="line"><span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">0</span>,len(all_point)):</span><br><span class="line">    a1 = a + <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> b <span class="keyword">in</span> range(<span class="number">0</span>,a1):</span><br><span class="line">        b1 = b + <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> range(<span class="number">0</span>,len(all_num)):</span><br><span class="line">            c1 = c + <span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> d <span class="keyword">in</span> range(<span class="number">0</span>, c1):</span><br><span class="line">                d1 = d + <span class="number">1</span></span><br><span class="line">                h = str(all_point[a])+str(effective_point[b])+str(all_num[c])+str(effective_num[d])</span><br><span class="line">                data1.append(str(h))</span><br><span class="line">                aa = str(format(float(effective_num[d]) / float(all_num[c]), <span class="string">'.2f'</span>))</span><br><span class="line">                bb = str(format(float(effective_point[b]) / float(all_point[a]), <span class="string">'.2f'</span>))</span><br><span class="line">                cc = str(<span class="number">0.6</span>)</span><br><span class="line">                dd = str(<span class="number">0.4</span>)</span><br><span class="line">                data2.append(str(format((float(aa) * float(cc) + float(bb) * float(dd)) * <span class="number">0.9</span>, <span class="string">'.3f'</span>)))</span><br><span class="line"><span class="comment"># 总点位数，有效点位数，总次数，有效次数</span></span><br><span class="line">print(data1)</span><br><span class="line"><span class="comment"># 算法得出的百分比</span></span><br><span class="line">print(data2)</span><br></pre></td></tr></table></figure>
+        <p>分享主题：docker devicemapper驱动下的存储扩容</p>
+<p>分享人： 崔格拉斯</p>
+<p>分享时间：2018/9/23</p>
+<p>第一次群分享圆满结束，相信在共同学习下，我会继续给大家带来更多优质的docker文章，同时非常感谢 Royal Never Give up 和易加武积极参与群分享，集思广益相信我们可以一同成长，fighting！</p>
+<h1 id="1-docker的存储驱动类型"><a href="#1-docker的存储驱动类型" class="headerlink" title="1. docker的存储驱动类型"></a>1. docker的存储驱动类型</h1><p>docker存储类型主要是5类，我们平时用到最多的是overlayFS和DeviceMapper。在docker 1.12版本时，docker默认推荐的是DeviceMapper；而现在1.12 以后的版本默认都推荐的是overlayFS。</p>
+<p>这5类驱动类型，我们可以从这张图中很清晰的了解到优缺点。和使用它的应用场景。</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/15378436717896f26e9c19f" alt="1537842701594"></p>
+<p>从官方推荐的变更可以看出来，overlayFS性能肯定是优于DeviceMapper。</p>
+<p>我之前是基于centos7.2 1611 docker 1.12版本开发应用的，所以在日常工作中发现了存储资源不够用的情况。于是今天我们就分享一下，1.12版本的存储资源扩容。</p>
+<h1 id="2-devicemapper驱动下的磁盘扩容方案"><a href="#2-devicemapper驱动下的磁盘扩容方案" class="headerlink" title="2. devicemapper驱动下的磁盘扩容方案"></a>2. devicemapper驱动下的磁盘扩容方案</h1><p>如果你是使用docker1.12版本，并且你的存储驱动类型是devicemapper，那么你应该会有存储扩容的需求。这里的存储扩容有两个，一个是docker资源池的扩容，一个是容器资源的扩容。所谓的docker资源池，是指/var/lib/docker/devicemapper/devicemapper/data 这个文件空间，这个文件实际上是给docker union文件系统提供空间的，直白点说就是你的容器磁盘大小都是从这个data pool中分配的。docker 默认启动一个容器时，分配的磁盘大小是10G，一般来说是足够使用的，但是如果你的业务需要，那么可以对这个磁盘分配做个修改。</p>
+<h1 id="3-资源池扩容"><a href="#3-资源池扩容" class="headerlink" title="3. 资源池扩容"></a>3. 资源池扩容</h1><p>我习惯于在安装完docker之后，立马进行扩容操作。扩容的思路也很简单，删除默认的data（100G），重新创建一个data，要多大创建多大的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yun -y install docker</span><br><span class="line">rm -rf /var/lib/docker</span><br><span class="line">mkdir -p /var/lib/docker/devicemapper/devicemapper</span><br><span class="line">dd if=/dev/zero of=/var/lib/docker/devicemapper/devicemapper/data bs=1G count=0 seek=1024</span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+<p>我这里是使用dd if创建一个1 T大小的文件，作为新的资源池。这里大小是通过 bs*seek 控制的。重启docker之后，我们用docker info命令是可以看到现在的资源池的大小的</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/15378436839861f19f77fd3" alt="1537842977212"></p>
+<h1 id="4-容器扩容"><a href="#4-容器扩容" class="headerlink" title="4. 容器扩容"></a>4. 容器扩容</h1><p>容器扩容分为静态和动态两种，静态是指在创建容器的时候我们通过–storage-opt size=20G设定容器可用空间的大小。</p>
+<p>动态是指给一个已经创建好的容器进行资源扩容。如果你的文件系统是xfs的，很抱歉我们无法执行容器资源动态扩容。如果你的主机文件系统是ext4的话，是支持容器资源动态扩容。我工作环境文件系统都是xfs也就没去实践容器动态扩容，话说容器在启动的时候我们就应该规划好资源了，所以这个动态扩容的功能大家有兴趣可以自己了解一下，实践应用的不是很多。如果你的文件系统是xfs的，很抱歉我们无法执行容器资源动态扩容。如果你的主机文件系统是ext4的话，是支持容器资源动态扩容。我工作环境文件系统都是xfs也就没去实践容器动态扩容，话说容器在启动的时候我们就应该规划好资源了，所以这个动态扩容的功能大家有兴趣可以自己了解一下，真实应用的不是很多。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># --storage-opt size=20G</span><br><span class="line">docker run -itd --name test1 --privileged docker.io/centos /usr/sbin/init</span><br><span class="line">docker run -itd --name test2 --privileged --storage-opt size=20G docker.io/centos /usr/sbin/init</span><br></pre></td></tr></table></figure>
+<p>通过参数–storage-opt size=20G，是的test2容器的磁盘大小是20g而不是默认的10g，满足了要求。</p>
+<p>所以在1.12 版本的docker中，使用DeviceMapper驱动的话，我们的扩容是非常简单的，根据实际业务的需求，我们可以设计好满足要求的资源池和容器资源。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>docker1.12 下devicemapper驱动下的存储扩容，如果文件系统是xfs，那么只能支持静态扩容即是我上面提到的方法，如果文件系统是ext4，是支持动态扩容的。</p>
+<p>docker1.12 默认推荐使用devicemapper驱动，这是centos7.2 1611系统的推荐。centos7.2以后的版本yum安装docker时，docker版本都是大于docker1.12，并且推荐的驱动是overlay2。</p>
 
       
     </div>
@@ -438,9 +448,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/存储扩容/" rel="tag"># 存储扩容</a>
           
         </div>
       
@@ -453,8 +463,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/28/Docker-镜像制作dockerfile/" rel="next" title="Docker镜像制作 - dockerfile">
-                <i class="fa fa-chevron-left"></i> Docker镜像制作 - dockerfile
+              <a href="/2018/09/21/docker-图形页面管理工具Portainer/" rel="next" title="docker 图形页面管理工具portainer">
+                <i class="fa fa-chevron-left"></i> docker 图形页面管理工具portainer
               </a>
             
           </div>
@@ -462,10 +472,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/29/python-邂逅算法绘图/" rel="prev" title="python 邂逅算法绘图">
-                python 邂逅算法绘图 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -665,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备"><span class="nav-number">2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计"><span class="nav-number">3.</span> <span class="nav-text">设计</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-docker的存储驱动类型"><span class="nav-number">1.</span> <span class="nav-text">1. docker的存储驱动类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-devicemapper驱动下的磁盘扩容方案"><span class="nav-number">2.</span> <span class="nav-text">2. devicemapper驱动下的磁盘扩容方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-资源池扩容"><span class="nav-number">3.</span> <span class="nav-text">3. 资源池扩容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-容器扩容"><span class="nav-number">4.</span> <span class="nav-text">4. 容器扩容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
