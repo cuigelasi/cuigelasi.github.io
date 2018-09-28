@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Docker,DockOne 分享," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="分享摘要容器化已经成为一种趋势，它可以解决很多运维中的痛点，比如效率、成本、稳定性等问题，而接入容器的过程中往往也会碰到很多问题和不便。在有赞最开始做容器化是为了快速交付开发测试环境，在容器化的过程中，我们碰到过容器技术、运维体系适配、用户使用习惯改变等各种问题，本次分享主要介绍有赞容器化过程中碰到的问题以及采取的方案。 主要内容 有赞容器化的初衷 有赞容器化⽅方案 生产环境容器化  分享嘉宾王波">
+<meta name="keywords" content="Docker,DockOne 分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有赞容器化实践">
+<meta property="og:url" content="http://yoursite.com/2018/09/28/有赞容器化实践/index.html">
+<meta property="og:site_name" content="CGLS 的博客">
+<meta property="og:description" content="分享摘要容器化已经成为一种趋势，它可以解决很多运维中的痛点，比如效率、成本、稳定性等问题，而接入容器的过程中往往也会碰到很多问题和不便。在有赞最开始做容器化是为了快速交付开发测试环境，在容器化的过程中，我们碰到过容器技术、运维体系适配、用户使用习惯改变等各种问题，本次分享主要介绍有赞容器化过程中碰到的问题以及采取的方案。 主要内容 有赞容器化的初衷 有赞容器化⽅方案 生产环境容器化  分享嘉宾王波">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538707008&di=e1318ad4f9dc7ade5738ac013ec0bce5&imgtype=jpg&er=1&src=http%3A%2F%2Fs3.51cto.com%2Foss%2F201809%2F13%2Fc431192df4a51cff59ef583a1d2f5bfc.jpg-wh_651x-s_2216620549.jpg">
+<meta property="og:updated_time" content="2018-09-28T02:38:04.279Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有赞容器化实践">
+<meta name="twitter:description" content="分享摘要容器化已经成为一种趋势，它可以解决很多运维中的痛点，比如效率、成本、稳定性等问题，而接入容器的过程中往往也会碰到很多问题和不便。在有赞最开始做容器化是为了快速交付开发测试环境，在容器化的过程中，我们碰到过容器技术、运维体系适配、用户使用习惯改变等各种问题，本次分享主要介绍有赞容器化过程中碰到的问题以及采取的方案。 主要内容 有赞容器化的初衷 有赞容器化⽅方案 生产环境容器化  分享嘉宾王波">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538707008&di=e1318ad4f9dc7ade5738ac013ec0bce5&imgtype=jpg&er=1&src=http%3A%2F%2Fs3.51cto.com%2Foss%2F201809%2F13%2Fc431192df4a51cff59ef583a1d2f5bfc.jpg-wh_651x-s_2216620549.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/28/有赞容器化实践/"/>
+
+
+
+
+
+  <title>有赞容器化实践 | CGLS 的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9bd817c58745d5357bf7510922c22f7a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CGLS 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">every minute counts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/28/有赞容器化实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">有赞容器化实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T10:20:53+08:00">
+                2018-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Share/" itemprop="url" rel="index">
+                    <span itemprop="name">Share</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538707008&di=e1318ad4f9dc7ade5738ac013ec0bce5&imgtype=jpg&er=1&src=http%3A%2F%2Fs3.51cto.com%2Foss%2F201809%2F13%2Fc431192df4a51cff59ef583a1d2f5bfc.jpg-wh_651x-s_2216620549.jpg" rel="gallery_cjmlegvfc002jq8cx325zjf1b"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538707008&di=e1318ad4f9dc7ade5738ac013ec0bce5&imgtype=jpg&er=1&src=http%3A%2F%2Fs3.51cto.com%2Foss%2F201809%2F13%2Fc431192df4a51cff59ef583a1d2f5bfc.jpg-wh_651x-s_2216620549.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="分享摘要"><a href="#分享摘要" class="headerlink" title="分享摘要"></a>分享摘要</h1><p>容器化已经成为一种趋势，它可以解决很多运维中的痛点，比如效率、成本、稳定性等问题，而接入容器的过程中往往也会碰到很多问题和不便。在有赞最开始做容器化是为了快速交付开发测试环境，在容器化的过程中，我们碰到过容器技术、运维体系适配、用户使用习惯改变等各种问题，本次分享主要介绍有赞容器化过程中碰到的问题以及采取的方案。</p>
+<h1 id="主要内容"><a href="#主要内容" class="headerlink" title="主要内容"></a>主要内容</h1><ol>
+<li>有赞容器化的初衷</li>
+<li>有赞容器化⽅方案</li>
+<li>生产环境容器化</li>
+</ol>
+<h1 id="分享嘉宾"><a href="#分享嘉宾" class="headerlink" title="分享嘉宾"></a>分享嘉宾</h1><p>王波，有赞运维平台负责人。<br>信息来源：DockOne</p>
+<h1 id="前⾔"><a href="#前⾔" class="headerlink" title="前⾔"></a>前⾔</h1><p>容器化已经成为⼀种趋势，它可以解决很多运维中的痛点，比如效率、成本、稳定性等问<br>题，⽽接入容器的过程中往往也会碰到很多问题和不便。在有赞最开始做容器化是为了快速<br>交付开发测试环境，在容器化的过程中，我们碰到过容器技术、运维体系适配、⽤户使⽤习<br>惯改变等各种问题，这次分享主要介绍有赞容器化过程中碰到的问题以及采取的⽅案。</p>
+<h1 id="有赞容器化的初衷"><a href="#有赞容器化的初衷" class="headerlink" title="有赞容器化的初衷"></a>有赞容器化的初衷</h1><p>在有赞同时会有很多个项⽬、⽇常在并⾏开发，环境的抢占问题严重影响了开发、测试和上<br>线的效率，我们需要给每个项⽬提供⼀套开发联调(daily)、测试环境(qa)，并且随着项⽬、<br>⽇常的⽣命周期项⽬环境也会随着创建和销毁，我们最早的容器化需求就是怎么解决环境快<br>速交付的问题。</p>
+<p>上⾯是有赞⼤致的研发流程，在标准流程中我们有四套稳定环境，分别是Daily环境、Qa环境、预发环境和测试环境。我们的开发、测试、联调⼯作⼀般并不会直接在稳定环境中进⾏，⽽是会拉⼀套独立的项⽬环境出来，随着代码经过开发、测试、预发验收最终发布到⽣产环境后再同步回Daily/Qa的稳定环境中。</p>
+<p>我们提供了⼀套以最⼩的资源投入满⾜最⼤项⽬并⾏度的环境交付⽅案，在Daily/Qa稳定环境的基础上，隔离出N个项⽬环境，在项⽬环境⾥只需要创建该项⽬所涉及应⽤的计算资源，其它缺失的服务调⽤由稳定环境提供。在项⽬环境⾥，我们⼤量使⽤了容器技术。</p>
+<p>后⾯我们⼜在项⽬环境快速交付的解决⽅案的基础上实现了持续交付流⽔线，⽬前已经有超过600套项⽬/持续交付环境，加上Daily/Qa稳定环境，涉及计算实例四五千个，这些计算实例⽆论是cpu还是内存使⽤率都是非常低的，容器化可以非常好的解决环境交付的效率问题，以及提⾼资源使⽤率来节省成本的投入。</p>
+<h1 id="有赞容器化⽅案"><a href="#有赞容器化⽅案" class="headerlink" title="有赞容器化⽅案"></a>有赞容器化⽅案</h1><p>我们的容器化⽅案基于kubernetes(1.7.10)和docker(1.12.6)、docker(1.13.1)，下⾯介绍⼀下我们在各个⽅⾯遇到的问题以及解决⽅案。</p>
+<h2 id="⽹络"><a href="#⽹络" class="headerlink" title="⽹络"></a>⽹络</h2><p>有赞后端主要是java应⽤，采⽤定制的dubbo服务化⽅案，过程中⽆法做到整个单元全量容器化，和原有集群在⽹络路由上互通也就成了刚需，由于我们⽆法解决公有云上overlay⽹络和公有云⽹络的互通问题，所以⼀开始我们放弃了overlay⽹络⽅案，采⽤了托管⽹络下的macvlan⽅案，这样既解决了⽹络互通的问题也不存在⽹络性能问题，但是也就享受不到公有云弹性资源的优势了。随着有赞多云架构的发展以及越来越多的云⼚商⽀持容器overlay⽹络和vpc⽹络打通，弹性资源的问题才得到了缓解。</p>
+<h2 id="隔离性"><a href="#隔离性" class="headerlink" title="隔离性"></a>隔离性</h2><p>容器的隔离主要利⽤内核的namespace和cgroup技术，在进程、cpu、内存、IO等资源隔离限制上有比较好的表现，但其他⽅⾯和虚拟机相比存在着很多的不⾜，我们在使⽤过程中碰到最多的问题是容器⾥看到的cpu数和内存⼤⼩不准确，因为/proc⽂件系统⽆法隔离，导致容器⾥的进程”看到”的是物理机的cpu数以及内存⼤⼩。</p>
+<h2 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h2><p>我们的java应⽤会根据服务器的内存⼤⼩来决定jvm参数应该怎么配置，我们是采⽤lxcfs⽅案来规避的。</p>
+<h2 id="CPU数的问题"><a href="#CPU数的问题" class="headerlink" title="CPU数的问题"></a>CPU数的问题</h2><p>因为我们有超卖的需求以及kubernetes默认也是采⽤cpu share来做cpu限制，虽然我们使⽤了lxcfs，CPU数还是不准的。jvm以及很多Java sdk都会根据系统的CPU数来决定创建多少线程，导致java应⽤在线程数和内存使⽤上都比虚拟机多的多，严重影响运⾏，其他类型的应⽤也有类似的问题。<br>我们会根据容器的规格内置⼀个环境变量NUM_CPUS，然后比如nodejs应⽤就会按照这个变量来创建它的worker进程数。在解决java类应⽤的问题时，我们索性通过LD_PRELOAD将JVM_ActiveProcessorCount函数覆盖掉，让它直接返回NUM_CPUS的值[1]。</p>
+<h2 id="应⽤接⼊"><a href="#应⽤接⼊" class="headerlink" title="应⽤接⼊"></a>应⽤接⼊</h2><p>在容器化之前，有赞的应⽤已经全部接入到发布系统，在发布系统⾥已经标准化了应⽤的打包、发布流程，所以在应⽤接入⽅⾯成本还是比较⼩的，业务⽅⽆需提供Dockerfile。<br>1、nodejs, python，php-soa等⽤supervisord托管的应⽤，只需要在git仓库⾥提供<br>app.yaml⽂件定义运⾏需要的runtime和启动命令即可。</p>
+<p>2、java标准化启动的应⽤业务⽅⽆需改动<br>3、java非标准化的应⽤需要做标准化改造</p>
+<h2 id="镜像集成"><a href="#镜像集成" class="headerlink" title="镜像集成"></a>镜像集成</h2><p>容器镜像我们分了三层，依次为stack层（os），runtime层（语⾔环境），应⽤层（业务代码和⼀些辅助agent），应⽤以及辅助agent由runit来启动。由于我们的配置还没有完全分离，在应⽤层⽬前还是每个环境独立打包，镜像⾥除了业务代码之外，我们还会根据业务的语⾔类型放⼀些辅助的agent。我们⼀开始也想将各种agent拆成多个镜像，然后每个pod运⾏多个容器，后来因为解决不了pod⾥容器的启动顺序（服务启动有依赖）问题，就把所有服务都扔到⼀个容器⾥去运⾏了。</p>
+<p>我们的容器镜像集成过程也是通过kubernetes来调度的（会调度到指定的打包节点上），在发布任务发起时，管控系统会在集群中创建⼀个打包的pod，打包程序会根据应⽤类型等参数编译代码、安装依赖，并且⽣成Dockerifile，然后在这个pod中使⽤docker in docker的⽅式来集成容器镜像并推送到仓库。<br>为了加速应⽤的打包速度，我们⽤pvc缓存了python的virtualenv，nodejs的node_modules，java的maven包等⽂件。另外就是docker早的版本⾥，Dockerfile ADD指令是不⽀持指定⽂件属主和分组的，这样会带来⼀个问题就是需要指定⽂件属主时（我们的应⽤是以app账号运⾏的）需要多运⾏⼀次RUN chown，这样镜像也就多了⼀层数据，所以我们打包节点的docker版本采⽤了官⽅比较新的ce版本，因为新版本⽀持ADD –chown特性。</p>
+<h2 id="负载均衡-ingress"><a href="#负载均衡-ingress" class="headerlink" title="负载均衡(ingress)"></a>负载均衡(ingress)</h2><p>有赞的应⽤内部调⽤有比较完善的服务化和service mesh⽅案，集群内的访问不⽤过多考虑，负载均衡只需要考虑⽤户和系统访问的http流量，在容器化之前我们已经⾃研了⼀套统⼀接入系统，所以在容器化负载均衡上我们并没有完整按照ingress的机制来实现controller，ingress的资源配置是配在统⼀接入⾥的，配置⾥⾯转发的upstream会和kubernetes⾥的service关联，我们只是做了⼀个sync程序watch kube-api，感知service的变化来实时更新统⼀接入系统中upstream的服务器列表信息。</p>
+<h2 id="容器登录和调试"><a href="#容器登录和调试" class="headerlink" title="容器登录和调试"></a>容器登录和调试</h2><p>在容器化接入过程中开发会反馈是控制台比较难⽤，虽然我们优化了多次，和iterm2等的体验还是有所不⾜，最终我们还是放开了项⽬/持续交付环境这种需要频繁登陆调试的ssh登陆权限。<br>另外⼀个比较严重的问题是，当⼀个应⽤启动后健康检查有问题会导致pod⼀直在重新调度，⽽在开发过程中开发肯定是希望看到失败现场的，我们提供了调试发布模式，让容器不做健康检查。</p>
+<h2 id="⽇志"><a href="#⽇志" class="headerlink" title="⽇志"></a>⽇志</h2><p>有赞有专⻔的⽇志系统，我们内部叫天⽹，⼤部分⽇志以及业务监控数据都是通过sdk直接打到天⽹⾥去了，所以容器的标准输出⽇志仅仅作为⼀种辅助排查问题的⼿段。我们容器的⽇志收集采⽤的是fluentd，经过fluentd处理后按照天⽹约定的⽇志格式打到kafka，最终由天⽹处理进入es做存储。</p>
+<h2 id="灰度发布"><a href="#灰度发布" class="headerlink" title="灰度发布"></a>灰度发布</h2><p>我们涉及到灰度发布的流量主要包含三部分：<br>1、⽤户端的http访问流量<br>2、应⽤之间的http调⽤<br>3、应⽤之间的dubbo调⽤</p>
+<p>⾸先，我们在入⼝的统⼀接入上统⼀打上灰度需要⽤的各种维度的标签（比如⽤户、店铺等），然后需要对统⼀接入、http client以及dubbo client做改造，⽬的是让这些标签能够在整个调⽤链上透传。我们在做容器灰度发布时，会发⼀个灰度的deployment，然后在统⼀接入以及灰度配置中⼼配置灰度规则，整个链路上的调⽤⽅都会感知这些灰度规则来实现灰度发布。</p>
+<h2 id="标准环境容器化"><a href="#标准环境容器化" class="headerlink" title="标准环境容器化"></a>标准环境容器化</h2><p>标准环境的出发点<br>1、和项⽬环境类似，标准稳定环境中的daily，qa，pre以及prod中超过⼀半运⾏在低⽔位的服务器的资源非常浪费。<br>2、因为成本考虑daily，qa，pre⾥都是以单台虚拟机运⾏的，这样⼀旦需要发布稳定环境将会造成标准稳定环境和项⽬环境的短暂不可⽤。<br>3、虚拟机交付速度比较慢，使⽤虚拟机做灰度发布也比较复杂。<br>4、虚拟机往往会存在⼏年甚⾄更⻓的时间，运⾏过程中操作系统以及基础软件版本的收敛非常⿇烦。</p>
+<h2 id="标准环境容器化推进"><a href="#标准环境容器化推进" class="headerlink" title="标准环境容器化推进"></a>标准环境容器化推进</h2><p>经过之前项⽬/持续交付的上线和迭代，⼤部分应⽤本⾝已经具备了容器化的条件。不过对于上线来说，需要整个运维体系来适配容器化，比如监控、发布、⽇志等等。⽬前我们⽣产环境容器化准备基本完成，⽣产⽹已经上了部分前端nodejs应⽤，其他应⽤也在陆续推动中，希望以后可以分享更多⽣产环境中的容器化经验。</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>以上是有赞在容器化上的应⽤，以及在容器化过程中碰到的⼀些问题和解决⽅案，我们⽣产环境的容器化还处于开始阶段，后⾯还会碰到各种个样的问题，希望能够和⼤家互相学习，后⾯能够有更多的经验分享给⼤家</p>
+<h1 id="解惑答疑"><a href="#解惑答疑" class="headerlink" title="解惑答疑"></a>解惑答疑</h1><p>Q: 你们的上线审批流程是怎样的<br>A: 我们主要是定义了发布窗口、发布次数等限制，如果在限制以内的，只需要走普通的发布审批流程，否则走紧急发布流程。</p>
+<p>Q: 在容器内打镜像怎么避免用户把仓库账号信息打印出来？<br>A:  clone代码所使用的私钥是通过pod的环境变量下发的，这里主要是把镜像集成分成多个步骤，我们会在最开始clone完代码后就将所有敏感信息清理掉了。</p>
+<p>Q: 请问，针对k8s中pod内存统计算上cache/buffer而经常导致podoom问题有遇到过吗?特别是读写文件比较频繁的应用，比如kafka,有啥经验没？<br>A: 没有经验</p>
+<p>Q: 解决不了pod内部容器启动顺序就可以全放到一个容器，这里违背了容器的设计理念。一个容器只运行一个进程了吧<br>A: 是的，落地过程并不总是那么完美。。。</p>
+<p>Q: 网络方面可以详细讲一下那。没有遇到问题吗？<br>A: 网络方面因为我上面说的原因，我们一开始就是macvlan的方案，ipam都是本地配置文件，这样风险确实是最低的，性能也很不错。后面我们随着有赞多云架构，也在使用qcloud的容器服务，当然这里的网络主要还是云厂商解决的。</p>
+<p>Q:请问，你们是如何衡量应用容器发布之后的效率改进的？单纯看用户体验？还是有类似发布效率改进这类的指标？<br>A: 容器化效率提升其实最主要的还是在开发测试环节，比如很多项目中都是push完代码就开始自动CI、部署、测试等过程的，我们在持续交付里会有很多指标的产出作为参考</p>
+<p>Q: 生产环境还没上java容器吗<br>A: 是的，我们目前仅仅在项目环境里强制java应用使用容器，最主要的目的是希望能够发现更多的问题，java应用生产容器化会在Q4大规模推进。</p>
+<p>Q: 灰度发布的情况下，服务端是如何避免db数据被灰度发布的错误污染的？<br>A: 灰度发布用的数据还是生产的，我们认为它只是减少错误影响的范围。</p>
+<p>Q: 多套环境是把数据库也容器化了吗<br>A: DB是共享的，目前还没有特别强烈的需求</p>
+<p>Q: 应用监控方案呢？docker内基础监控的采集，上报，存储和展示方案，能否分享下？<br>A: 监控主要用的还是prometheus，主要包括采集容器的基础metrics数据、kube-state-metrics数据以及后续java框架/nodejs框架统一输出的metrics数据。这些监控数据会和容器之前的所有监控数据统一到“天网”中，展示是我们自己定制的，实现在我们的基础保障平台里面。</p>
+<p>Q: 之前看过有赞sc环境的文章，里面dubbo的路由规则是否针对环境的逻辑隔离做过改造？关键实现的点是哪些？<br>A: 是的，我们确实改造过整个调用链里的每个环节，会全链路透传一个环境标签，以及我们灰度实现的方案也是基于这个。</p>
+<p>Q: 没有用存储吗？kafka es都在vm上？<br>Q: 测试环境里面，db是如何快速创建的？<br>A: 存储类业务都在独立的物理机上，并没有容器化。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+            <a href="/tags/DockOne-分享/" rel="tag"># DockOne 分享</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/27/Docker 动态添加端口映射解决思路/" rel="next" title="Docker 动态添加端口映射解决思路">
+                <i class="fa fa-chevron-left"></i> Docker 动态添加端口映射解决思路
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg"
+                alt="cuijianmin" />
+            
+              <p class="site-author-name" itemprop="name">cuijianmin</p>
+              <p class="site-description motion-element" itemprop="description">我哒哒的马蹄声是一个美丽的错误，我不是归人是过客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cuigelasi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cuigelasi?viewmode=contents" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/10178945/%E5%B4%94%E5%81%A5%E6%95%8F" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分享摘要"><span class="nav-number">1.</span> <span class="nav-text">分享摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主要内容"><span class="nav-number">2.</span> <span class="nav-text">主要内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分享嘉宾"><span class="nav-number">3.</span> <span class="nav-text">分享嘉宾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前⾔"><span class="nav-number">4.</span> <span class="nav-text">前⾔</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有赞容器化的初衷"><span class="nav-number">5.</span> <span class="nav-text">有赞容器化的初衷</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有赞容器化⽅案"><span class="nav-number">6.</span> <span class="nav-text">有赞容器化⽅案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#⽹络"><span class="nav-number">6.1.</span> <span class="nav-text">⽹络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隔离性"><span class="nav-number">6.2.</span> <span class="nav-text">隔离性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存问题"><span class="nav-number">6.3.</span> <span class="nav-text">内存问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU数的问题"><span class="nav-number">6.4.</span> <span class="nav-text">CPU数的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应⽤接⼊"><span class="nav-number">6.5.</span> <span class="nav-text">应⽤接⼊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#镜像集成"><span class="nav-number">6.6.</span> <span class="nav-text">镜像集成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡-ingress"><span class="nav-number">6.7.</span> <span class="nav-text">负载均衡(ingress)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器登录和调试"><span class="nav-number">6.8.</span> <span class="nav-text">容器登录和调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#⽇志"><span class="nav-number">6.9.</span> <span class="nav-text">⽇志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#灰度发布"><span class="nav-number">6.10.</span> <span class="nav-text">灰度发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准环境容器化"><span class="nav-number">6.11.</span> <span class="nav-text">标准环境容器化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准环境容器化推进"><span class="nav-number">6.12.</span> <span class="nav-text">标准环境容器化推进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-number">6.13.</span> <span class="nav-text">结束语</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解惑答疑"><span class="nav-number">7.</span> <span class="nav-text">解惑答疑</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+    </div>
+    
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuijianmin</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <!--统计start-->
+      <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+      </script>
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+      <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  undefined
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
