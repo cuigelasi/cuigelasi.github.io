@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="K8S,教程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习方法在一个互联网技术更迭频繁的世界，学习一门新的互联网技术时，我们需要用最有效率的学习方法快速学习。K8S是时下最流行的容器编排技术，当我们学习这个新技术的时候，总会发现很难入门，没有资源学习。其实你是没有掌握一个学习方法。就我而言，学习一个新的技术，我首先会打开这个技术的官方网站，在官网中找相关的文档去阅读，虽然说很多技术文档都是英文，阅读有障碍，可是你还有字典可以翻译啊，沉下心来先从官方文">
+<meta name="keywords" content="K8S,教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kubernetes 从入门到弃坑-1">
+<meta property="og:url" content="http://yoursite.com/2018/09/28/kubernetes 从入门到弃坑-1/index.html">
+<meta property="og:site_name" content="CGLS 的博客">
+<meta property="og:description" content="学习方法在一个互联网技术更迭频繁的世界，学习一门新的互联网技术时，我们需要用最有效率的学习方法快速学习。K8S是时下最流行的容器编排技术，当我们学习这个新技术的时候，总会发现很难入门，没有资源学习。其实你是没有掌握一个学习方法。就我而言，学习一个新的技术，我首先会打开这个技术的官方网站，在官网中找相关的文档去阅读，虽然说很多技术文档都是英文，阅读有障碍，可是你还有字典可以翻译啊，沉下心来先从官方文">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538136478514&di=a3f1f8e868e96edceccfd5cb9b710a4c&imgtype=0&src=http%3A%2F%2Farticle.fd.zol-img.com.cn%2Ft_s640x2000%2Fg5%2FM00%2F09%2F03%2FChMkJ1ntwPGIbbLXAAEJlQge_u8AAhflQNba1sAAQmt010.jpg">
+<meta property="og:updated_time" content="2018-09-30T06:30:34.355Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kubernetes 从入门到弃坑-1">
+<meta name="twitter:description" content="学习方法在一个互联网技术更迭频繁的世界，学习一门新的互联网技术时，我们需要用最有效率的学习方法快速学习。K8S是时下最流行的容器编排技术，当我们学习这个新技术的时候，总会发现很难入门，没有资源学习。其实你是没有掌握一个学习方法。就我而言，学习一个新的技术，我首先会打开这个技术的官方网站，在官网中找相关的文档去阅读，虽然说很多技术文档都是英文，阅读有障碍，可是你还有字典可以翻译啊，沉下心来先从官方文">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538136478514&di=a3f1f8e868e96edceccfd5cb9b710a4c&imgtype=0&src=http%3A%2F%2Farticle.fd.zol-img.com.cn%2Ft_s640x2000%2Fg5%2FM00%2F09%2F03%2FChMkJ1ntwPGIbbLXAAEJlQge_u8AAhflQNba1sAAQmt010.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/28/kubernetes 从入门到弃坑-1/"/>
+
+
+
+
+
+  <title>kubernetes 从入门到弃坑-1 | CGLS 的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9bd817c58745d5357bf7510922c22f7a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CGLS 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">every minute counts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/28/kubernetes 从入门到弃坑-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">kubernetes 从入门到弃坑-1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T14:59:54+08:00">
+                2018-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/K8S/" itemprop="url" rel="index">
+                    <span itemprop="name">K8S</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538136478514&di=a3f1f8e868e96edceccfd5cb9b710a4c&imgtype=0&src=http%3A%2F%2Farticle.fd.zol-img.com.cn%2Ft_s640x2000%2Fg5%2FM00%2F09%2F03%2FChMkJ1ntwPGIbbLXAAEJlQge_u8AAhflQNba1sAAQmt010.jpg" rel="gallery_cjmomlyhn001vqkcx4b1fmtca"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1538136478514&di=a3f1f8e868e96edceccfd5cb9b710a4c&imgtype=0&src=http%3A%2F%2Farticle.fd.zol-img.com.cn%2Ft_s640x2000%2Fg5%2FM00%2F09%2F03%2FChMkJ1ntwPGIbbLXAAEJlQge_u8AAhflQNba1sAAQmt010.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="学习方法"><a href="#学习方法" class="headerlink" title="学习方法"></a>学习方法</h1><p>在一个互联网技术更迭频繁的世界，学习一门新的互联网技术时，我们需要用最有效率的学习方法快速学习。K8S是时下最流行的容器编排技术，当我们学习这个新技术的时候，总会发现很难入门，没有资源学习。其实你是没有掌握一个学习方法。就我而言，学习一个新的技术，我首先会打开这个技术的官方网站，在官网中找相关的文档去阅读，虽然说很多技术文档都是英文，阅读有障碍，可是你还有字典可以翻译啊，沉下心来先从官方文档中学习。除此之外，我们也要善于利用一些技术论坛，技术论坛中有很多分享的相关知识可以学习借鉴，没事可以多逛逛论坛，总会有收获的。如果说以上两点，你很难做到，那么只剩下一条路了，找一个靠谱的博客博主或自媒体博主，跟着他一步步学习。不过说实话，互联网这么大，靠谱的人可真不多，这个寻找过程是困难且耗时的。</p>
+<h1 id="简单说说K8S"><a href="#简单说说K8S" class="headerlink" title="简单说说K8S"></a>简单说说K8S</h1><p>K8S 全称kubernetes，是容器平台技术中的编排引擎。简单点说就是大家都在使用的基于容器技术的分布式架构方案。K8S 之所以这么火，是因为它牛！体现在K8S是谷歌开源的技术方案，红帽、Docker、亚马逊云、阿里云、腾讯云、华为云都基于K8S进行开发容器服务。换句话说，全行业的大佬都在用K8S 进行容器编排管理，你要学习容器技术还不快点学K8S。说了这么多K8S到底能做什么？docker 可以管理容器的全生命周期：创建、运行、销毁；K8S 可以管理应用的全生命周期：创建应用，应用部署，提供服务，扩容缩容，应用更新 。当然这里的应用都是一个个容器组成的，说白了K8S管理着docker 容器组成的应用的全生命周期。既然K8S这么厉害我们就一起来学习一下吧。</p>
+<h1 id="跟我一起学-k8s"><a href="#跟我一起学-k8s" class="headerlink" title="跟我一起学 k8s"></a>跟我一起学 k8s</h1><h2 id="找到官网"><a href="#找到官网" class="headerlink" title="找到官网"></a>找到官网</h2><p>既然要学习K8S，我们就找到K8S的官网，去看看官方有什么文档可以辅助学习。</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1538124274726d994312bec" alt="1538118389(1)"></p>
+<p>文档大家可以慢慢看，我还是带着大家上手练练K8S的命令吧。</p>
+<h2 id="动手练习"><a href="#动手练习" class="headerlink" title="动手练习"></a>动手练习</h2><p>打开模拟器之后，跟上我的步骤，我们一起了解下K8S的常用操作</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/15381242827129369b714a7" alt="1538120091(1)"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 我们打开的页面是模拟器，你第一步需要做的事情就是打开迷你版的K8S，怎么打开，左侧提示信息很清晰的告诉你运行命令启动迷你版K8S，其实运行start之后你是获取到一台云主机，接下来的操作都是在你获得的云主机上执行的。</span></span><br><span class="line">minikube version</span><br><span class="line">minikube start </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 接下来我们先看看K8S的版本</span></span><br><span class="line">kubectl version</span><br><span class="line"><span class="meta">#</span><span class="bash"> 也可以查看一下集群信息</span></span><br><span class="line">kubectl cluster info</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看K8S的集群节点</span></span><br><span class="line">kubectl get nodes</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看主机名</span></span><br><span class="line">hostname</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 总结：通过上面的命令可以发现K8S的命令，都是以kubectl 开头的，了解K8S命令可以 kubectl &lt;<span class="built_in">command</span>&gt; --<span class="built_in">help</span> 查看每个命令的使用方法。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 接下来我们可以练习一个 部署kubernetes-bootcamp应用的实例（来源：CloudMan）</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用kubectl run 命令部署应用，可以看出镜像选择的是v1版，接下来我们有升级镜像的操作，要注意的是这时的--port只是设置对外开放的端口，而不是映射关系</span></span><br><span class="line">kubectl run kubernetes-bootcamp --image=docker.io/jocatalin/kubernetes-bootcamp:v1 --port=8080</span><br><span class="line"><span class="meta">#</span><span class="bash"> 应用开放了8080端口，只能确保pod中的容器是可以访问到，而不能确保外部也可以访问。所有我们创建一个services 使得容器的端口和主机进行绑定。</span></span><br><span class="line">kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里解释一下两个概念，pod和services</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> pod 里面有一个根容器 Pause容器，一个或者多个业务容器。也就是说一个pod是一组容器的集合，这一组容器都共享Pause 容器的ip和数据卷</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> services 简单理解就是微服务，这个微服务可以定义服务访问的入口地址</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 现在我们查看一下pods 和 services</span></span><br><span class="line">kubectl get pods</span><br><span class="line">```</span><br><span class="line">NAME                                  READY     STATUS    RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-56cdd766d-87gkw   1/1       Running   0          1m</span><br><span class="line">```</span><br><span class="line">kubectl get services</span><br><span class="line">```</span><br><span class="line">NAME                  TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)          AGE</span><br><span class="line">kubernetes            ClusterIP   10.96.0.1      &lt;none&gt;        443/TCP          1m</span><br><span class="line">kubernetes-bootcamp   NodePort    10.111.59.30   &lt;none&gt;        8080:30592/TCP   47s</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以看到我们服务访问入口地址已经绑定到主机的32067端口上，那我们就访问一下我们的30592端口，看看效果吧</span></span><br><span class="line">hostname</span><br><span class="line">```</span><br><span class="line">minikube</span><br><span class="line">```</span><br><span class="line">curl minikube:30592</span><br><span class="line">```</span><br><span class="line">Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-56cdd766d-87gkw | v=1</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 接下来我们要搞事情，把这个副本扩大点然后再缩小点，这里补充一下 deployments概念，他和RC概念很像都是用来部署的工具，可以创建应用并随时知道部署的进度。概念性东西后续教程会更上不用太纠结。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看deployments 还是使用kubectl get命令</span></span><br><span class="line">kubectl get deployments</span><br><span class="line"><span class="meta">#</span><span class="bash"> 动态扩容kubernetes-bootcamp应用的副本数</span></span><br><span class="line">kubectl scale deployments/kubernetes-bootcamp --replicas=3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看此时部署的进度</span></span><br><span class="line">kubectl get deployments</span><br><span class="line">```</span><br><span class="line">NAME                  DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">kubernetes-bootcamp   3         3         3            3           3m</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看pods</span></span><br><span class="line">kubectl get pods</span><br><span class="line">```</span><br><span class="line">NAME                                  READY     STATUS    RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-56cdd766d-2zpmp   1/1       Running   0          10s</span><br><span class="line">kubernetes-bootcamp-56cdd766d-87gkw   1/1       Running   0          2m</span><br><span class="line">kubernetes-bootcamp-56cdd766d-nqhxf   1/1       Running   0          10s</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> K8S是编排工具，pod又是一组应用的容器集合，那么实际上每次访问这个应用时请求会发送到不同的 Pod，三个副本轮询处理，这样就实现了负载均衡。</span></span><br><span class="line">curl minikube:30592</span><br><span class="line">```</span><br><span class="line"><span class="meta">$</span><span class="bash"> curl minikube:30592</span></span><br><span class="line">Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-56cdd766d-2zpmp | v=1</span><br><span class="line"><span class="meta">$</span><span class="bash"> curl minikube:30592</span></span><br><span class="line">Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-56cdd766d-87gkw | v=1</span><br><span class="line"><span class="meta">$</span><span class="bash"> curl minikube:30592</span></span><br><span class="line">Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-56cdd766d-2zpmp | v=1</span><br><span class="line"><span class="meta">$</span><span class="bash"> curl minikube:30592</span></span><br><span class="line">Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-56cdd766d-87gkw | v=1</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 接下来我们升级镜像</span></span><br><span class="line">kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以看到升级的过程</span></span><br><span class="line">kubectl get pods</span><br><span class="line">```</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods</span></span><br><span class="line">NAME                                   READY     STATUS        RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-56cdd766d-2zpmp    1/1       Terminating   0          3m</span><br><span class="line">kubernetes-bootcamp-56cdd766d-87gkw    1/1       Terminating   0          5m</span><br><span class="line">kubernetes-bootcamp-56cdd766d-nqhxf    1/1       Terminating   0          3m</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-qkfrl   1/1       Running       0          14s</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-qsdwj   1/1       Running       0          11s</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-rhs95   1/1       Running       0          12s</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods</span></span><br><span class="line">NAME                                   READY     STATUS    RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-qkfrl   1/1       Running   0          52s</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-qsdwj   1/1       Running   0          49s</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-rhs95   1/1       Running   0          50s</span><br><span class="line">```</span><br><span class="line">curl minikube:30592</span><br><span class="line">```</span><br><span class="line"><span class="meta">$</span><span class="bash"> curl minikube:30592</span></span><br><span class="line">Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-7799cbcb86-rhs95 | v=2</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> 回退到v1的镜像也很简单使用kubectl rollout undo 命令即可</span></span><br><span class="line">kubectl rollout undo deployments/kubernetes-bootcamp</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以看到回退的过程</span></span><br><span class="line">kubectl get pods</span><br><span class="line">```</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods</span></span><br><span class="line">NAME                                   READY     STATUS        RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-56cdd766d-drtnh    1/1       Running       0          23s</span><br><span class="line">kubernetes-bootcamp-56cdd766d-mm76p    1/1       Running       0          22s</span><br><span class="line">kubernetes-bootcamp-56cdd766d-nn75g    1/1       Running       0          25s</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-qkfrl   1/1       Terminating   0          2m</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-qsdwj   1/1       Terminating   0          2m</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-rhs95   1/1       Terminating   0          2m</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods</span></span><br><span class="line">NAME                                   READY     STATUS        RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-56cdd766d-drtnh    1/1       Running       0          33s</span><br><span class="line">kubernetes-bootcamp-56cdd766d-mm76p    1/1       Running       0          32s</span><br><span class="line">kubernetes-bootcamp-56cdd766d-nn75g    1/1       Running       0          35s</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-qkfrl   0/1       Terminating   0          3m</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-qsdwj   0/1       Terminating   0          3m</span><br><span class="line">kubernetes-bootcamp-7799cbcb86-rhs95   0/1       Terminating   0          3m</span><br><span class="line"><span class="meta">$</span><span class="bash"> kubectl get pods</span></span><br><span class="line">NAME                                  READY     STATUS    RESTARTS   AGE</span><br><span class="line">kubernetes-bootcamp-56cdd766d-drtnh   1/1       Running   0          1m</span><br><span class="line">kubernetes-bootcamp-56cdd766d-mm76p   1/1       Running   0          1m</span><br><span class="line">kubernetes-bootcamp-56cdd766d-nn75g   1/1       Running   0          1m</span><br><span class="line">```</span><br><span class="line">curl minikube:30592</span><br><span class="line">```</span><br><span class="line"><span class="meta">$</span><span class="bash"> curl minikube:30592</span></span><br><span class="line">Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-56cdd766d-nn75g | v=1</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>好记性不然烂笔头，看的多不然动手练练。K8S系列教程将持续更新，请大家多多指点。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/K8S/" rel="tag"># K8S</a>
+          
+            <a href="/tags/教程/" rel="tag"># 教程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/28/有赞容器化实践/" rel="next" title="有赞容器化实践">
+                <i class="fa fa-chevron-left"></i> 有赞容器化实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/28/kubernetes-从入门到弃坑-2/" rel="prev" title="kubernetes 从入门到弃坑-2">
+                kubernetes 从入门到弃坑-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg"
+                alt="cuijianmin" />
+            
+              <p class="site-author-name" itemprop="name">cuijianmin</p>
+              <p class="site-description motion-element" itemprop="description">我哒哒的马蹄声是一个美丽的错误，我不是归人是过客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cuigelasi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cuigelasi?viewmode=contents" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/10178945/%E5%B4%94%E5%81%A5%E6%95%8F" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习方法"><span class="nav-number">1.</span> <span class="nav-text">学习方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简单说说K8S"><span class="nav-number">2.</span> <span class="nav-text">简单说说K8S</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#跟我一起学-k8s"><span class="nav-number">3.</span> <span class="nav-text">跟我一起学 k8s</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#找到官网"><span class="nav-number">3.1.</span> <span class="nav-text">找到官网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动手练习"><span class="nav-number">3.2.</span> <span class="nav-text">动手练习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/K8S/">K8S</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+    </div>
+    
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuijianmin</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <!--统计start-->
+      <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+      </script>
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+      <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  undefined
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
