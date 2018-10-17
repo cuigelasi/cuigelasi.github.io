@@ -4,12 +4,49 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/10/15/kubernetes-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91-9/</loc>
-    <lastmod>2018-10-15T09:14:44.589Z</lastmod>
+    <loc>http://yoursite.com/2018/10/16/bootstrap3-unittest-django2-%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/</loc>
+    <lastmod>2018-10-17T02:17:30.116Z</lastmod>
     <data>
         <display>
-        <title>kubernetes 从入门到弃坑-9</title>
-        <pubTime>2018-10-15T08:01:58.000Z</pubTime>
+        <title>bootstrap3+unittest+django2 接口自动化测试平台</title>
+        <pubTime>2018-10-16T08:22:50.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/10/15/Hadoop-On-Kubernetes%E5%BB%BA%E6%A8%A1%E5%88%86%E4%BA%AB/</loc>
+    <lastmod>2018-10-16T08:22:57.001Z</lastmod>
+    <data>
+        <display>
+        <title>Hadoop On Kubernetes建模分享</title>
+        <pubTime>2018-10-15T09:42:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>DockOne 分享</tag>
+         
+         
+           
+             
+              <breadCrumb title="Share" url="http://yoursite.com/categories/Share/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/10/16/kubernetes-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91-11/</loc>
+    <lastmod>2018-10-16T07:47:59.109Z</lastmod>
+    <data>
+        <display>
+        <title>kubernetes 从入门到弃坑-11</title>
+        <pubTime>2018-10-16T06:13:17.000Z</pubTime>
         
         <tag>K8S</tag>
          
@@ -27,11 +64,33 @@
     
   <url>
     <loc>http://yoursite.com/2018/10/15/kubernetes-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91-10/</loc>
-    <lastmod>2018-10-15T08:17:47.803Z</lastmod>
+    <lastmod>2018-10-15T09:42:08.536Z</lastmod>
     <data>
         <display>
         <title>kubernetes 从入门到弃坑-10</title>
         <pubTime>2018-10-15T08:02:02.000Z</pubTime>
+        
+        <tag>K8S</tag>
+         
+        <tag>教程</tag>
+         
+         
+           
+             
+              <breadCrumb title="K8S" url="http://yoursite.com/categories/K8S/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/10/15/kubernetes-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91-9/</loc>
+    <lastmod>2018-10-15T09:14:44.589Z</lastmod>
+    <data>
+        <display>
+        <title>kubernetes 从入门到弃坑-9</title>
+        <pubTime>2018-10-15T08:01:58.000Z</pubTime>
         
         <tag>K8S</tag>
          
