@@ -4,23 +4,8 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/10/16/bootstrap3-unittest-django2-%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/</loc>
-    <lastmod>2018-10-17T02:17:30.116Z</lastmod>
-    <data>
-        <display>
-        <title>bootstrap3+unittest+django2 接口自动化测试平台</title>
-        <pubTime>2018-10-16T08:22:50.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2018/10/15/Hadoop-On-Kubernetes%E5%BB%BA%E6%A8%A1%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2018-10-16T08:22:57.001Z</lastmod>
+    <lastmod>2018-10-17T02:21:48.566Z</lastmod>
     <data>
         <display>
         <title>Hadoop On Kubernetes建模分享</title>
@@ -35,6 +20,27 @@
              
               <breadCrumb title="Share" url="http://yoursite.com/categories/Share/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/10/16/bootstrap3-unittest-django2-%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/</loc>
+    <lastmod>2018-10-17T02:21:13.624Z</lastmod>
+    <data>
+        <display>
+        <title>bootstrap3+unittest+django2 接口自动化测试平台</title>
+        <pubTime>2018-10-16T08:22:50.000Z</pubTime>
+        
+        <tag>API</tag>
+         
+        <tag>django</tag>
+         
+        <tag>自动化</tag>
+         
+         
+           
         </display>
     </data>
     </url>
