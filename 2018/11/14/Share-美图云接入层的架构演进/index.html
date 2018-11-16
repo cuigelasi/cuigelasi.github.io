@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,DockOne 分享," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言接入层从传统模式到云平台迁移面临的问题 业务概述为了解决应用实例的可扩展、可用性、安全性问题，在不同的应用实例间分配传入的流量，需要依赖于一些负载均衡解决方案。 比如公有云AWS ELB提供了两种类型的负载均衡器： Classic 负载均衡器，可基于应用程序或网络级信息路由流量，适用于在多个 EC2 实例之间进行简单的流量负载均衡 应用程序负载均衡器，可基于包括请求内容的高级应用程序级信息路由">
+<meta name="keywords" content="docker,DockOne 分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Share 美图云接入层的架构演进">
+<meta property="og:url" content="http://yoursite.com/2018/11/14/Share-美图云接入层的架构演进/index.html">
+<meta property="og:site_name" content="CGLS 的博客">
+<meta property="og:description" content="前言接入层从传统模式到云平台迁移面临的问题 业务概述为了解决应用实例的可扩展、可用性、安全性问题，在不同的应用实例间分配传入的流量，需要依赖于一些负载均衡解决方案。 比如公有云AWS ELB提供了两种类型的负载均衡器： Classic 负载均衡器，可基于应用程序或网络级信息路由流量，适用于在多个 EC2 实例之间进行简单的流量负载均衡 应用程序负载均衡器，可基于包括请求内容的高级应用程序级信息路由">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542198940097&di=02f408b1a6027df8c70c84def808bb18&imgtype=0&src=http%3A%2F%2Fimg.liansuo.com%2Fhtml%2Fimages%2F20170927%2F49431506501013.jpg">
+<meta property="og:updated_time" content="2018-11-14T09:59:57.847Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Share 美图云接入层的架构演进">
+<meta name="twitter:description" content="前言接入层从传统模式到云平台迁移面临的问题 业务概述为了解决应用实例的可扩展、可用性、安全性问题，在不同的应用实例间分配传入的流量，需要依赖于一些负载均衡解决方案。 比如公有云AWS ELB提供了两种类型的负载均衡器： Classic 负载均衡器，可基于应用程序或网络级信息路由流量，适用于在多个 EC2 实例之间进行简单的流量负载均衡 应用程序负载均衡器，可基于包括请求内容的高级应用程序级信息路由">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542198940097&di=02f408b1a6027df8c70c84def808bb18&imgtype=0&src=http%3A%2F%2Fimg.liansuo.com%2Fhtml%2Fimages%2F20170927%2F49431506501013.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/14/Share-美图云接入层的架构演进/"/>
+
+
+
+
+
+  <title>Share 美图云接入层的架构演进 | CGLS 的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9bd817c58745d5357bf7510922c22f7a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CGLS 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">every minute counts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/14/Share-美图云接入层的架构演进/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Share 美图云接入层的架构演进</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T17:47:00+08:00">
+                2018-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Share/" itemprop="url" rel="index">
+                    <span itemprop="name">Share</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542198940097&di=02f408b1a6027df8c70c84def808bb18&imgtype=0&src=http%3A%2F%2Fimg.liansuo.com%2Fhtml%2Fimages%2F20170927%2F49431506501013.jpg" rel="gallery_cjojnp483001kzccxozzfukba"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542198940097&di=02f408b1a6027df8c70c84def808bb18&imgtype=0&src=http%3A%2F%2Fimg.liansuo.com%2Fhtml%2Fimages%2F20170927%2F49431506501013.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>接入层从传统模式到云平台迁移面临的问题</p>
+<h2 id="业务概述"><a href="#业务概述" class="headerlink" title="业务概述"></a>业务概述</h2><p>为了解决应用实例的可扩展、可用性、安全性问题，在不同的应用实例间分配传入的流量，需要依赖于一些负载均衡解决方案。</p>
+<p>比如公有云AWS ELB提供了两种类型的负载均衡器：</p>
+<p>Classic 负载均衡器，可基于应用程序或网络级信息路由流量，适用于在多个 EC2 实例之间进行简单的流量负载均衡</p>
+<p>应用程序负载均衡器，可基于包括请求内容的高级应用程序级信息路由流量，适用于需要高级路由功能、微服务和基于容器的架构的应用程序。应用程序负载均衡器可将流量路由至多个服务，也可在同一 EC2 实例的多个端口之间进行负载均衡  </p>
+<p>而我们线上主要有三类型的负载均衡解决方案：</p>
+<p>LVS，基本上当前线上所有应用的入口，最前面都会架一层LVS，解决后端七层负载均衡器的扩展的问题</p>
+<p>HAProxy，当前我们有小部分业务使用到了HAProxy来解决，更早期因为Nginx的TCP Load Balancer不支持(当前已经支持)，所以HAProxy在四层负载均衡层面有功能优势，并且HAProxy在性能情况表现也不错。不过随着Nginx对于TCP Load Balancer的支持和稳定后，HAProxy是否有一些其他适用的场景，到时再结合着做考究</p>
+<p>Nginx，当前是我们主要在使用的七层负载均衡的解决方案，目前在Proxy层我们主要是使用Tengine的开源解决方案，然后同时我们也围绕着Nginx，基于LUA也有做了一些相关的扩展，比如流控等相关功能。</p>
+<p>在业务往容器化方向去做管理的时候，也会有负载均衡相关问题需要解决，不过在容器化过程，除了面临之前以物理机提供业务服务的时候所面临的一些负载均衡问题外，还需要会有一些差异化的地方：</p>
+<p>容器化后，应用节点随时可能会被调度，从而应用节点的IP本身会是一个不断变化的过程，所以需要去解决业务容器的服务发现的问题</p>
+<p>集群内部容器的IP管理是使用内部虚拟网络，而虚拟网络的IP是外部节点路由无法到达，所以需要解决容器集群内和集群外的服务互通的问题 </p>
+<p>有两个典型的线上业务场景在容器化后需要去解决：</p>
+<p>HTTP接口调用问题</p>
+<p>RPC接口调用问题</p>
+<p>RPC当前我们的方案Tardis（架构和电商），是直接走gRPC直连的方式，在client做一些负载均衡策略和高可用策略，而service通过注册自己的IP到etcd来供client发现服务，这种方式在容器化后，在与容器化外部集群交互的时候，会遇到IP的路由问题需要去解决。PHP的RPC方案是做YAR的方式，也是以HTTP做协议的交互，所以和HTTP面临的问题是类似。而广告平台，是以百度sofa作为RPC方案，也是节点IP直连的方式，和Tardis面临的问题一样</p>
+<p>备注：接下来下面的所有讨论，都是建立在我们的网络方案不是基于HostNetwork的方案来进行，因为如果基于HostNetwork的方案的话，那么Edge Router的路由不可达的问题就不存在，从而方案还有存在其他的选择的考虑</p>
+<h2 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h2><p>在没开始容器化的时候，美图是处于在传统物理机运维的场景：</p>
+<p>当前整体的部署方式基于lvs+ tegine的http7层代理</p>
+<p>通过发布机+类似ansible 统一发布管理</p>
+<p>基于tegine reqstat + accesslog + open-falon+influxDB + grafana做监控</p>
+<p>运维大部分是微博团队，熟悉openDCP 的管理方式 </p>
+<p>​opendcp​</p>
+<p>为什么不直接用openDCP？</p>
+<p>OpenDCP 暂时不支持Kubernetes</p>
+<p>如果基于OpenDCP扩展做，一些功能不满足业务的需求，同时OpenDCP 是基于php的k8s对php client 的支持相对比较弱</p>
+<h2 id="面临问题"><a href="#面临问题" class="headerlink" title="面临问题"></a>面临问题</h2><p>业务nginx配置迁移</p>
+<p>当前的nginx配置项非常复杂</p>
+<p>一些项目的配置不是简单的location+rewirte。难以抽象成ingress的规则</p>
+<p>服务发现</p>
+<p>配置管理</p>
+<p>多版本管理</p>
+<p>配置的灰度发布</p>
+<p>配置检查     </p>
+<p>支持http 代理，后续支持4层、gRPC代理代理等功能</p>
+<p>部分项目走gRPC 协议</p>
+<h2 id="方案调研"><a href="#方案调研" class="headerlink" title="方案调研"></a>方案调研</h2><ul>
+<li>K8s 的服务暴露方式<ul>
+<li>外部<ul>
+<li>ingress</li>
+<li>nodePort</li>
+<li>ExtendIPs</li>
+<li>hostport</li>
+</ul>
+</li>
+<li>内部<ul>
+<li>clusterIp  <ul>
+<li>cluster.local 集群内部域名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>早期的架构是以Kubernetes Deployments + Ingress 来满足LB的功能需求。<br>后面方向做了一个很大的变化，主要是有几个方面的考虑：</p>
+<ul>
+<li>LB是所有服务的统一的入口，如果LB在Kubernetes调度后，出问题，那么整体会放大影响到很多业务，所以他的可靠性保障要比其他业务更高，从而初期上线，运维也预期更稳妥些，所以现在的方式就变成是以非Kubernetes的部署方式来满足</li>
+<li>运维预期有更灵活的配置控制策略，他们会更期望能够手动编写nginx配置的方式，而不是一些非Nginx配置的方式引入新的概念来解决相关的问题，主要担心的是一些运维风险。从而导致了Ingress的简单的机制无法来满足这些需求，要满足这些需求，会让Ingress做得更复杂，从而引发一些问题</li>
+<li>同时，配置迁移的成本需要尽量的小，运维能够主要把控<br>所以，后面的部署方案是：</li>
+</ul>
+<p>Nginx Controller 以物理机的方式来部署，并且配置回归到Nginx Format的格式的情况</p>
+<ul>
+<li>当前的完整发布流程是</li>
+</ul>
+<p>创建一个版本，点击灰度发布，然后matrix更新configmap-canary，然后同步创建一个kubernetes job来check涉及节点的发布状态情况(主要是对比版本号)，然后更新这次发布配置的详情。</p>
+<p>那么就引入几个问题：</p>
+<ul>
+<li>Nginx 配置如何管理</li>
+</ul>
+<p>本地配置的方式，和整合Configmap的方式 。</p>
+<p>那如果使用本地配置的方式，如何更新配置呢，在matrix可以通过ansible来更新，但是问题来了，因为Nginx Controller不以容器化来部署，在老的发布平台，要部署新节点，那么他的配置从哪里来，从而会导致耦合而变得复杂。</p>
+<p>所以matrix上面，就使用configmap来管理。</p>
+<ul>
+<li>怎么做灰度</li>
+</ul>
+<p>通过两个 configmap 来解决，configmap-canary作为灰度，并且通过annotation来标记哪些是要灰度IP，这样nginx controller如果识别到configmap-canary里面的变化，来决定是否reload</p>
+<ul>
+<li>怎么做版本管理</li>
+</ul>
+<p>目前文件的版本是在mysql里面管理，因为目前还没有其他地方来承接（包含前面所提及早期和当前的iron还是一个不确定的状态）</p>
+<ul>
+<li>怎么做状态的检测</li>
+</ul>
+<p>因为发布后的状态监测，是一个长任务的过程，会有一定的时长，而我们当前matrix是一个无状态的服务，而我们当前同时又没有一套的任务管理来管理这种发布监测（另外一种方式，就需要通过前端的JS逐步来进行，但是这种的一致性很难保证，比如如果这个时候你关闭了浏览器）。从而当前是取巧，利用kubernetes job来做任务的状态监测和管理。</p>
+<ul>
+<li>当前配置结构相关的设计</li>
+</ul>
+<p>以类似的目录的树状结构的方式来支持，从而能够完整的支持当前各种LB的需求，比如Nginx，使用nginx.conf的配置，然后nginx.conf里面可以include各种目录，然后创建的其他配置项，也是这种就可以</p>
+<p>Q&amp;A</p>
+<ul>
+<li>当前的nginx-controller是基于什么工程</li>
+</ul>
+<p>早期基于ingress工程，后面的方式废弃掉了这块，做了重构</p>
+<p>依赖两个项目一个是controller-core 实现k8s的监听和callback，一个是nignx-controller 实现controller-core 对应的接口，同时实现go-template 的渲染和nginx的reload</p>
+<ul>
+<li>当前是否能够支持其他LB实现</li>
+</ul>
+<p>当前的设计，基本上能够支持所有其他的LB的实现，只要其他LB 实现controller-core 的接口和渲染对应的模版</p>
+<ul>
+<li>当前还依赖于ingress，service么</li>
+</ul>
+<p>当前不依赖于ingress了，只依赖于service，通过service来获取服务节点（因为service定位就是解决服务的暴露的问题)。然后nginx controller会基于service拿到endpoints，然后直接生成配置，直接nginx -&gt; pod</p>
+<h2 id="技术演进中面临的问题"><a href="#技术演进中面临的问题" class="headerlink" title="技术演进中面临的问题"></a>技术演进中面临的问题</h2><h4 id="1dymanic-upstream"><a href="#1dymanic-upstream" class="headerlink" title="1dymanic upstream"></a>1dymanic upstream</h4><h5 id="dyups-module-e"><a href="#dyups-module-e" class="headerlink" title="dyups_module](e"></a><a href="https://github.com/yzprofile/ngx_http_dyups_module" target="_blank" rel="noopener">dyups_module](e</a></h5><ul>
+<li><p>Attention: You MUST use nginx variable to do proxy_pass)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set $ups upstream_name;</span><br><span class="line">proxy_pass http://$ups;</span><br></pre></td></tr></table></figure>
+<p>因为 <code>dyups_module</code> 模块其实实现是依赖teinge 的一个变量，这块其实是比较取巧的方式，主要是tengine proxy 模块，在配置解析阶段，如果    proxy_pass 中没有变量，就会将当前的loc 和对应的upstream关联上，而这个关联是值传递而非指针的方式。如果有变量，就会在运行的时候做查找，所以必要有这个变量，才能后续修改的配置生效</p>
+<p>当然，其实可以通过path tengine 的代码和规避这个问题，但是因为这块涉及的的代码比较多，修改后不知道是否会引发其他问题，所以没去去改动。（估计阿里也是因为这个原因，所以没去改这块）</p>
+<p>这个变量会让配置产生一些不确定性，例如运维没填写这个配置的时候，并没有触发语法解析的错误，所以对线上的可用性，会带来很高的风险，所以我们放弃了这个方案。</p>
+</li>
+</ul>
+<h2 id="基于ngx-lua的动态服务路由方案"><a href="#基于ngx-lua的动态服务路由方案" class="headerlink" title="基于ngx_lua的动态服务路由方案"></a>基于ngx_lua的动态服务路由方案</h2><ul>
+<li>这块最新 nginx-ingress-controller 也是基于这个方式做dynamic upstream</li>
+<li>这块也是依赖一些变量去同时lua 脚本当前使用的是那个upstream</li>
+<li>但是ingress-contoller的所以配置都是生成的，所以不会出错</li>
+<li>而我们的配置是upstream 这块生成，其他都是之前的配置，所以容易出现问题</li>
+</ul>
+<p>当然这块也是其中一个方向</p>
+<h2 id="内部DNS方案"><a href="#内部DNS方案" class="headerlink" title="内部DNS方案"></a>内部DNS方案</h2><ul>
+<li>因为首先多了一层DNS解析时间，再怎么快都是需要解析时间的，</li>
+<li>第二个是有DNS缓存，这是最主要的原因，因为缓存的存在，没办法立即把一台有问题的机器切掉，如果你要缓解这个问题，就要把缓存设得短一点，但这样解析次数就多了。</li>
+</ul>
+<h5 id="ngx-dynamic-upstream"><a href="#ngx-dynamic-upstream" class="headerlink" title="ngx_dynamic_upstream"></a><code>ngx_dynamic_upstream</code></h5><p> <a href="https://github.com/cubicdaiya/ngx_dynamic_upstream" target="_blank" rel="noopener"><code>ngx_dynamic_upstream</code>](`</a><br>这块需<br>这块需要nginx 新版本的特性upstream zone 的支持，所以这块需要我们从tengine 迁移到nginx。</p>
+<ul>
+<li>我们在上面做了扩展 http check 模块的动态加载。</li>
+<li>同时整合tengine 的reqstat 到nginx上 做了一些尝试 </li>
+</ul>
+<h2 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料:"></a>相关资料:</h2><p><a href="http://support.upyun.com/hc/kb/article/1025471" target="_blank" rel="noopener">http://support.upyun.com/hc/kb/article/1025471</a></p>
+<p><a href="https://cmgs.me/life/eru-lb" target="_blank" rel="noopener">https://cmgs.me/life/eru-lb</a></p>
+<h2 id="基于reqstat-accesslog-统计的优化"><a href="#基于reqstat-accesslog-统计的优化" class="headerlink" title="基于reqstat + accesslog 统计的优化"></a>基于reqstat + accesslog 统计的优化</h2><ul>
+<li>基于reqstat 的扩展ngx_mtstat 模块<ul>
+<li>支持 $upstream_ 相关 内置变量</li>
+<li>提供 $mtstat_upstream_addr 支持upstream 的统计</li>
+<li>添加slow 请求的统计 </li>
+</ul>
+</li>
+</ul>
+<p>从而减少了对acesslog 的处理引发的一些额外的问题</p>
+<h2 id="使用优化"><a href="#使用优化" class="headerlink" title="使用优化"></a>使用优化</h2><ul>
+<li>这个基于 Nginx Format的格式的配置，不太利于开发去维护，只能运维去配置，会导致新业务接入慢了</li>
+<li>大部分内网服务，只需要给定一个默认的域名就可以</li>
+<li>办公网可以提供一个测试的域名，在业务迁移和接入的时候使用</li>
+<li>对外的服务，提供审核的方式，可以</li>
+<li>同时提供更完善的监控系统</li>
+</ul>
+<h2 id="服务治理的需求"><a href="#服务治理的需求" class="headerlink" title="服务治理的需求"></a>服务治理的需求</h2><ul>
+<li>多集群的服务发现        </li>
+<li>流量灰度和分发</li>
+<li>更优雅的服务发现和动态配置</li>
+<li>高级负载均衡</li>
+<li>故障注入</li>
+<li>分布式的trace</li>
+</ul>
+<h1 id="演进的过程和思路"><a href="#演进的过程和思路" class="headerlink" title="演进的过程和思路"></a>演进的过程和思路</h1><h4 id="阶段1-引入ingress机制"><a href="#阶段1-引入ingress机制" class="headerlink" title="阶段1 引入ingress机制"></a>阶段1 引入ingress机制</h4><p>为了解决简单的服务暴露场景</p>
+<ul>
+<li>通过设置默认域名，来解决新服务上线的问题<ul>
+<li>那个服务设置两个不同的域名，一个是办公域名，一个是内网域名</li>
+<li>办公域名可以通过oauth公司账号／服务方自己用户+密码 （base auth）进行访问 </li>
+</ul>
+</li>
+<li>对外的服务暴露<ul>
+<li>在系统上通过申请的方式，也可以走ingress 的服务暴露机制</li>
+</ul>
+</li>
+</ul>
+<h4 id="阶段2引入envoy"><a href="#阶段2引入envoy" class="headerlink" title="阶段2引入envoy"></a>阶段2引入envoy</h4><p>在容器化的场景，随着业务架构的演进，业务方更希望系统提供一些服务治理的功能.</p>
+<p>Envoy 包括如下特性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">进程外架构，不侵入应用进程</span><br><span class="line">使用现代版 C++11 代码</span><br><span class="line">L3/L4 filter 架构</span><br><span class="line">HTTP L7 filter 架构</span><br><span class="line">支持 HTTP/2</span><br><span class="line">HTTP L7 routing</span><br><span class="line">支持 gRPC</span><br><span class="line">支持 MongoDB L7</span><br><span class="line">动态配置</span><br><span class="line">最佳可观测性</span><br><span class="line">支持 front/edge proxy</span><br><span class="line">高级负载均衡</span><br><span class="line">健康检查</span><br><span class="line">服务发现</span><br><span class="line">支持 DynamoDB L7	</span><br><span class="line">等</span><br></pre></td></tr></table></figure>
+<p>同时当前我们也是想引入service mesh 的解决方案，当前service mesh 社区中Istio 是当前最活跃的产品。<br>所以我们选择envoy作为我们新一代的LB.</p>
+<h3 id="一些小技巧"><a href="#一些小技巧" class="headerlink" title="一些小技巧"></a>一些小技巧</h3><ul>
+<li>春哥基于systemtap的nginx调试工具</li>
+<li>火焰图和perf 查看一些异常</li>
+<li>春哥基于prove写的nginx 单元测试工具</li>
+</ul>
+<h3 id="解决过的问题"><a href="#解决过的问题" class="headerlink" title="解决过的问题"></a>解决过的问题</h3><p>以下是在研究过程中解决的一些问题，但是由于篇幅原因，就不展开讨论：</p>
+<ul>
+<li>平滑更新</li>
+<li>http 长链接</li>
+<li>tegine reload bug 造成cpu 异常</li>
+<li>关于reuseport 出现的一些问题</li>
+<li>configmap 大小的限制</li>
+<li>calico ipip 单cpu</li>
+<li>应用lua 的发布和管理等</li>
+<li>kubelet 断链导致服务节点下线  </li>
+<li>服务预热</li>
+<li>nginx-ingress-controller cpu 异常</li>
+<li>nginx vts 模块 异常</li>
+</ul>
+<h3 id="我们正在的事情"><a href="#我们正在的事情" class="headerlink" title="我们正在的事情"></a>我们正在的事情</h3><ul>
+<li><p>LB本身容器化管理弹性伸缩</p>
+</li>
+<li><p>未来kubernetes下的LB服务，如何解决配置问题和部署问题</p>
+</li>
+</ul>
+<p>配置使用configmap，部署使用deployment ，那么整体的部署就都非常简单，灰度也非常简单，包含状态监测等相关信息。从而未来的差异，需要调整的只是底层实现的适配，上次感知不明显。而同时状态监测也很好做，直接deployment发布的时候，指定pod的检测脚本，如果检测失败，那么部署就不继续进行。所以在容器化下，一切事情变得很简单。（所以等稳定下来，第一件事情就是要容器化这块）</p>
+<p>架构会是：</p>
+<pre><code>LVS -&gt; LB(Nginx) -&gt; Pod
+</code></pre><p>LVS主要是为了解决LB的访问问题，另外一种方式是DNS，不过DNS更新会面临TTL的问题。LVS和LB是通过Calico打通网络。然后创建一个LB的时候，同步配置下LVS Controller配置，从而由LVS Controller来解决LVS的配置更新的问题</p>
+<h1 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h1><p>Q:能介绍下配置中心架构么？<br>A:一开始我们考虑用我们自研的配置中心iron （基于etcd）上，这样能做到物理LB 和k8s-LB 的统一管理，但是iron是设计比较合方小的配置，所以当前我们的配置都是放在k8s的configmap </p>
+<p>Q:限流能再具体些吗?选型的思路是什么<br>A:限流这里分两块，一块是当前的接入层LB 通过ngx limit模块做限流。<br>另一个是nginx+lua，作为一个container 部署到业务的pod 中，然后在流量这个container再倒入业务的container中</p>
+<p>Q:灰度发布结合k8s具体是怎么实现的？<br>A:创建一个版本，点击灰度发布，然后matrix更新configmap-canary ，configmap-canary  上的annotation 有对应的灰度版本+ip，如果当前nginx-controller 监听到对应的canary 上有自己的ip，则更新配置，同时暴露http 接口限时当前状态。同时有个长任务去轮训所有的LB，看发布是否正常。全量的时候，把configmap-canay 的内容拷贝到configmap，然后去掉configmap-canary 中annotations的ip</p>
+<p>Q:lvs 偏内核面  debug的话有什么方法和<br>A:暂时还未涉猎。</p>
+<p>Q:网络组件是calico还是其他，如何全网实现与路由器或交换机bdp宣告<br>A:目前使用 calico 方案，然后 calico 可以和物理 BGP 路由进行 iBGP 。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/DockOne-分享/" rel="tag"># DockOne 分享</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/14/Share 360搜索容器云探索与实践/" rel="next" title="360搜索容器云探索与实践">
+                <i class="fa fa-chevron-left"></i> 360搜索容器云探索与实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg"
+                alt="cuijianmin" />
+            
+              <p class="site-author-name" itemprop="name">cuijianmin</p>
+              <p class="site-description motion-element" itemprop="description">我哒哒的马蹄声是一个美丽的错误，我不是归人是过客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cuigelasi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cuigelasi?viewmode=contents" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/10178945/%E5%B4%94%E5%81%A5%E6%95%8F" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#业务概述"><span class="nav-number">1.1.</span> <span class="nav-text">业务概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现状"><span class="nav-number">1.2.</span> <span class="nav-text">现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面临问题"><span class="nav-number">1.3.</span> <span class="nav-text">面临问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方案调研"><span class="nav-number">1.4.</span> <span class="nav-text">方案调研</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术演进中面临的问题"><span class="nav-number">1.5.</span> <span class="nav-text">技术演进中面临的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1dymanic-upstream"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">1dymanic upstream</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#dyups-module-e"><span class="nav-number">1.5.0.1.1.</span> <span class="nav-text">dyups_module](e</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于ngx-lua的动态服务路由方案"><span class="nav-number">1.6.</span> <span class="nav-text">基于ngx_lua的动态服务路由方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内部DNS方案"><span class="nav-number">1.7.</span> <span class="nav-text">内部DNS方案</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ngx-dynamic-upstream"><span class="nav-number">1.7.0.0.1.</span> <span class="nav-text">ngx_dynamic_upstream</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关资料"><span class="nav-number">1.8.</span> <span class="nav-text">相关资料:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于reqstat-accesslog-统计的优化"><span class="nav-number">1.9.</span> <span class="nav-text">基于reqstat + accesslog 统计的优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用优化"><span class="nav-number">1.10.</span> <span class="nav-text">使用优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务治理的需求"><span class="nav-number">1.11.</span> <span class="nav-text">服务治理的需求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#演进的过程和思路"><span class="nav-number">2.</span> <span class="nav-text">演进的过程和思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#阶段1-引入ingress机制"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">阶段1 引入ingress机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阶段2引入envoy"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">阶段2引入envoy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些小技巧"><span class="nav-number">2.0.1.</span> <span class="nav-text">一些小技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决过的问题"><span class="nav-number">2.0.2.</span> <span class="nav-text">解决过的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们正在的事情"><span class="nav-number">2.0.3.</span> <span class="nav-text">我们正在的事情</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问答"><span class="nav-number">3.</span> <span class="nav-text">问答</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/K8S/">K8S</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenStack/">OpenStack</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战/">实战</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+    </div>
+    
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuijianmin</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <!--统计start-->
+      <!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+      <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+      <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  undefined
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

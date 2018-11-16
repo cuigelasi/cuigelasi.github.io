@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,DockOne 分享," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言主要从以下几个方面介绍360搜索云平台的构建历程： 发展历程架构设计Wayne平台踩过的一些坑发展方向 发展历程发展初衷快速迭代：提升上线效率，开发自助上线并可以快速回滚。提高资源利用率：不用类型业务混布，充分利用机器资源。 发展历史360搜索从2016年开始探索基于Kubernetes打造公司私有云平台，由于当时Kuebrnetes对有状态服务支持力度有限以及历史遗留业务容器化难度较大，因此">
+<meta name="keywords" content="docker,DockOne 分享">
+<meta property="og:type" content="article">
+<meta property="og:title" content="360搜索容器云探索与实践">
+<meta property="og:url" content="http://yoursite.com/2018/11/14/Share 360搜索容器云探索与实践/index.html">
+<meta property="og:site_name" content="CGLS 的博客">
+<meta property="og:description" content="前言主要从以下几个方面介绍360搜索云平台的构建历程： 发展历程架构设计Wayne平台踩过的一些坑发展方向 发展历程发展初衷快速迭代：提升上线效率，开发自助上线并可以快速回滚。提高资源利用率：不用类型业务混布，充分利用机器资源。 发展历史360搜索从2016年开始探索基于Kubernetes打造公司私有云平台，由于当时Kuebrnetes对有状态服务支持力度有限以及历史遗留业务容器化难度较大，因此">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542197872299&di=91a80485a6f884fe857a23c1e5ddba36&imgtype=0&src=http%3A%2F%2Ftz.img.dns4.cn%2Fpic%2F232800%2Fp1%2F20180604181922_1576_zs_sy.jpg">
+<meta property="og:updated_time" content="2018-11-14T09:44:30.776Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="360搜索容器云探索与实践">
+<meta name="twitter:description" content="前言主要从以下几个方面介绍360搜索云平台的构建历程： 发展历程架构设计Wayne平台踩过的一些坑发展方向 发展历程发展初衷快速迭代：提升上线效率，开发自助上线并可以快速回滚。提高资源利用率：不用类型业务混布，充分利用机器资源。 发展历史360搜索从2016年开始探索基于Kubernetes打造公司私有云平台，由于当时Kuebrnetes对有状态服务支持力度有限以及历史遗留业务容器化难度较大，因此">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542197872299&di=91a80485a6f884fe857a23c1e5ddba36&imgtype=0&src=http%3A%2F%2Ftz.img.dns4.cn%2Fpic%2F232800%2Fp1%2F20180604181922_1576_zs_sy.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/14/Share 360搜索容器云探索与实践/"/>
+
+
+
+
+
+  <title>360搜索容器云探索与实践 | CGLS 的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9bd817c58745d5357bf7510922c22f7a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CGLS 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">every minute counts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/14/Share 360搜索容器云探索与实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">360搜索容器云探索与实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-14T17:26:02+08:00">
+                2018-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Share/" itemprop="url" rel="index">
+                    <span itemprop="name">Share</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542197872299&di=91a80485a6f884fe857a23c1e5ddba36&imgtype=0&src=http%3A%2F%2Ftz.img.dns4.cn%2Fpic%2F232800%2Fp1%2F20180604181922_1576_zs_sy.jpg" rel="gallery_cjojnp48j002czccxwa659nrr"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542197872299&di=91a80485a6f884fe857a23c1e5ddba36&imgtype=0&src=http%3A%2F%2Ftz.img.dns4.cn%2Fpic%2F232800%2Fp1%2F20180604181922_1576_zs_sy.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>主要从以下几个方面介绍360搜索云平台的构建历程：</p>
+<p>发展历程<br>架构设计<br>Wayne平台<br>踩过的一些坑<br>发展方向</p>
+<h1 id="发展历程"><a href="#发展历程" class="headerlink" title="发展历程"></a>发展历程</h1><h2 id="发展初衷"><a href="#发展初衷" class="headerlink" title="发展初衷"></a>发展初衷</h2><p>快速迭代：提升上线效率，开发自助上线并可以快速回滚。<br>提高资源利用率：不用类型业务混布，充分利用机器资源。</p>
+<h2 id="发展历史"><a href="#发展历史" class="headerlink" title="发展历史"></a>发展历史</h2><p>360搜索从2016年开始探索基于Kubernetes打造公司私有云平台，由于当时Kuebrnetes对有状态服务支持力度有限以及历史遗留业务容器化难度较大，因此Kubernetes主要负责部署一些无状态的Web服务。</p>
+<p>从2017年开始Kubernetes逐渐在私有云市场占据了绝对优势，已然成为容器编排的标准。同时Kubernetes对有状态的服务支持逐渐完善，我们开始完全基于Kubernetes打造私有云平台。目前已稳定运行上万台容器。</p>
+<h1 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h1><p>下图是云平台整体架构</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188013478.png" alt="1542188013478"></p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="Flannel时代"><a href="#Flannel时代" class="headerlink" title="Flannel时代"></a>Flannel时代</h3><p>早期使用的是Flannel VXLAN网络模型，存在转发表项太多的问题。</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188054745.png" alt="1542188054745"></p>
+<p>后面flannel优化，降低了转发表项</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188077789.png" alt="1542188077789"></p>
+<p>接入方面使用ExternalIP边缘节点的模式，由iptables做nat</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188095739.png" alt="1542188095739"></p>
+<p>后面做了dsr优化，回程数据包不走flannel网卡</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188116535.png" alt="1542188116535"></p>
+<h3 id="Calico时代"><a href="#Calico时代" class="headerlink" title="Calico时代"></a>Calico时代</h3><p>由于集群规模扩张，同时公司基础网络也支持了BGP，所有集群都迁移到了Calico。<br>下图是calico的通讯模式，去掉了vxlan造成的overhead</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188152173.png" alt="1542188152173"></p>
+<p>IDC网络模型</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188173102.png" alt="1542188173102"></p>
+<p>关于calico的一些改造点</p>
+<p>服务器相同as号，方便部署<br>使用原有默认路由，ToR不向下宣告路由<br>聚合到27位路由，宣告给ToR<br>通过annotation实现32位路由</p>
+<p>网络改造具体详见我们团队同事的文章容器网络——从CNI到Calico  o  <a href="http://dockone.io/article/2578" target="_blank" rel="noopener">http://dockone.io/article/2578</a></p>
+<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><p>由于搜索有状态的业务较多，最早有状态的服务无法迁移，自己维护了一套Gluster集群，支持了很长一段时间业务存储。<br>后来公司存储团队提供了Ceph RBD和Cephfs存储服务，有状态的业务逐渐迁移到了Ceph。存储管理自己开发了Robin（即将开源，敬请期待）组件，用于管理RBD的image对象以及Cephfs的路径。</p>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><p>目前我们的日志搜集方式是业务输出日志到std，Docker将std输出存放到日志目录，Kubelet通过软连的方式连接到/var/log/containers目录。<br>早期日志是Logstash统一到/var/log/containers目录下搜集，经过处理发送到Kafka，之后业务去Kafka消费或者直接进HDFS。但随着业务日志量的增加，Logstash耗费资源越来越多，日志积压也越来越严重，此时Filebeat功能已经逐渐完善，但缺少了一些解析Kubernetes资源的功能，于是我们自己扩展了一下Filebeat，自己实现了一个Kubernetes Processor，用于增加Kubernetes的相关标签，比如Deployment Name、Pod Name等。同时还做了一些性能优化，使得单机处理能力大幅提升。具体可以参见我之前写过的博客Filebeat优化实践  践  <a href="https://wilhelmguo.tk/blog/post/william/Filebeat%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5" target="_blank" rel="noopener">https://wilhelmguo.tk/blog/post/william/Filebeat%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5</a></p>
+<h2 id="Wayne平台（即将开源，敬请期待）"><a href="#Wayne平台（即将开源，敬请期待）" class="headerlink" title="Wayne平台（即将开源，敬请期待）"></a>Wayne平台（即将开源，敬请期待）</h2><p>Kubernetes虽然很强大，但并不是万能的，要打造一个简单易用的云平台仅仅有Kubernetes是远远不够的。比如：</p>
+<p>Kubernetes配置过于复杂，直接让开发人员配置Kubernetes对象难度太高，而且也比较容易出错</p>
+<p>由于Kubernetes对权限管理并不完善，不同人员分配不同的权限实现比较困难</p>
+<p>Kubernetes想要快速回滚到历史版本比较困难，虽然Deployment保留了历史的RS对象，但是很难知道每个版本做了什么更改，想要快速回滚也比较困难。</p>
+<p>此时，Wayne作为一个私有云平台的统一入口应运而生。</p>
+<h3 id="Wayne简介"><a href="#Wayne简介" class="headerlink" title="Wayne简介"></a>Wayne简介</h3><p>Wayne是一个通用的、基于Web的Kubernetes多集群一站式可视化管理平台。内置了丰富多样的功能，满足企业的通用需求，同时插件化的方式可以方便集成定制化功能</p>
+<p>Wayne已大规模服务于360搜索，承载了公司绝大部分业务，稳定管理了上万个容器。</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188360713.png" alt="1542188360713"></p>
+<h3 id="Wayne可以做什么？"><a href="#Wayne可以做什么？" class="headerlink" title="Wayne可以做什么？"></a>Wayne可以做什么？</h3><p>可视化操作：提供直观、简便的方式操作Kubernetes集群，减小学习成本，快速上线业务。<br>多样的编辑模式：支持图形化编辑，也支持Json、Yaml两种高级定制化编辑模式。<br>微内核架构：采用可扩展的插件化方式开发，定制化选择特性功能，更方便的集成符合企业需求的新功能。<br>多集群管理：可以同时管理多个Kubernetes集群，更方便的管理多个集群。<br>丰富的权限管理：将资源抽象化为部门、项目级别，角色的权限可以更细化的控制，适用于多部门、多项目的统一集中管理。</p>
+<p>多种登录模式：支持企业级LDAP登录、支持OAuth2登录，支持数据库登录多种模式。</p>
+<p>完备的审计：所有操作都会有完整的审计功能，方便追踪操作历史。</p>
+<p>开放平台：支持APIKey开放平台，用户可自主申请相关APIKey并管理自己的项目。</p>
+<p>多层次监控：提供多级别的监控统计信息，实时关注集群的运行状态。</p>
+<p>集成WebShell<br>为了方便用户在线查看日志及进入容器调试，Wayne集成了WebShell功能，用户可以查看Pod列表并且可以进入容器进行调试。</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188422789.png" alt="1542188422789"></p>
+<h3 id="踩过的一些坑"><a href="#踩过的一些坑" class="headerlink" title="踩过的一些坑"></a>踩过的一些坑</h3><ul>
+<li>Pod健康检查正常，但通过边缘节点无法访问到这个节点上的Pod。</li>
+</ul>
+<p>原因：由于我们之前试用的是Flannel网络，Flannel挂了无法正常启动，会导致这台机器上的服务无法正常访问。<br>解决方案：需要监控Falnnel组件的状态，如果异常立即报警。</p>
+<ul>
+<li>Deployment滚动更新过程中流量负载均衡异常,会出现丢失请求的情况</li>
+</ul>
+<p>原因：Pod Terminating过程中，有些机器的Iptable还未刷新，导致部分流量仍然请求到Terminating的Pod上，导致请求出错。详情参见：<br>：<br><a href="https://github.com/kubernetes/kubernetes/issues/47597" target="_blank" rel="noopener">https://github.com/kubernetes/kubernetes/issues/47597</a><br>ht<br>7<br><a href="https://github.com/kubernetes/kubernetes/issues/43576" target="_blank" rel="noopener">https://github.com/kubernetes/kubernetes/issues/43576</a></p>
+<p>解决</p>
+<p>解决方案：利用Kubernetes的preStop特性为每个Pod设置一个退出时间，让每个Pod收到退出信号时时默认等待一段时间再退出。</p>
+<ul>
+<li>Kubernetes1.9之前Apiserver挂掉之后Kubernetes Endpoints不更新，导致部分访问失败。</li>
+</ul>
+<p>原因：Kubernetes1.9之前只要Apiserver启动成功Kubernetes Endpoints便不再更新，需手动维护。<br>解决方案：<br>升级到Kubernetes 1.10版本后设置 –endpoint-reconciler-type = lease<br>Use an endpoint reconciler (master-count, lease, none)</p>
+<ul>
+<li><p>Iptables莫名丢弃syn包</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188519126.png" alt="1542188519126"></p>
+</li>
+</ul>
+<p>原因:这个是nf_conntrack设计时对性能的权衡，使用rcu锁，导致snat可能获取到重复的local port，然后丢弃报文，上面是内核中一些函数调用链，具体代码不展开了</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1542188535225.png" alt="1542188535225"></p>
+<p>解决方案：<br>有两种缓解方式</p>
+<p>增加local ip数量，降低冲突概率<br>snat中local port选择增加随机过程，实际上centos内核模块有这个功能，只是centos7上iptables命令没实现，可以通过修改iptables代码，在netlink调用时加入NF_NAT_RANGE_PROTO_RANDOM_FULLY</p>
+<h3 id="未来发展方向"><a href="#未来发展方向" class="headerlink" title="未来发展方向"></a>未来发展方向</h3><p>Wayne开源<br>360搜索私有云平台在搭建过程中从很多CNCF项目中收益，本着取之开源，回馈开源的精神，我们决定将Wayne平台开源，并且会持续开发和长期维护。考虑到目前官方Dashboard并不太好用，而且不支持多集群和多租户管理。相信Wayne的开源会给很多人带来收益。</p>
+<p>项目地址目地址<a href="https://github.com/Qihoo360/wayne" target="_blank" rel="noopener">https://github.com/Qihoo360/wayne</a> 目前代 目前代码还没有上传，下周一（2018-11-19）完全开源。</p>
+<p>服务更多业务迁移<br>目前私有云平台服务容器仅有上万个，还有大量业务没有迁移上云，之后会加大力度协助适合的业务迁移到云平台。</p>
+<h1 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h1><p>Q：bgp 的calico 应该是直连容器了吧，那么 snat 时 syn 包被丢弃这个是发生在什么场景下的呢？<br>A：边缘节点发生的，使用的是ExternalIP模式，以后会改造成直连容器</p>
+<p>Q：webshell实现技术细节<br>A：基于websocket和xterm实现，我们开源代码后您可以看具体细节</p>
+<p>Q：如果新老业务存在相互调用，之间网络如何打通？<br>A：统一使用LVS VIP调用的，集群内部可以使用svc域名访问</p>
+<p>Q：wayne是采用什么技术体系实现？参与到该项目的开源有什么技术要求？谢谢<br>A：前端是Angular，后端beego，有好的想法都可以一起参与开发</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/DockOne-分享/" rel="tag"># DockOne 分享</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/14/K8S实战-构建Django项目-05/" rel="next" title="K8S实战-构建Django项目-05-EFK日志方案和Weave监控方案">
+                <i class="fa fa-chevron-left"></i> K8S实战-构建Django项目-05-EFK日志方案和Weave监控方案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/14/Share-美图云接入层的架构演进/" rel="prev" title="Share 美图云接入层的架构演进">
+                Share 美图云接入层的架构演进 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg"
+                alt="cuijianmin" />
+            
+              <p class="site-author-name" itemprop="name">cuijianmin</p>
+              <p class="site-description motion-element" itemprop="description">我哒哒的马蹄声是一个美丽的错误，我不是归人是过客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cuigelasi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cuigelasi?viewmode=contents" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/10178945/%E5%B4%94%E5%81%A5%E6%95%8F" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发展历程"><span class="nav-number">2.</span> <span class="nav-text">发展历程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#发展初衷"><span class="nav-number">2.1.</span> <span class="nav-text">发展初衷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发展历史"><span class="nav-number">2.2.</span> <span class="nav-text">发展历史</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#架构设计"><span class="nav-number">3.</span> <span class="nav-text">架构设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络"><span class="nav-number">3.1.</span> <span class="nav-text">网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flannel时代"><span class="nav-number">3.1.1.</span> <span class="nav-text">Flannel时代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Calico时代"><span class="nav-number">3.1.2.</span> <span class="nav-text">Calico时代</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储"><span class="nav-number">3.2.</span> <span class="nav-text">存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志"><span class="nav-number">3.3.</span> <span class="nav-text">日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wayne平台（即将开源，敬请期待）"><span class="nav-number">3.4.</span> <span class="nav-text">Wayne平台（即将开源，敬请期待）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wayne简介"><span class="nav-number">3.4.1.</span> <span class="nav-text">Wayne简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wayne可以做什么？"><span class="nav-number">3.4.2.</span> <span class="nav-text">Wayne可以做什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#踩过的一些坑"><span class="nav-number">3.4.3.</span> <span class="nav-text">踩过的一些坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未来发展方向"><span class="nav-number">3.4.4.</span> <span class="nav-text">未来发展方向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问答"><span class="nav-number">4.</span> <span class="nav-text">问答</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/K8S/">K8S</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenStack/">OpenStack</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战/">实战</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+    </div>
+    
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuijianmin</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <!--统计start-->
+      <!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+      <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+      <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  undefined
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/11/12/K8S%E5%AE%9E%E6%88%98-%E6%9E%84%E5%BB%BADjango%E9%A1%B9%E7%9B%AE-03/</loc>
-    <lastmod>2018-11-12T08:44:05.351Z</lastmod>
+    <loc>http://yoursite.com/2018/11/07/K8S%E5%AE%9E%E6%88%98-%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE-01/</loc>
+    <lastmod>2018-11-16T06:41:50.569Z</lastmod>
     <data>
         <display>
-        <title>K8S实战-构建Django项目-03</title>
-        <pubTime>2018-11-12T07:16:00.000Z</pubTime>
+        <title>K8S实战-构建Django项目-01-初始化</title>
+        <pubTime>2018-11-07T03:19:16.000Z</pubTime>
         
         <tag>K8S</tag>
          
@@ -27,10 +27,10 @@
     
   <url>
     <loc>http://yoursite.com/2018/11/08/K8S%E5%AE%9E%E6%88%98-%E6%9E%84%E5%BB%BADjango%E9%A1%B9%E7%9B%AE-02/</loc>
-    <lastmod>2018-11-12T02:23:28.050Z</lastmod>
+    <lastmod>2018-11-16T06:41:19.407Z</lastmod>
     <data>
         <display>
-        <title>K8S实战-构建Django项目-02</title>
+        <title>K8S实战-构建Django项目-02-自动化构建</title>
         <pubTime>2018-11-08T01:40:31.000Z</pubTime>
         
         <tag>K8S</tag>
@@ -48,12 +48,12 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/11/07/K8S%E5%AE%9E%E6%88%98-%E6%9E%84%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE-01/</loc>
-    <lastmod>2018-11-09T10:07:18.210Z</lastmod>
+    <loc>http://yoursite.com/2018/11/12/K8S%E5%AE%9E%E6%88%98-%E6%9E%84%E5%BB%BADjango%E9%A1%B9%E7%9B%AE-03/</loc>
+    <lastmod>2018-11-16T06:41:08.735Z</lastmod>
     <data>
         <display>
-        <title>K8S实战-构建Django项目-01</title>
-        <pubTime>2018-11-07T03:19:16.000Z</pubTime>
+        <title>K8S实战-构建Django项目-03-使用共享存储</title>
+        <pubTime>2018-11-12T07:16:00.000Z</pubTime>
         
         <tag>K8S</tag>
          
@@ -63,6 +63,116 @@
            
              
               <breadCrumb title="K8S" url="http://yoursite.com/categories/K8S/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/11/13/K8S%E5%AE%9E%E6%88%98-%E6%9E%84%E5%BB%BADjango%E9%A1%B9%E7%9B%AE-04/</loc>
+    <lastmod>2018-11-16T06:40:58.636Z</lastmod>
+    <data>
+        <display>
+        <title>K8S实战-构建Django项目-04-数据加密滚动更新</title>
+        <pubTime>2018-11-13T01:33:22.000Z</pubTime>
+        
+        <tag>K8S</tag>
+         
+        <tag>实战</tag>
+         
+         
+           
+             
+              <breadCrumb title="K8S" url="http://yoursite.com/categories/K8S/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/11/14/K8S%E5%AE%9E%E6%88%98-%E6%9E%84%E5%BB%BADjango%E9%A1%B9%E7%9B%AE-05/</loc>
+    <lastmod>2018-11-16T06:40:34.727Z</lastmod>
+    <data>
+        <display>
+        <title>K8S实战-构建Django项目-05-EFK日志方案和Weave监控方案</title>
+        <pubTime>2018-11-14T08:46:20.000Z</pubTime>
+        
+        <tag>K8S</tag>
+         
+        <tag>实战</tag>
+         
+         
+           
+             
+              <breadCrumb title="K8S" url="http://yoursite.com/categories/K8S/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/10/09/kubernetes-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91-4/</loc>
+    <lastmod>2018-11-15T01:59:56.253Z</lastmod>
+    <data>
+        <display>
+        <title>kubernetes-从入门到弃坑-4</title>
+        <pubTime>2018-10-09T08:53:29.000Z</pubTime>
+        
+        <tag>K8S</tag>
+         
+        <tag>教程</tag>
+         
+         
+           
+             
+              <breadCrumb title="K8S" url="http://yoursite.com/categories/K8S/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/11/14/Share-%E7%BE%8E%E5%9B%BE%E4%BA%91%E6%8E%A5%E5%85%A5%E5%B1%82%E7%9A%84%E6%9E%B6%E6%9E%84%E6%BC%94%E8%BF%9B/</loc>
+    <lastmod>2018-11-14T09:59:57.847Z</lastmod>
+    <data>
+        <display>
+        <title>Share 美图云接入层的架构演进</title>
+        <pubTime>2018-11-14T09:47:00.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>DockOne 分享</tag>
+         
+         
+           
+             
+              <breadCrumb title="Share" url="http://yoursite.com/categories/Share/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/11/14/Share%20360%E6%90%9C%E7%B4%A2%E5%AE%B9%E5%99%A8%E4%BA%91%E6%8E%A2%E7%B4%A2%E4%B8%8E%E5%AE%9E%E8%B7%B5/</loc>
+    <lastmod>2018-11-14T09:44:30.776Z</lastmod>
+    <data>
+        <display>
+        <title>360搜索容器云探索与实践</title>
+        <pubTime>2018-11-14T09:26:02.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+        <tag>DockOne 分享</tag>
+         
+         
+           
+             
+              <breadCrumb title="Share" url="http://yoursite.com/categories/Share/"/>
           
         </display>
     </data>
@@ -226,7 +336,7 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/10/15/Hadoop-On-Kubernetes%E5%BB%BA%E6%A8%A1%E5%88%86%E4%BA%AB/</loc>
+    <loc>http://yoursite.com/2018/10/15/Share%20Hadoop-On-Kubernetes%E5%BB%BA%E6%A8%A1%E5%88%86%E4%BA%AB/</loc>
     <lastmod>2018-10-17T02:21:48.566Z</lastmod>
     <data>
         <display>
@@ -401,28 +511,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/10/09/kubernetes-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91-4/</loc>
-    <lastmod>2018-10-09T09:23:51.825Z</lastmod>
-    <data>
-        <display>
-        <title>kubernetes-从入门到弃坑-4</title>
-        <pubTime>2018-10-09T08:53:29.000Z</pubTime>
-        
-        <tag>K8S</tag>
-         
-        <tag>教程</tag>
-         
-         
-           
-             
-              <breadCrumb title="K8S" url="http://yoursite.com/categories/K8S/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2018/09/30/kubernetes-%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91-3/</loc>
     <lastmod>2018-10-09T09:09:37.470Z</lastmod>
     <data>
@@ -511,7 +599,7 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/09/19/%E5%94%AF%E5%93%81%E4%BC%9A%E4%BA%91%E5%B9%B3%E5%8F%B0%E5%AE%9E%E7%8E%B0%E5%86%85%E5%B9%95%E6%8A%AB%E9%9C%B2/</loc>
+    <loc>http://yoursite.com/2018/09/19/Share%20%E5%94%AF%E5%93%81%E4%BC%9A%E4%BA%91%E5%B9%B3%E5%8F%B0%E5%AE%9E%E7%8E%B0%E5%86%85%E5%B9%95%E6%8A%AB%E9%9C%B2/</loc>
     <lastmod>2018-09-28T02:38:34.516Z</lastmod>
     <data>
         <display>
@@ -533,7 +621,7 @@
 
     
   <url>
-    <loc>http://yoursite.com/2018/09/28/%E6%9C%89%E8%B5%9E%E5%AE%B9%E5%99%A8%E5%8C%96%E5%AE%9E%E8%B7%B5/</loc>
+    <loc>http://yoursite.com/2018/09/28/Share%20%E6%9C%89%E8%B5%9E%E5%AE%B9%E5%99%A8%E5%8C%96%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2018-09-28T02:38:04.279Z</lastmod>
     <data>
         <display>
@@ -1106,9 +1194,9 @@
         <title>kubernetes入门与实战</title>
         <pubTime>2018-08-04T07:09:44.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>云计算</tag>
+         
+        <tag>docker</tag>
          
         <tag>kubernetes</tag>
          
@@ -1127,9 +1215,9 @@
         <title>humpback容器管理平台</title>
         <pubTime>2018-08-04T04:03:26.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>云计算</tag>
+         
+        <tag>docker</tag>
          
         <tag>humpback</tag>
          
@@ -1170,9 +1258,9 @@
         <title>docker技术入门与实践</title>
         <pubTime>2018-08-04T03:08:44.000Z</pubTime>
         
-        <tag>docker</tag>
-         
         <tag>云计算</tag>
+         
+        <tag>docker</tag>
          
          
            

@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="K8S,实战," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言又到周三了，我们的K8S实战已经进入了后期优化阶段。前面三篇文章，已经带着大家一起使用yaml文件，构建了基础服务资源，从现在开始，我们需要思考的是如何在现有的资源环境下，做到稳定健壮。要去思考如何保护数据，如何设置更新策略。 每日解析（11.11 每日一题解析）问题一：如何实现敏感数据加密？ 敏感数据在K8S中我们可以使用secret 以密文的方式存储数据，然后将secret 以数据卷形式挂">
+<meta name="keywords" content="K8S,实战">
+<meta property="og:type" content="article">
+<meta property="og:title" content="K8S实战-构建Django项目-04-数据加密滚动更新">
+<meta property="og:url" content="http://yoursite.com/2018/11/13/K8S实战-构建Django项目-04/index.html">
+<meta property="og:site_name" content="CGLS 的博客">
+<meta property="og:description" content="前言又到周三了，我们的K8S实战已经进入了后期优化阶段。前面三篇文章，已经带着大家一起使用yaml文件，构建了基础服务资源，从现在开始，我们需要思考的是如何在现有的资源环境下，做到稳定健壮。要去思考如何保护数据，如何设置更新策略。 每日解析（11.11 每日一题解析）问题一：如何实现敏感数据加密？ 敏感数据在K8S中我们可以使用secret 以密文的方式存储数据，然后将secret 以数据卷形式挂">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541570890311&di=f9e8a600973a58f1bf1ce8c6f6e1cc48&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171129%2F35c49523c50843f3ba22b8bc246c5d42.jpeg">
+<meta property="og:updated_time" content="2018-11-16T06:40:58.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="K8S实战-构建Django项目-04-数据加密滚动更新">
+<meta name="twitter:description" content="前言又到周三了，我们的K8S实战已经进入了后期优化阶段。前面三篇文章，已经带着大家一起使用yaml文件，构建了基础服务资源，从现在开始，我们需要思考的是如何在现有的资源环境下，做到稳定健壮。要去思考如何保护数据，如何设置更新策略。 每日解析（11.11 每日一题解析）问题一：如何实现敏感数据加密？ 敏感数据在K8S中我们可以使用secret 以密文的方式存储数据，然后将secret 以数据卷形式挂">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541570890311&di=f9e8a600973a58f1bf1ce8c6f6e1cc48&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171129%2F35c49523c50843f3ba22b8bc246c5d42.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/13/K8S实战-构建Django项目-04/"/>
+
+
+
+
+
+  <title>K8S实战-构建Django项目-04-数据加密滚动更新 | CGLS 的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9bd817c58745d5357bf7510922c22f7a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CGLS 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">every minute counts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/13/K8S实战-构建Django项目-04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">K8S实战-构建Django项目-04-数据加密滚动更新</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-13T09:33:22+08:00">
+                2018-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/K8S/" itemprop="url" rel="index">
+                    <span itemprop="name">K8S</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541570890311&di=f9e8a600973a58f1bf1ce8c6f6e1cc48&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171129%2F35c49523c50843f3ba22b8bc246c5d42.jpeg" rel="gallery_cjojnp47m000vzccx2473r3y8"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541570890311&di=f9e8a600973a58f1bf1ce8c6f6e1cc48&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171129%2F35c49523c50843f3ba22b8bc246c5d42.jpeg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>又到周三了，我们的K8S实战已经进入了后期优化阶段。前面三篇文章，已经带着大家一起使用yaml文件，构建了基础服务资源，从现在开始，我们需要思考的是如何在现有的资源环境下，做到稳定健壮。要去思考如何保护数据，如何设置更新策略。</p>
+<h1 id="每日解析（11-11-每日一题解析）"><a href="#每日解析（11-11-每日一题解析）" class="headerlink" title="每日解析（11.11 每日一题解析）"></a>每日解析（11.11 每日一题解析）</h1><p>问题一：如何实现敏感数据加密？</p>
+<p>敏感数据在K8S中我们可以使用secret 以密文的方式存储数据，然后将secret 以数据卷形式挂载到Pod中使用。</p>
+<p>问题二：如何从版本二升级到版本三？并且可以回滚到版本二？</p>
+<p>这里所要实现的无非是版本的升级与回滚，我们将采用Rolling Update来实现。</p>
+<h1 id="secret"><a href="#secret" class="headerlink" title="secret"></a>secret</h1><p>secret是kubernetes中专门解决敏感数据存储的方案，我们创建secret的资源，然后在deployment资源创建时使用数据卷的形式挂载上去。</p>
+<p>为mysql的账号密码创建secret资源；cm9vdA==和MTIzcXdl都是原始数据加密之后得出的，加密方式很简单。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo -n root | base64</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; cm9vdA==</span><br><span class="line">echo -n root | base64</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; MTIzcXdl</span><br></pre></td></tr></table></figure>
+<p>mysqlsecret.yaml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">mysqlsecret</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line"><span class="attr">  username:</span> <span class="string">cm9vdA==</span></span><br><span class="line"><span class="attr">  password:</span> <span class="string">MTIzcXdl</span></span><br></pre></td></tr></table></figure>
+<p>为django的账号密码创建secret资源；YWRtaW4=和MTIzcXdl都是原始数据加密之后得出的，加密方式很简单。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo -n admin | base64</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; cm9vdA==</span><br><span class="line">echo -n root | base64</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; YWRtaW4=</span><br><span class="line">echo -n admin@qq.com | base64</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; YWRtaW5AZXhhbXBsZS5jb20=</span><br></pre></td></tr></table></figure>
+<p>djangosecret.yaml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Secret</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line"><span class="attr">  username:</span> <span class="string">YWRtaW4=</span></span><br><span class="line"><span class="attr">  password:</span> <span class="string">MTIzcXdl</span></span><br><span class="line"><span class="attr">  email:</span> <span class="string">YWRtaW5AZXhhbXBsZS5jb20=</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f mysqlsecret.yaml</span><br><span class="line">kubectl apply -f djangosecret.yaml</span><br><span class="line">kubectl get secret</span><br></pre></td></tr></table></figure>
+<p>创建好了secret资源之后，我们接下来就是在deployment资源中使用。</p>
+<p>mysql pod中我准备使用文件方式，使用secret资源，这样有一个好处是secret可以动态修改，应该是挂载的方式修改secret是可以作用到pod中的。阅读之后，你会发现我是将secret 中的键值对以文件的形式挂载到pod的/etc/foo/cgls目录下，需要使用secret密文数据只需读取相应的文件即可。</p>
+<p>mysql_deployment.yaml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      initContainers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">mysql-init</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">busybox</span></span><br><span class="line"><span class="attr">        imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line"><span class="attr">        command:</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">sh</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">"-c"</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">|</span></span><br><span class="line"><span class="string">            set -ex</span></span><br><span class="line"><span class="string">            username=`cat /etc/foo/cgls/mysql-username`</span></span><br><span class="line"><span class="string">            password=`cat /etc/foo/cgls/mysql-password`</span></span><br><span class="line"><span class="string">            cat &gt; /start_script/mysql_init.sh &lt;&lt;EOF</span></span><br><span class="line"><span class="string">            #!/bin/bash</span></span><br><span class="line"><span class="string">            sed -i "/log-error/i\skip-grant-tables" /etc/my.cnf</span></span><br><span class="line"><span class="string">            systemctl restart mysqld</span></span><br><span class="line"><span class="string">            sleep 50</span></span><br><span class="line"><span class="string">            mysql -u$username -p$password -e "CREATE DATABASE polls DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"</span></span><br><span class="line"><span class="string">            mysql -u$username -p$password -e "use mysql;"</span></span><br><span class="line"><span class="string">            mysql -u$username -p$password -e "grant all privileges  on *.* to $username@'%' identified by \"$password\";"</span></span><br><span class="line"><span class="string">            mysql -u$username -p$password -e "flush privileges;"</span></span><br><span class="line"><span class="string">            systemctl restart mysqld</span></span><br><span class="line"><span class="string">            EOF</span></span><br><span class="line"><span class="string">            chmod +x /start_script/mysql_init.sh</span></span><br><span class="line"><span class="string"></span><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">mysql-initdb</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/start_script</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/etc/foo</span></span><br><span class="line"><span class="attr">          readOnly:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">mysql-initdb</span></span><br><span class="line"><span class="attr">        persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">          claimName:</span> <span class="string">mypvc1</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">mysql-data</span></span><br><span class="line"><span class="attr">        persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">          claimName:</span> <span class="string">mysqlpvc</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">        secret:</span></span><br><span class="line"><span class="attr">          secretName:</span> <span class="string">mysqlsecret</span></span><br><span class="line"><span class="attr">          items:</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">username</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/mysql-username</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">password</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/mysql-password</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - image:</span> <span class="attr">centos7:mysql3</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">        imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line"><span class="attr">        readinessProbe:</span></span><br><span class="line"><span class="attr">          exec:</span></span><br><span class="line"><span class="attr">            command:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">/bin/sh</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">"-c"</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">username=`cat</span> <span class="string">/etc/foo/cgls/mysql-username`</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">password=`cat</span> <span class="string">/etc/foo/cgls/mysql-password`</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">mysql</span> <span class="bullet">-h</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="bullet">-u</span> <span class="string">$username</span> <span class="bullet">-p</span> <span class="string">$password</span> <span class="bullet">-e</span> <span class="string">"SELECT 1"</span></span><br><span class="line"><span class="attr">          initialDelaySeconds:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">          timeoutSeconds:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">          successThreshold:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">          failureThreshold:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">          periodSeconds:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">mysql-initdb</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/start_script</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">mysql-data</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/raiddisk</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/etc/foo</span></span><br><span class="line"><span class="attr">          readOnly:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>django pod 我将使用env（环境变量）的方式，使用secret数据，env和数据卷的区别在于，env不支持动态修改secret，如果你的secret修改了 环境变量不会变化。阅读下面之后，你会发现我是将secret 中的键值对以环境变量的方式存在着，使用起来也很方便。</p>
+<p>django_deployment.yaml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      initContainers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">django-init</span></span><br><span class="line"><span class="attr">        env:</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">SECRET_USERNAME</span></span><br><span class="line"><span class="attr">            valueFrom:</span></span><br><span class="line"><span class="attr">              secretKeyRef:</span></span><br><span class="line"><span class="attr">                name:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">                key:</span> <span class="string">username</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">SECRET_PASSWORD</span></span><br><span class="line"><span class="attr">            valueFrom:</span></span><br><span class="line"><span class="attr">              secretKeyRef:</span></span><br><span class="line"><span class="attr">                name:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">                key:</span> <span class="string">password</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">SECRET_EMAIL</span></span><br><span class="line"><span class="attr">            valueFrom:</span></span><br><span class="line"><span class="attr">              secretKeyRef:</span></span><br><span class="line"><span class="attr">                name:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">                key:</span> <span class="string">email</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">busybox</span></span><br><span class="line"><span class="attr">        imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line"><span class="attr">        command:</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">sh</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">"-c"</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">|</span></span><br><span class="line"><span class="string">            set -ex</span></span><br><span class="line"><span class="string">            cat &gt; /start_script/django_init.sh &lt;&lt;EOF</span></span><br><span class="line"><span class="string">            #!/bin/bash</span></span><br><span class="line"><span class="string">            mkdir /root/django</span></span><br><span class="line"><span class="string">            cd /root/django</span></span><br><span class="line"><span class="string">            git clone https://github.com/cuigelasi/learn_django.git</span></span><br><span class="line"><span class="string">            cd /root/django/learn_django</span></span><br><span class="line"><span class="string">            git checkout -t origin/polls</span></span><br><span class="line"><span class="string">            sed -i "s/172.10.1.2/10.101.1.1/" learn_django/settings.py</span></span><br><span class="line"><span class="string">            sleep 60</span></span><br><span class="line"><span class="string">            python manage.py makemigrations</span></span><br><span class="line"><span class="string">            python manage.py migrate</span></span><br><span class="line"><span class="string">            echo "from django.contrib.auth.models import User; User.objects.create_superuser('$SECRET_USERNAME', '$SECRET_EMAIL', '$SECRET_PASSWORD')" | python manage.py shell</span></span><br><span class="line"><span class="string">            python manage.py runserver 0.0.0.0:8000</span></span><br><span class="line"><span class="string">            EOF</span></span><br><span class="line"><span class="string">            chmod +x /start_script/django_init.sh</span></span><br><span class="line"><span class="string"></span><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">django-initdb</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/start_script</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - image:</span> <span class="attr">centos7:django3</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">django-initdb</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/start_script</span></span><br><span class="line"><span class="attr">        readinessProbe:</span></span><br><span class="line"><span class="attr">          exec:</span></span><br><span class="line"><span class="attr">            command:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">cat</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">/root/django/learn_django/learn_django/settings.py</span></span><br><span class="line"><span class="attr">          initialDelaySeconds:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">          periodSeconds:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">      nodeSelector:</span></span><br><span class="line"><span class="attr">        disktype:</span> <span class="string">xfs</span></span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">django-initdb</span></span><br><span class="line"><span class="attr">        persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">          claimName:</span> <span class="string">mypvc1</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">django-data</span></span><br><span class="line"><span class="attr">        persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">          claimName:</span> <span class="string">djangopvc</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">        secret:</span></span><br><span class="line"><span class="attr">          secretName:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">          items:</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">username</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/django-username</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">password</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/django-password</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">email</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/django-email</span></span><br></pre></td></tr></table></figure>
+<p>最后我们整理一下，形成版本四的django_deployment.yaml。值得注意的是，4.0版本时，健康检查的形式我修改了，如果可以正常访问django服务才能判断是健康的。</p>
+<p>django_deployment.yaml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      initContainers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">mysql-init</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">busybox</span></span><br><span class="line"><span class="attr">        imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line"><span class="attr">        command:</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">sh</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">"-c"</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">|</span></span><br><span class="line"><span class="string">            set -ex</span></span><br><span class="line"><span class="string">            username=`cat /etc/foo/cgls/mysql-username`</span></span><br><span class="line"><span class="string">            password=`cat /etc/foo/cgls/mysql-password`</span></span><br><span class="line"><span class="string">            cat &gt; /start_script/mysql_init.sh &lt;&lt;EOF</span></span><br><span class="line"><span class="string">            #!/bin/bash</span></span><br><span class="line"><span class="string">            sed -i "/log-error/i\skip-grant-tables" /etc/my.cnf</span></span><br><span class="line"><span class="string">            systemctl restart mysqld</span></span><br><span class="line"><span class="string">            sleep 50</span></span><br><span class="line"><span class="string">            mysql -u$username -p$password -e "CREATE DATABASE polls DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"</span></span><br><span class="line"><span class="string">            mysql -u$username -p$password -e "use mysql;"</span></span><br><span class="line"><span class="string">            mysql -u$username -p$password -e "grant all privileges  on *.* to $username@'%' identified by \"$password\";"</span></span><br><span class="line"><span class="string">            mysql -u$username -p$password -e "flush privileges;"</span></span><br><span class="line"><span class="string">            systemctl restart mysqld</span></span><br><span class="line"><span class="string">            EOF</span></span><br><span class="line"><span class="string">            chmod +x /start_script/mysql_init.sh</span></span><br><span class="line"><span class="string"></span><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">mysql-initdb</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/start_script</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/etc/foo</span></span><br><span class="line"><span class="attr">          readOnly:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">mysql-initdb</span></span><br><span class="line"><span class="attr">        persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">          claimName:</span> <span class="string">mypvc1</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">mysql-data</span></span><br><span class="line"><span class="attr">        persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">          claimName:</span> <span class="string">mysqlpvc</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">        secret:</span></span><br><span class="line"><span class="attr">          secretName:</span> <span class="string">mysqlsecret</span></span><br><span class="line"><span class="attr">          items:</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">username</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/mysql-username</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">password</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/mysql-password</span></span><br><span class="line"><span class="attr">      nodeSelector:</span></span><br><span class="line"><span class="attr">        disktype:</span> <span class="string">xfs</span>            </span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - image:</span> <span class="attr">centos7:mysql3</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">        imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line"><span class="attr">        readinessProbe:</span></span><br><span class="line"><span class="attr">          exec:</span></span><br><span class="line"><span class="attr">            command:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">/bin/sh</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">"-c"</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">username=`cat</span> <span class="string">/etc/foo/cgls/mysql-username`</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">password=`cat</span> <span class="string">/etc/foo/cgls/mysql-password`</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">mysql</span> <span class="bullet">-h</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="bullet">-u</span> <span class="string">$username</span> <span class="bullet">-p</span> <span class="string">$password</span> <span class="bullet">-e</span> <span class="string">"SELECT 1"</span></span><br><span class="line"><span class="attr">          initialDelaySeconds:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">          timeoutSeconds:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">          successThreshold:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">          failureThreshold:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">          periodSeconds:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">mysql-initdb</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/start_script</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">mysql-data</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/raiddisk</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/etc/foo</span></span><br><span class="line"><span class="attr">          readOnly:</span> <span class="literal">true</span></span><br><span class="line">          </span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">mysql-svc</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">  clusterIP:</span> <span class="number">10.101</span><span class="number">.1</span><span class="number">.1</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">3306</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="number">3306</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    matchLabels:</span></span><br><span class="line"><span class="attr">      app:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      initContainers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">django-init</span></span><br><span class="line"><span class="attr">        env:</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">SECRET_USERNAME</span></span><br><span class="line"><span class="attr">            valueFrom:</span></span><br><span class="line"><span class="attr">              secretKeyRef:</span></span><br><span class="line"><span class="attr">                name:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">                key:</span> <span class="string">username</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">SECRET_PASSWORD</span></span><br><span class="line"><span class="attr">            valueFrom:</span></span><br><span class="line"><span class="attr">              secretKeyRef:</span></span><br><span class="line"><span class="attr">                name:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">                key:</span> <span class="string">password</span></span><br><span class="line"><span class="attr">          - name:</span> <span class="string">SECRET_EMAIL</span></span><br><span class="line"><span class="attr">            valueFrom:</span></span><br><span class="line"><span class="attr">              secretKeyRef:</span></span><br><span class="line"><span class="attr">                name:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">                key:</span> <span class="string">email</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">busybox</span></span><br><span class="line"><span class="attr">        imagePullPolicy:</span> <span class="string">IfNotPresent</span></span><br><span class="line"><span class="attr">        command:</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">sh</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">"-c"</span></span><br><span class="line"><span class="bullet">          -</span> <span class="string">|</span></span><br><span class="line"><span class="string">            set -ex</span></span><br><span class="line"><span class="string">            cat &gt; /start_script/django_init.sh &lt;&lt;EOF</span></span><br><span class="line"><span class="string">            #!/bin/bash</span></span><br><span class="line"><span class="string">            mkdir /root/django</span></span><br><span class="line"><span class="string">            cd /root/django</span></span><br><span class="line"><span class="string">            git clone https://github.com/cuigelasi/learn_django.git</span></span><br><span class="line"><span class="string">            cd /root/django/learn_django</span></span><br><span class="line"><span class="string">            git checkout -t origin/polls</span></span><br><span class="line"><span class="string">            sed -i "s/172.10.1.2/10.101.1.1/" learn_django/settings.py</span></span><br><span class="line"><span class="string">            sleep 60</span></span><br><span class="line"><span class="string">            python manage.py makemigrations</span></span><br><span class="line"><span class="string">            python manage.py migrate</span></span><br><span class="line"><span class="string">            echo "from django.contrib.auth.models import User; User.objects.create_superuser('$SECRET_USERNAME', '$SECRET_EMAIL', '$SECRET_PASSWORD')" | python manage.py shell</span></span><br><span class="line"><span class="string">            python manage.py runserver 0.0.0.0:8000</span></span><br><span class="line"><span class="string">            EOF</span></span><br><span class="line"><span class="string">            chmod +x /start_script/django_init.sh</span></span><br><span class="line"><span class="string"></span><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">django-initdb</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/start_script</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - image:</span> <span class="attr">centos7:django3</span></span><br><span class="line"><span class="attr">        name:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">        volumeMounts:</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">django-initdb</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/start_script</span></span><br><span class="line"><span class="attr">        readinessProbe:</span></span><br><span class="line"><span class="attr">          exec:</span></span><br><span class="line"><span class="attr">            command:</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">cat</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">/root/django/learn_django/learn_django/settings.py</span></span><br><span class="line"><span class="attr">          initialDelaySeconds:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">          periodSeconds:</span> <span class="number">5</span></span><br><span class="line"><span class="attr">      nodeSelector:</span></span><br><span class="line"><span class="attr">        disktype:</span> <span class="string">xfs</span></span><br><span class="line"><span class="attr">      volumes:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">django-initdb</span></span><br><span class="line"><span class="attr">        persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">          claimName:</span> <span class="string">mypvc1</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">django-data</span></span><br><span class="line"><span class="attr">        persistentVolumeClaim:</span></span><br><span class="line"><span class="attr">          claimName:</span> <span class="string">djangopvc</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">foo</span></span><br><span class="line"><span class="attr">        secret:</span></span><br><span class="line"><span class="attr">          secretName:</span> <span class="string">djangosecret</span></span><br><span class="line"><span class="attr">          items:</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">username</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/django-username</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">password</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/django-password</span></span><br><span class="line"><span class="attr">          - key:</span> <span class="string">email</span></span><br><span class="line"><span class="attr">            path:</span> <span class="string">cgls/django-email</span>     </span><br><span class="line">            </span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">django-svc</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">django</span></span><br><span class="line"><span class="attr">  clusterIP:</span> <span class="number">10.101</span><span class="number">.1</span><span class="number">.2</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - protocol:</span> <span class="string">TCP</span></span><br><span class="line"><span class="attr">    nodePort:</span> <span class="number">30008</span></span><br><span class="line"><span class="attr">    port:</span> <span class="number">8000</span></span><br><span class="line"><span class="attr">    targetPort:</span> <span class="number">8000</span></span><br></pre></td></tr></table></figure>
+<p>同志们，还没有结束啊，我们还要实现动态的更新服务，并且回滚到之前的版本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd django3.0</span><br><span class="line">kubectl apply -f django_deployment.yaml --record</span><br><span class="line">kubectl rollout history deployment django mysql</span><br><span class="line">cd django4.0</span><br><span class="line">kubectl apply -f django_deployment.yaml --record</span><br><span class="line">kubectl rollout history deployment django mysql</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 回滚到3.0版本</span><br><span class="line">kubectl rollout undo deployment django mysql --to-revision=1</span><br></pre></td></tr></table></figure>
+<p>使用K8S更新回滚，就是这么简单，做好健康检查，你的升级再也不怕出问题了。</p>
+<p>每日一题</p>
+<p>k8s 跨主机网络如何实现？你的各个节点是否可以访问各个节点上的Pod，各个Pod直接能否互相访问？</p>
+<p>近期发现了一个深坑，下一节我们一起来填K8S的跨网络的坑~~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/K8S/" rel="tag"># K8S</a>
+          
+            <a href="/tags/实战/" rel="tag"># 实战</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/12/K8S实战-构建Django项目-03/" rel="next" title="K8S实战-构建Django项目-03-使用共享存储">
+                <i class="fa fa-chevron-left"></i> K8S实战-构建Django项目-03-使用共享存储
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/14/K8S实战-构建Django项目-05/" rel="prev" title="K8S实战-构建Django项目-05-EFK日志方案和Weave监控方案">
+                K8S实战-构建Django项目-05-EFK日志方案和Weave监控方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg"
+                alt="cuijianmin" />
+            
+              <p class="site-author-name" itemprop="name">cuijianmin</p>
+              <p class="site-description motion-element" itemprop="description">我哒哒的马蹄声是一个美丽的错误，我不是归人是过客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cuigelasi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cuigelasi?viewmode=contents" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/10178945/%E5%B4%94%E5%81%A5%E6%95%8F" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#每日解析（11-11-每日一题解析）"><span class="nav-number">2.</span> <span class="nav-text">每日解析（11.11 每日一题解析）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#secret"><span class="nav-number">3.</span> <span class="nav-text">secret</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/K8S/">K8S</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenStack/">OpenStack</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战/">实战</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+    </div>
+    
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuijianmin</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <!--统计start-->
+      <!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+      <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+      <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  undefined
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
