@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,DockOne 分享,OpenShift," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言主要内容：概述与实践背景Openshift结构和核心流程企业内部部署结构和基础镜像、应用部署模板服务访问拓扑及踩过的坑正在做的事情Openshift的借鉴意义 概述：OpenShift是红帽的云开发平台即服务（PaaS）。 通过OpenShift，企业可以快速搭建稳定、安全、高效的容器应用平台。在这个平台上：可以构建企业内部的容器应用市场，为开发人员快速提供应用开发所依赖的中间件、数据库等服务">
+<meta name="keywords" content="docker,DockOne 分享,OpenShift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Share 智融集团基于OpenShift的容器化PaaS平台实践">
+<meta property="og:url" content="http://yoursite.com/2018/12/05/Share-智融集团基于OpenShift的容器化PaaS平台实践/index.html">
+<meta property="og:site_name" content="CGLS 的博客">
+<meta property="og:description" content="前言主要内容：概述与实践背景Openshift结构和核心流程企业内部部署结构和基础镜像、应用部署模板服务访问拓扑及踩过的坑正在做的事情Openshift的借鉴意义 概述：OpenShift是红帽的云开发平台即服务（PaaS）。 通过OpenShift，企业可以快速搭建稳定、安全、高效的容器应用平台。在这个平台上：可以构建企业内部的容器应用市场，为开发人员快速提供应用开发所依赖的中间件、数据库等服务">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542775376113&di=5dded949dddd59c20af44ba0ba96e391&imgtype=0&src=http%3A%2F%2Fhimg2.huanqiu.com%2Fattachment2010%2F2016%2F1031%2F14%2F16%2F20161031021656945.png">
+<meta property="og:updated_time" content="2018-12-05T01:54:44.893Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Share 智融集团基于OpenShift的容器化PaaS平台实践">
+<meta name="twitter:description" content="前言主要内容：概述与实践背景Openshift结构和核心流程企业内部部署结构和基础镜像、应用部署模板服务访问拓扑及踩过的坑正在做的事情Openshift的借鉴意义 概述：OpenShift是红帽的云开发平台即服务（PaaS）。 通过OpenShift，企业可以快速搭建稳定、安全、高效的容器应用平台。在这个平台上：可以构建企业内部的容器应用市场，为开发人员快速提供应用开发所依赖的中间件、数据库等服务">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542775376113&di=5dded949dddd59c20af44ba0ba96e391&imgtype=0&src=http%3A%2F%2Fhimg2.huanqiu.com%2Fattachment2010%2F2016%2F1031%2F14%2F16%2F20161031021656945.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/05/Share-智融集团基于OpenShift的容器化PaaS平台实践/"/>
+
+
+
+
+
+  <title>Share 智融集团基于OpenShift的容器化PaaS平台实践 | CGLS 的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9bd817c58745d5357bf7510922c22f7a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CGLS 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">every minute counts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/05/Share-智融集团基于OpenShift的容器化PaaS平台实践/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Share 智融集团基于OpenShift的容器化PaaS平台实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-05T09:42:18+08:00">
+                2018-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Share/" itemprop="url" rel="index">
+                    <span itemprop="name">Share</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542775376113&di=5dded949dddd59c20af44ba0ba96e391&imgtype=0&src=http%3A%2F%2Fhimg2.huanqiu.com%2Fattachment2010%2F2016%2F1031%2F14%2F16%2F20161031021656945.png" rel="gallery_cjpb0465g002apccxqb9df9nv"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542775376113&di=5dded949dddd59c20af44ba0ba96e391&imgtype=0&src=http%3A%2F%2Fhimg2.huanqiu.com%2Fattachment2010%2F2016%2F1031%2F14%2F16%2F20161031021656945.png" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>主要内容：<br>概述与实践背景<br>Openshift结构和核心流程<br>企业内部部署结构和基础镜像、应用部署模板<br>服务访问拓扑及踩过的坑<br>正在做的事情<br>Openshift的借鉴意义</p>
+<h1 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h1><p>OpenShift是红帽的云开发平台即服务（PaaS）。 通过OpenShift，企业可以快速搭建稳定、安全、高效的容器应用平台。<br>在这个平台上：<br>可以构建企业内部的容器应用市场，为开发人员快速提供应用开发所依赖的中间件、数据库等服务。<br>通过自动化的流程，开发人员可以快速进行应用的构建、容器化及部署。<br>通过OpenShift，用户可以贯通从应用开发到测试，再到上线的全流程，开发、测试和运维等不同的角色可以在一个平台上进行协作。<br>支持LDAP用户权限管理，支持细粒度的权限资源管理<br>OpenShift可以提高应用从研发到上线的效率和速度，缩短产品上市的时间，可以有效地帮助企业推进DevOps，提高资源利用率，提升生产效率。</p>
+<h1 id="实践背景："><a href="#实践背景：" class="headerlink" title="实践背景："></a>实践背景：</h1><p>当前公司业务和产品处于快速迭代和扩展阶段，每个月平均新增10多个新服务，迭代速度越来越快，同时废弃的老服务服务也越来越多。新技术发展也比较快，在旧方式的基础上我们尝试新技术的成本也比较高，维护成本也比较高。如何提高我们的生产效率，如何提高我们适应新时代的能力，越来越重要。<br>在此背景下，我们先列出以下几个比较明显的问题，<br>第一，阿里云上的资源利用率比较低<br>第二，临时扩容比较慢，在运营活动的时候经常资源不足，需要升级配置，活动结束后资源利用率回归较低水平<br>第三，新服务增加快，新机器、SLB等越来越多，越来越不好维护<br>第四，微服务治理的重要性越来越突出<br>为了解决这些问题，我们调研了多个解决方案，最终选择了Openshift作为PaaS平台；截止目前已有70多个项目、100多个服务、上千个pod运行在PaaS平台里（包括Python27、Python36、Java、Golang、Nodejs等类型服务）</p>
+<h1 id="Openshift结构："><a href="#Openshift结构：" class="headerlink" title="Openshift结构："></a>Openshift结构：</h1><p><img src="C:\Users\cgls\AppData\Local\Temp\1543974311607.png" alt="1543974311607"></p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1543974327097.png" alt="1543974327097"></p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1543974343218.png" alt="1543974343218"></p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1543974356334.png" alt="1543974356334"></p>
+<p>Openshift层级自底而上，分为：基础架构层、容器引擎层、容器编排层、PaaS服务层、界面及工具层<br>    1、Docker<br>        优势：构建一个隔离的、稳定的、安全的、高性能的容器运行环境；很多开源项目都做了自己的官方镜像，使用和维护更方便<br>    2、Kubernetes<br>        容器编排<br>        1）容器调度：按业务的需求快速部署容器到指定的目标<br>        2）弹性伸缩：按业务的需求快速扩展或收缩容器的运行实例数量<br>        3）异常自愈：当容器实例运行异常，集群能自动感知、处理并恢复服务状态<br>        4）持久化卷：为散布在集群不同机器上的容器提供持久化的智能对接<br>        5）服务发现：为业务为服务化提供服务发现及负载均衡等功能<br>        6）配置管理：为业务应用提供灵活的配置管理及分发规则<br>    3、Openshift<br>        容器云，在Docker和Kubernetes的基础上提供了各种功能，以满足业务应用、研发用户及运维用户在生产效率上的诉求<br>        1）应用开发框架及中间件<br>                OpenShift提供了丰富的开箱即用的编程开发框架及中间件，如Java、PHP、Ruby、Python、JBossEAP、Tomcat、MySQL、MongoDB及JBoss系列中间件等<br>        2）应用及服务目录<br>                OpenShift提供了如软件市场式的服务及应用目录，可以实现用户一键部署各类应用及服务，比如一键部署Hadoop集群和Spark集群<br>        3）自动化流程及工具<br>                OpenShift内置了自动化流程工具S2I（SourcetoImage），帮助用户自动化完成代码的编译、构建及镜像发布<br>        4）软件自定义网络<br>                通过OpenVSwitch，OpenShift为用户提供了灵活强健的软件定义网络。实现跨主机共享网络及多租户隔离网络模式<br>        5）性能监控及日志管理<br>                OpenShift提供了开箱可用的性能监控及日志管理的组件。通过平台，业务能快速获取运行状态指标，对业务日志进行收集及分析<br>        6）多用户接口<br>                OpenShift提供了友好的Web用户界面、命令行工具及RESTfulAPI<br>        7）自动化集群部署及管理<br>                OpenShift通过Ansible实现了集群的自动化部署，为集群的自动化扩容提供了接口</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1543974428938.png" alt="1543974428938"></p>
+<h1 id="Openshift核心流程："><a href="#Openshift核心流程：" class="headerlink" title="Openshift核心流程："></a>Openshift核心流程：</h1><p><img src="C:\Users\cgls\AppData\Local\Temp\1543974450288.png" alt="1543974450288"></p>
+<h1 id="一、应用构建"><a href="#一、应用构建" class="headerlink" title="一、应用构建"></a>一、应用构建</h1><pre><code>第1步，部署应用。流程的开始是用户通过OpenShift的Web控制台或命令行ocnew-app创建应用。根据用户提供的源代码仓库地址及Builder镜像，平台将生成构建配置（BuildConfig）、部署配置（DeploymentConfig）、Service及Route等对象。
+第2步，触发构建。应用相关的对象创建完毕后，平台将触发一次S2I构建。
+第3步，实例化构建。平台依据应用的BuildConfig实例化一次构建，生成一个Build对象。Build对象生成后，平台将执行具体的构建操作，包括下载源代码、实例化Builder镜像、执行编译和构建脚本等。
+第4步，生成镜像。构建成功后将生成一个可供部署的应用容器镜像。平台将把此镜像推送到内部的镜像仓库组件Registry中。
+第5步，更新ImageStream。镜像推送至内部的仓库后，平台将创建或更新应用的ImageStream的镜像信息，使之指向最新的镜像。
+</code></pre><p>二、应用部署<br>    第6步，触发镜像部署。当ImageStream的镜像信息更新后，将触发平台部署S2I构建生成的镜像。<br>    第7步，实例化镜像部署。DeploymentConfig对象记录了部署的定义，平台将依据此配置实例化一次部署，生成一个Deploy对象跟踪当次部署的状态。<br>    第8步，生成ReplicationController。平台部署将实例化一个ReplicationController，用以调度应用容器的部署。<br>    第9步，部署容器。通过ReplicationController，OpenShift将Pod及应用容器部署到集群的计算节点中。<br>三、请求处理<br>    第10步，用户访问。用户通过浏览器访问Route对象中定义的应用域名。<br>    第11步，请求处理并返回。请求到Router组件后，Router根据Route定义的规则，找到请求所含域名相关联的Service的容器，并将请求转发给容器实例。容器实例除了请求后返回数据，还会通过Router将数据返回给调用的客户端。<br>四、应用更新<br>    在应用更新时，平台将重复上述流程的第1步至第9步。平台将用下载更新后的代码构建应用，生成新的镜像，并将镜像部署至集群中。值得注意的是，OpenShit支持滚动更新。在第9步时，平台将通过滚动更新的方式，保证应用在新老实例交替时服务不间断。</p>
+<h1 id="部署结构："><a href="#部署结构：" class="headerlink" title="部署结构："></a>部署结构：</h1><p><img src="C:\Users\cgls\AppData\Local\Temp\1543974496535.png" alt="1543974496535"></p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1543974513626.png" alt="1543974513626"></p>
+<h1 id="Openshift集群："><a href="#Openshift集群：" class="headerlink" title="Openshift集群："></a>Openshift集群：</h1><pre><code>1、所有服务组件都部署在阿里云上，即VPC网络的ECS机器上，分布在多个可用区
+2、3个Master节点，3个etcd节点，1个harbor节点，N个Node节点
+3、Node节点分布，根据业务类型打tag标签区分，分别为：
+  base集群，主要运行router服务和registry镜像仓库
+  inf集群，主要运行内部pypi的Python内部源、nexus服务（主要作为maven的内部源）和trace系统等
+  gateway集群，主要部署openresty的API网关服务，作为流量从公网域名进入集群的入口
+  service集群，主要部署公司的业务应用
+  bigdata集群，主要部署公司内部大数据服务
+4、变更平台，通过调用Openshift的API，来完成build镜像、通过deployment的模板来更新容器，并记录当前pod的代码版本。
+    回滚时选择代码版本对应的一个deployment配置文件来进行重新部署（注意：deployment是使用的img的对应hash值，启动参数主要通过configmap、配置中心Apollo来管理）
+</code></pre><h1 id="服务镜像自动化及部署模板："><a href="#服务镜像自动化及部署模板：" class="headerlink" title="服务镜像自动化及部署模板："></a>服务镜像自动化及部署模板：</h1><p>SourcetoImage（S2I），S2I是OpenShit的一个重要功能。容器镜像是容器云的应用交付格式。容器镜像中包含了应用及其所依赖的运行环境。通常的做法必须基于外部的基础镜像构建包含企业自身开发代码的应用。这个镜像的构建过程是必须的，要么由企业的IT人员手工完成，要么使用某种工具实现自动化。<br>作为一个面向应用的平台，OpenShift提供了S2I的流程，使得企业内容器的构建变得标准化和自动化，从而提高了软件从开发到上线的效率。<br>一个典型的S2I流程包含了以下几个步骤。<br>    1）用户输入源代码仓库的地址。<br>    2）用户选择S2I构建的基础镜像（又称为Builder镜像）。Builder镜像中包含了操作系统、编程语言、框架等应用所需的软件及配置。OpenShift默认提供了多种编程语言的Builder镜像，如Java、PHP、Ruby、Python、Perl等。用户也可以根据自身需求定制自己的Builder镜像，并发布到服务目录中供用户选用。<br>    3）用户或系统触发S2I构建。OpenShift将实例化S2I构建执行器。<br>    4）S2I构建执行器将从用户指定的代码仓库下载源代码。<br>    5）S2I构建执行器实例化Builder镜像。代码将会被注入Builder镜像中。<br>    6）Builder镜像将根据预定义的逻辑执行源代码的编译、构建并完成部署。<br>    7）S2I构建执行器将完成操作的Builder镜像并生成新的Docker镜像。<br>    8）S2I构建执行器将新的镜像推送到OpenShift内部的镜像仓库。<br>    9）S2I构建执行器更新该次构建相关的ImageStream信息。<br>S2I构建完成后，根据用户定义的部署逻辑，OpenShift将把镜像实例化部署到集群中。<br>除了接受源代码仓库地址作为输入外，S2I还接受Dockerfile以及二进制文件作为构建的输入。甚至可以完全自定义构建逻辑来满足特殊的需求。</p>
+<h1 id="部署模板："><a href="#部署模板：" class="headerlink" title="部署模板："></a>部署模板：</h1><p>通过自定义模板，可以创建我们自己应用发布时的快速部署模板。包括应用所需的多个Build Config、Deployment Config、Service及Route等对象。OpenShift的Template还有一个重要的特性就是参数化。用户可以在Template中定义参数，这些参数在用户部署模板时将显示在Web控制台的界面上，供用户输入。用户的输入最终以环境变量的方式传递到容器内部。一个OpenShift的Template在结构上主要分为三个组成部分：元信息、对象列表及参数列表。</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1543974574204.png" alt="1543974574204"></p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1543974588924.png" alt="1543974588924"></p>
+<p>服务访问拓扑：</p>
+<p><img src="C:\Users\cgls\AppData\Local\Temp\1543974605751.png" alt="1543974605751"></p>
+<p>容器里的服务都是阿里云VPC的网络，旧服务都是部署在阿里云经典网络的ECS机器上，互相访问时经典网络SLB是一个问题。需要将原来经典网络的SLB换成VPC的SLB<br>1、容器互访：通过Hostname+Port方式，后端是Service Ip<br>2、容器访问经典网络服务：将经典网络的SLB，替换成VPC的SLB<br>3、经典网络的服务访问容器：a、HTTP服务，通过内网域名；b、RPC服务，通过映射的Node+Port<br>4、外网访问容器里的服务：外网域名——&gt;外网SLB——&gt;API网关——&gt;容器service的HOSTNAME——&gt;Pod</p>
+<h1 id="踩过的坑："><a href="#踩过的坑：" class="headerlink" title="踩过的坑："></a>踩过的坑：</h1><p>1、日志搜集：因为pod来回漂移，我们采用了阿里云的NAS存储（NFS）作为PV；日志文件会被共享，并被抢占文件句柄，导致日志里有乱码；我们的处理方式是日志中间加一个hostname，例如：interface.paris-interface-service-c-44-bx52z.debug，日志收集时flume匹配interface.*.debug<br>2、监控：Openshift自身的监控是使用Hawkular+Cassandra+Heapster，只有容器的CPU、内存和网络的监控。pod版本的一致性、events监控（包括imge的生命周期、pod的生命周期、服务健康检查等）、PV的监控等，都需要通过API来获取并加入到自建的监控平台<br>3、cronjob不太稳定，crash时间比较长的情况下，Job下一次执行时间延迟过久，导致不再执行。这种情况只能删除后重新部署Job。<br>4、版本的控制，deployment需要通过配置里的image的hash值，找到对应的build（build信息里记录了代码版本信息，包括commit、commit message、更新人和提交时间等）；回滚的时候要选择代码版本对应的build，然后再找到build对应的deployment配置进行部署，这些都通过自建的变更平台来管理。</p>
+<h1 id="我们正在做的事情："><a href="#我们正在做的事情：" class="headerlink" title="我们正在做的事情："></a>我们正在做的事情：</h1><p>1、将API网关替换成Kong，目前已经测试了大部分的功能，但Docker版本的稳定性比较差，QPS在很小的情况下也有很多5XX的错误。解决方案：在Kubernetes的Node节点上部署<br>2、由于现在对外业务发展比较快，计划通过模板、环境变量和配置中心来创建一整套的Applications，类似于SaaS服务。<br>3、打通QA，研发人员从提交代码转换到交付一个线上可用的image</p>
+<h1 id="Openshift对容器化PaaS平台实践的借鉴意义："><a href="#Openshift对容器化PaaS平台实践的借鉴意义：" class="headerlink" title="Openshift对容器化PaaS平台实践的借鉴意义："></a>Openshift对容器化PaaS平台实践的借鉴意义：</h1><pre><code>1、S2I自动构建服务镜像，实现自动化的流程
+2、部署模板，根据某一类型服务进行快速部署deployment（例如Python的模板、Golang的模板等）；在每一个版本的deployment配置中，img会使用镜像的hash值（例如：docker-registry.default.svc:5000/XXX/XXX@sha256:899007bXXXXXXXX95f561203cba）；回滚时选择对应版本的deployment配置进行重新部署即可达到回滚的目的
+3、Router服务使用haproxy（支持AB部署，及流量分配），Router根据Route定义的规则，找到请求所含域名相关联的Service的容器，并将请求转发给容器实例。容器实例除了请求后返回数据，还会通过Router将数据返回给调用的客户端。
+4、LDAP用户管理等多用户管理，通过clusterrole/clusterrolebinding（全局资源权限）、role/rolebinding、serviceaccount、oauthaccesstoken等来实现权限分配
+</code></pre><h1 id="问答"><a href="#问答" class="headerlink" title="问答"></a>问答</h1><p>Q：请问通过openshift怎么做高可用？<br>A：Openshift的高可用是跟Kubernetes的高可用一致的，就是延用了k8s的service Ip来做服务发现和负载均衡；另外，前面还有DNS服务，(例如：Hostname: service.abc-platform.svc，后端就是指向的Cluster Ip)</p>
+<p>Q ：image的版本管理怎么做？配置的版本管理怎么做？<br>A ：Openshift本身会创建一个内部的registry，S2I会根据Build来更新image，image的版本是通过sha256的值对应Build的版本号（例如：Build版本#24对应registry.intra.XXXXX.com/abc/abc-platform@sha256:b41c8XXXXX）</p>
+<p>Q：openshift的网络方案性能方面有多少损耗？与k8s的其他网络方案如calico相比如何<br>A：Openshift的网络方案是选择的ovs，性能上肯定是不如calico，但对于我们的服务足够了。目前跑了有1000+个常驻POD，没有出现网络瓶颈</p>
+<p>Q：如果要做多机房部署，openshift能搞吗？<br>A：多机房，只要网络能通并比较稳定，是没有问题的。我们的部署方案就是在阿里云上的多个可用区部署的。而且，实际部署中也是鼓励多机房部署的，服务容灾要求一个服务要分布在多个可用区（或者机房）</p>
+<p>Q：问下，你们平台性能怎么测试的？如何集成<br>A：平台性能测试分两部分。一个是在集群内部不经过Nginx直接压测svc，另外一个是在集群外部压测内网域名或者公网域名。</p>
+<p>Q：我们之前用自己的镜像仓库，会报tls认证错误，不知道你们有没有遇到过？<br>A：我们自己创建的镜像仓库是用harbor来建的，只是存储了内部服务的基础镜像。Openshift集群内的镜像仓库有自己的认证，是通过Secrets管理对应权限的token（用户级别的权限是通过LDAP统一认证的）。S2I创建服务镜像的时候就是通过这个来获取权限的。还是比较稳定的，没有出现过tls的问题</p>
+<p>Q：生产环境的节点磁盘是怎么分区分配的？<br>A：生产环境的节点磁盘分为两类，一个是系统盘（40G），另一个是数据盘（100G）；Docker的所有镜像、实例等存储都是放在数据盘，服务的日志是挂载的PV，PV是使用的阿里云的nas存储</p>
+<p>Q: 我看你们在集群访问前加了个apigateway,用了openresty，这个能详细介绍下不?<br>A：可以简单理解为一个自建的ingress，底层是Nginx+lua实现的；我们已经在逐渐使用Kong来代替openresty了。Kong底层是Nginx+lua+PostgreSQL，界面管理是使用的konga。选择Kong和Konga的理由是：1、Kong的管理和插件比较方便，还支持自定义插件；2、Konga的界面更友好，管理、更新都比较方面</p>
+<p>Q：看到你们是3master高可用，请问k8s–master挂了一台，openshift如何恢复？etcd是否有做备份？<br>A：我们做过演练，Master挂一台或者两台，甚至三台全挂，也不会影响已经运行的服务。只要etcd没有问题，重启Master或者新增一台Master都可以快速恢复集群。etcd的备份是做的全量备份，上传到我们的备份存储中</p>
+<p>Q：如何评估现有的集群模式是适合用K8S还是使用openshift？etcd的备份计划你们怎么做的？<br>A：Openshift的调度就是用的K8S，我个人理解适用于K8S的服务，都可以使用Openshift</p>
+<p>Q：内网域名是怎么跨vpc和经典网络的？<br>A：内网域名的DNSPod解析是解析到VPC网络的一台ECS机器上，通过Nginx来管理。经典网络的ECS服务集群可以在前面挂载一个VPC网络的SLB，Nginx的对应Server Name的upstream设为这个VPC的SLB即可</p>
+<p>Q：监控和告警好像没有提到？感觉OC这块似乎缺失？<br>A：Openshift本身有很多服务状态，image的Build、pull、push等状态，以及pod的各种状态；另外还有强大events。我们是通过Openshift的API来获取这些信息，同步到openfalcon上来处理报警信息的</p>
+<p>Q：日志统一生产、采集用了什么方式能介绍一下吗？<br>A：日志是一个比较疑难的问题；我们的解决方案是，所有的日志都打到同一个NaS盘上，服务名来做该服务的日志路径。多个pod打同一个日志的时候，会出现乱码。我们的解决方案是在日志中间加hostname，例如haadeers.melon-crm-b-9-nb9d5.log，melon-crm-b-9-nb9d5为pod的hostname。日志收集，是几台ECS机器挂载改Nas盘，启动flume来收集</p>
+<p>Q：监控我们现在用的k8s原生推荐的promethues+grafana，这个怎么样？<br>A：据说这个方案不错，我们有自己的监控平台，就没有用。Openshift有promethues的部署模板，可以快速部署，可以尝试一下</p>
+<p>Q：业务应用的自动化发布你们是怎么设计的？ 能否详细说说思路<br>A：我们是自己定义了S2I的流程。Build镜像统一在代码仓库里加一个Makefile，定义一个assemble的role，来做初始化（依赖包的安装、nodejs的Build等等，这里还是比较灵活的）。自动发布：我们是自定义了部署模板，分享的内容里有（只需要简单的几步就可以部署一套服务）。</p>
+<p>Q: 基于nas（nfs）的pv可以限制大小吗<br>A：可以限制大小的</p>
+<p>Q:  是如何控制deployment里的pod分布到不同的可用区？<br>A：我们通过label来管理可用区，创建服务的时候可以通过label分布到不同的可用区</p>
+<p>Q : 是否使用了 resource limit / request ？对于应用需要感知资源限制的场景（JVM gc 线程数，堆内存大小，nginx worker 线程数）等是怎么处理的？<br>A：为了充分利用资源，我们requests默认设置的100millicore和100MiB;limit默认设置的是1Core 1GiB。资源不够用的时候优先调整pod数量（如果服务本身消耗大的话可以直接调大limit值）</p>
+<p>Q:  你们有在K8S集群上部署基础组件的集群吗？遇到过什么问题（比如redis-cluster，mysql集群等）<br>A：redis、mysql等，不建议部署在集群内部。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/DockOne-分享/" rel="tag"># DockOne 分享</a>
+          
+            <a href="/tags/OpenShift/" rel="tag"># OpenShift</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/04/Tool 004-Python-Scrapy 爬取图片数据/" rel="next" title="Tool 004 - Python Scrapy 爬取图片数据">
+                <i class="fa fa-chevron-left"></i> Tool 004 - Python Scrapy 爬取图片数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/05/Tool 005 - Python Django 渲染markdown文本/" rel="prev" title="Tool 005 - Python Django 渲染markdown文本">
+                Tool 005 - Python Django 渲染markdown文本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg"
+                alt="cuijianmin" />
+            
+              <p class="site-author-name" itemprop="name">cuijianmin</p>
+              <p class="site-description motion-element" itemprop="description">我哒哒的马蹄声是一个美丽的错误，我不是归人是过客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cuigelasi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cuigelasi?viewmode=contents" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/10178945/%E5%B4%94%E5%81%A5%E6%95%8F" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概述："><span class="nav-number">2.</span> <span class="nav-text">概述：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实践背景："><span class="nav-number">3.</span> <span class="nav-text">实践背景：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Openshift结构："><span class="nav-number">4.</span> <span class="nav-text">Openshift结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Openshift核心流程："><span class="nav-number">5.</span> <span class="nav-text">Openshift核心流程：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、应用构建"><span class="nav-number">6.</span> <span class="nav-text">一、应用构建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署结构："><span class="nav-number">7.</span> <span class="nav-text">部署结构：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Openshift集群："><span class="nav-number">8.</span> <span class="nav-text">Openshift集群：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务镜像自动化及部署模板："><span class="nav-number">9.</span> <span class="nav-text">服务镜像自动化及部署模板：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署模板："><span class="nav-number">10.</span> <span class="nav-text">部署模板：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#踩过的坑："><span class="nav-number">11.</span> <span class="nav-text">踩过的坑：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我们正在做的事情："><span class="nav-number">12.</span> <span class="nav-text">我们正在做的事情：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Openshift对容器化PaaS平台实践的借鉴意义："><span class="nav-number">13.</span> <span class="nav-text">Openshift对容器化PaaS平台实践的借鉴意义：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问答"><span class="nav-number">14.</span> <span class="nav-text">问答</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DB/">DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/K8S/">K8S</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenShift/">OpenShift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenStack/">OpenStack</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill/">Skill</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战/">实战</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/情感分析/">情感分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+    </div>
+    
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuijianmin</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <!--统计start-->
+      <!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+      <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+      <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  undefined
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
