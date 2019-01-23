@@ -78,7 +78,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="kubernetes,容器云," />
 
 
 
@@ -89,16 +89,20 @@
 
 
 
-<meta name="description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CGLS 的博客">
-<meta property="og:url" content="http://yoursite.com/tags/服务发现/index.html">
+<meta name="description" content="前言2018年是我在云计算领域深耕的第二年，成功的将docker技术在企业业务中落地实践，虽然这个过程中遇到了很多的问题，但是都一一披荆斩棘完美解决，所以18年是收获满满的一年。 新技术的应用，会引发更深层次的思考，深入了解Docker之后，你会自然而然的想去了解Docker的编排技术Kubernetes，当我深入了解K8S后，我的内心告诉我，“基于kubernetes做一个容器云吧！”。17年我">
+<meta name="keywords" content="kubernetes,容器云">
+<meta property="og:type" content="article">
+<meta property="og:title" content="容器云架构实践-01">
+<meta property="og:url" content="http://yoursite.com/2019/01/23/容器云架构实践-01/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta property="og:description" content="前言2018年是我在云计算领域深耕的第二年，成功的将docker技术在企业业务中落地实践，虽然这个过程中遇到了很多的问题，但是都一一披荆斩棘完美解决，所以18年是收获满满的一年。 新技术的应用，会引发更深层次的思考，深入了解Docker之后，你会自然而然的想去了解Docker的编排技术Kubernetes，当我深入了解K8S后，我的内心告诉我，“基于kubernetes做一个容器云吧！”。17年我">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548233195357&di=63d152c4a5b51491792205466eb4bc8e&imgtype=0&src=http%3A%2F%2Fwww.ctsbw.com%2Fuploadfile%2F2015%2F1223%2Fthumb_720_450_20151223101055762.png">
+<meta property="og:updated_time" content="2019-01-23T06:01:55.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CGLS 的博客">
-<meta name="twitter:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta name="twitter:title" content="容器云架构实践-01">
+<meta name="twitter:description" content="前言2018年是我在云计算领域深耕的第二年，成功的将docker技术在企业业务中落地实践，虽然这个过程中遇到了很多的问题，但是都一一披荆斩棘完美解决，所以18年是收获满满的一年。 新技术的应用，会引发更深层次的思考，深入了解Docker之后，你会自然而然的想去了解Docker的编排技术Kubernetes，当我深入了解K8S后，我的内心告诉我，“基于kubernetes做一个容器云吧！”。17年我">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548233195357&di=63d152c4a5b51491792205466eb4bc8e&imgtype=0&src=http%3A%2F%2Fwww.ctsbw.com%2Fuploadfile%2F2015%2F1223%2Fthumb_720_450_20151223101055762.png">
 
 
 
@@ -128,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/服务发现/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/23/容器云架构实践-01/"/>
 
 
 
 
 
-  <title>标签: 服务发现 | CGLS 的博客</title>
+  <title>容器云架构实践-01 | CGLS 的博客</title>
   
 
 
@@ -163,7 +167,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -297,54 +301,196 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>服务发现<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/23/容器云架构实践-01/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/09/18/服务发现docker解决方案/" itemprop="url">
-              
-                <span itemprop="name">docker服务发现方案etcd</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">容器云架构实践-01</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-18T14:13:01+08:00"
-              content="2018-09-18" >
-          09-18
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-23T10:33:53+08:00">
+                2019-01-23
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/容器云/" itemprop="url" rel="index">
+                    <span itemprop="name">容器云</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548233195357&di=63d152c4a5b51491792205466eb4bc8e&imgtype=0&src=http%3A%2F%2Fwww.ctsbw.com%2Fuploadfile%2F2015%2F1223%2Fthumb_720_450_20151223101055762.png" rel="gallery_cjr8s7wjl0099kkcxdc476xmd"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548233195357&di=63d152c4a5b51491792205466eb4bc8e&imgtype=0&src=http%3A%2F%2Fwww.ctsbw.com%2Fuploadfile%2F2015%2F1223%2Fthumb_720_450_20151223101055762.png" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2018年是我在云计算领域深耕的第二年，成功的将docker技术在企业业务中落地实践，虽然这个过程中遇到了很多的问题，但是都一一披荆斩棘完美解决，所以18年是收获满满的一年。</p>
+<p>新技术的应用，会引发更深层次的思考，深入了解Docker之后，你会自然而然的想去了解Docker的编排技术Kubernetes，当我深入了解K8S后，我的内心告诉我，“基于kubernetes做一个容器云吧！”。17年我深耕的是OpenStack云平台技术，18年深耕的是Docker技术，在19年用Kubernetes技术将所学的技术全部整合起来，做一个云原生的容器云将是一个很棒的idea。</p>
+<p>说做就做！接下来我将记录我研究容器云的技术笔记，与大家一起分享从零开始制作一套云原生的容器云。</p>
+<h1 id="做什么"><a href="#做什么" class="headerlink" title="做什么?"></a>做什么?</h1><p>做一件事情前，我们首先要了解我们做的事情是什么，并且能够把这件事情给一个新人直白的描述清楚。既然我们要做一套云原生的容器云，那么我们来一一阐述下把。</p>
+<h2 id="云原生？"><a href="#云原生？" class="headerlink" title="云原生？"></a>云原生？</h2><p>Cloud Native 翻译成中文是云原生。这个词的含义很多很复杂。如果你想了解更多关于云原生的知识，需要自己去探寻。这里我只简单说一下我个人的理解。</p>
+<p>了解云原生这个词，是因为学习Kubernetes。Kubernetes现在是CNCF (云原生应用基金会)主推的容器编排技术                                    解决方案，CNCF之所以这么大力推K8S，一方面是K8S技术的优益性，另一方面是K8S是CNCF自己管理的技术项目。这里不得不佩服谷歌，K8S前身是谷歌的Borg 容器编排管理平台，14年谷歌将Borg开源更名为Kubernetes，16年谷歌把Kubernetes项目控制权交给CNCF，18年CNCF宣布Kubernetes正式毕业。所以说谷歌是时刻布局，步步为营，比国内的宫斗剧都要精彩。</p>
+<p>言归正传，云原生到底是什么呢？首先云原生是一种新的概念，它是一个集合包含了多种技术和管理方案。对于云计算来说，云原生是一系列的云计算、企业管理方法的集合。说点直白易懂的，云原生是DevOps、持续交付、微服务、敏捷开发、业务重组……。如果你还是没明白，那就记住，云原生就剩云计算的技术加上企业云时代管理方案的集合。</p>
+<h2 id="容器云？"><a href="#容器云？" class="headerlink" title="容器云？"></a>容器云？</h2><p>容器云字面意思就是容器的云，实际也是如此它指的是以容器为单位，封装环境、提供构建、发布、运行分布式应用平台。也就是说，容器云是管理容器资源的云平台，在这个云平台上可以对容器资源进行调度管理。当我们理解了容器云是什么，我们也就知道我们需要对容器进行编排调度的工具来制作容器云。因此我们要使用现在行业内最权威的编排调度工具-Kubernetes来进行容器云开发。</p>
+<h2 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes?"></a>Kubernetes?</h2><p>kubernetes我们常说的K8S，Kubernetes 生于谷歌公司，是谷歌10多年容器编排调度经验的智慧结晶。前面我们也提到K8S的一些发展历程，2018不仅仅是K8S从CNCF毕业，同时也是K8S战胜了所有的编排调度工具，成为业内编排标准的一年。Kubernetes到底是什么，怎么去理解K8S，我们将在接下来的章节中，一一与大家进行分享。</p>
+<p>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             </p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+          
+            <a href="/tags/容器云/" rel="tag"># 容器云</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/14/白虹容器云内部资料-准备手册/" rel="next" title="白虹容器云内部资料-准备手册">
+                <i class="fa fa-chevron-left"></i> 白虹容器云内部资料-准备手册
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -352,6 +498,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -372,8 +522,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -501,6 +660,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#做什么"><span class="nav-number">2.</span> <span class="nav-text">做什么?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#云原生？"><span class="nav-number">2.1.</span> <span class="nav-text">云原生？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容器云？"><span class="nav-number">2.2.</span> <span class="nav-text">容器云？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kubernetes"><span class="nav-number">2.3.</span> <span class="nav-text">Kubernetes?</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -679,6 +854,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
