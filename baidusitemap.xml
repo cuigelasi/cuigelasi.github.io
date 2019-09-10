@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://yoursite.com/2019/01/24/%E5%AE%B9%E5%99%A8%E4%BA%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5-10/</loc>
-    <lastmod>2019-01-24T08:43:38.053Z</lastmod>
+    <loc>http://yoursite.com/2019/08/12/%E6%A0%B8%E5%BF%83%E6%9C%8D%E5%8A%A1/0812-v264-volume-ip/</loc>
+    <lastmod>2019-08-29T10:46:25.660Z</lastmod>
     <data>
         <display>
-        <title>容器云架构实践-10</title>
-        <pubTime>2019-01-24T08:43:38.000Z</pubTime>
+        <title></title>
+        <pubTime>2019-08-12T05:49:09.010Z</pubTime>
         
          
            
@@ -19,8 +19,259 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/10/16/bootstrap3-unittest-django2-%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/</loc>
+    <lastmod>2019-07-11T02:27:03.503Z</lastmod>
+    <data>
+        <display>
+        <title>bootstrap3+unittest+django2 接口自动化测试平台</title>
+        <pubTime>2018-10-16T08:22:50.000Z</pubTime>
+        
+        <tag>API</tag>
+         
+        <tag>django</tag>
+         
+        <tag>自动化</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/02/15/%E7%99%BD%E8%99%B9%E5%AE%B9%E5%99%A8%E4%BA%91%E5%86%85%E9%83%A8%E8%B5%84%E6%96%992-%E5%87%86%E5%A4%87%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2019-07-11T01:41:45.484Z</lastmod>
+    <data>
+        <display>
+        <title>白虹容器云内部资料2-准备手册</title>
+        <pubTime>2019-02-15T01:39:08.000Z</pubTime>
+        
+        <tag>容器云</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/06/12/%E5%B4%94%E5%85%88%E7%94%9F%E7%83%B9%E9%A5%AA%E8%AF%BE-%E5%88%9D%E8%AF%86chef/</loc>
+    <lastmod>2019-06-13T01:45:49.678Z</lastmod>
+    <data>
+        <display>
+        <title>崔先生烹饪课 - 初识chef</title>
+        <pubTime>2019-06-12T07:53:32.000Z</pubTime>
+        
+        <tag>Chef</tag>
+         
+         
+           
+             
+              <breadCrumb title="Chef" url="http://yoursite.com/categories/Chef/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/01/28/up/</loc>
+    <lastmod>2019-06-12T07:26:55.446Z</lastmod>
+    <data>
+        <display>
+        <title>up</title>
+        <pubTime>2019-01-28T02:33:55.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/05/21/%E6%A0%B8%E5%BF%83%E6%9C%8D%E5%8A%A1/chrony/chrony%20%E5%AE%89%E8%A3%85%E7%AF%87/</loc>
+    <lastmod>2019-05-22T07:22:40.591Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2019-05-21T02:14:34.194Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/03/18/Nginx-%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98-02-%E6%97%A5%E5%B8%B8%E7%BB%B4%E6%8A%A4/</loc>
+    <lastmod>2019-04-11T07:06:48.769Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx 入门与实战 02 日常维护</title>
+        <pubTime>2019-03-18T05:44:31.000Z</pubTime>
+        
+        <tag>nginx</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/04/09/django-websocket/</loc>
+    <lastmod>2019-04-09T08:08:35.864Z</lastmod>
+    <data>
+        <display>
+        <title>django websocket</title>
+        <pubTime>2019-04-09T07:47:20.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/04/03/Nginx-%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98-03-django-uwsgi-nginx/</loc>
+    <lastmod>2019-04-04T07:10:04.117Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx 入门与实战 03 django + uwsgi + nginx </title>
+        <pubTime>2019-04-03T06:08:57.000Z</pubTime>
+        
+        <tag>nginx</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/03/18/Nginx-%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98-01-%E6%9C%8D%E5%8A%A1%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2019-03-21T02:26:08.174Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx 入门与实战 01 服务安装</title>
+        <pubTime>2019-03-18T03:41:30.000Z</pubTime>
+        
+        <tag>nginx</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/03/07/prometheus/</loc>
+    <lastmod>2019-03-07T10:15:30.508Z</lastmod>
+    <data>
+        <display>
+        <title>prometheus</title>
+        <pubTime>2019-03-07T09:49:58.000Z</pubTime>
+        
+        <tag>云计算</tag>
+         
+        <tag>k8s</tag>
+         
+        <tag>prometheus</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/01/14/%E7%99%BD%E8%99%B9%E5%AE%B9%E5%99%A8%E4%BA%91%E5%86%85%E9%83%A8%E8%B5%84%E6%96%99-%E5%87%86%E5%A4%87%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2019-02-15T01:55:06.454Z</lastmod>
+    <data>
+        <display>
+        <title>白虹容器云内部资料-准备手册</title>
+        <pubTime>2019-01-14T06:57:47.000Z</pubTime>
+        
+        <tag>容器云</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/01/31/Docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2019-01-31T09:28:53.127Z</lastmod>
+    <data>
+        <display>
+        <title>Docker 常用命令</title>
+        <pubTime>2019-01-31T09:01:45.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/01/30/%E5%AE%B9%E5%99%A8%E4%BA%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5-11/</loc>
+    <lastmod>2019-01-30T09:44:11.056Z</lastmod>
+    <data>
+        <display>
+        <title>容器云架构实践-11</title>
+        <pubTime>2019-01-30T07:17:20.000Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>容器云</tag>
+         
+         
+           
+             
+              <breadCrumb title="容器云" url="http://yoursite.com/categories/%E5%AE%B9%E5%99%A8%E4%BA%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2019/01/24/%E5%AE%B9%E5%99%A8%E4%BA%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5-10/</loc>
+    <lastmod>2019-01-30T07:20:42.749Z</lastmod>
+    <data>
+        <display>
+        <title>容器云架构实践-10</title>
+        <pubTime>2019-01-24T08:43:38.000Z</pubTime>
+        
+        <tag>kubernetes</tag>
+         
+        <tag>容器云</tag>
+         
+         
+           
+             
+              <breadCrumb title="容器云" url="http://yoursite.com/categories/%E5%AE%B9%E5%99%A8%E4%BA%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2019/01/24/%E5%AE%B9%E5%99%A8%E4%BA%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5-09/</loc>
-    <lastmod>2019-01-24T08:43:32.074Z</lastmod>
+    <lastmod>2019-01-30T07:20:38.809Z</lastmod>
     <data>
         <display>
         <title>容器云架构实践-09</title>
@@ -32,6 +283,9 @@
          
          
            
+             
+              <breadCrumb title="容器云" url="http://yoursite.com/categories/%E5%AE%B9%E5%99%A8%E4%BA%91/"/>
+          
         </display>
     </data>
     </url>
@@ -39,7 +293,7 @@
     
   <url>
     <loc>http://yoursite.com/2019/01/24/%E5%AE%B9%E5%99%A8%E4%BA%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5-08/</loc>
-    <lastmod>2019-01-24T08:01:22.110Z</lastmod>
+    <lastmod>2019-01-30T07:20:34.402Z</lastmod>
     <data>
         <display>
         <title>容器云架构实践-08</title>
@@ -51,6 +305,9 @@
          
          
            
+             
+              <breadCrumb title="容器云" url="http://yoursite.com/categories/%E5%AE%B9%E5%99%A8%E4%BA%91/"/>
+          
         </display>
     </data>
     </url>
@@ -58,7 +315,7 @@
     
   <url>
     <loc>http://yoursite.com/2019/01/24/%E5%AE%B9%E5%99%A8%E4%BA%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5-07/</loc>
-    <lastmod>2019-01-24T07:28:36.786Z</lastmod>
+    <lastmod>2019-01-30T07:20:31.642Z</lastmod>
     <data>
         <display>
         <title>容器云架构实践-07</title>
@@ -70,6 +327,9 @@
          
          
            
+             
+              <breadCrumb title="容器云" url="http://yoursite.com/categories/%E5%AE%B9%E5%99%A8%E4%BA%91/"/>
+          
         </display>
     </data>
     </url>
@@ -77,7 +337,7 @@
     
   <url>
     <loc>http://yoursite.com/2019/01/24/%E5%AE%B9%E5%99%A8%E4%BA%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5-06/</loc>
-    <lastmod>2019-01-24T06:19:00.077Z</lastmod>
+    <lastmod>2019-01-30T07:20:28.874Z</lastmod>
     <data>
         <display>
         <title>容器云架构实践-06</title>
@@ -89,6 +349,9 @@
          
          
            
+             
+              <breadCrumb title="容器云" url="http://yoursite.com/categories/%E5%AE%B9%E5%99%A8%E4%BA%91/"/>
+          
         </display>
     </data>
     </url>
@@ -96,7 +359,7 @@
     
   <url>
     <loc>http://yoursite.com/2019/01/23/%E5%AE%B9%E5%99%A8%E4%BA%91%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5-05/</loc>
-    <lastmod>2019-01-24T02:54:38.449Z</lastmod>
+    <lastmod>2019-01-30T07:20:25.990Z</lastmod>
     <data>
         <display>
         <title>容器云架构实践-05</title>
@@ -108,6 +371,9 @@
          
          
            
+             
+              <breadCrumb title="容器云" url="http://yoursite.com/categories/%E5%AE%B9%E5%99%A8%E4%BA%91/"/>
+          
         </display>
     </data>
     </url>
@@ -206,23 +472,6 @@
         <title>Docker 容器云平台openshfit</title>
         <pubTime>2018-08-30T06:53:20.000Z</pubTime>
         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2019/01/14/%E7%99%BD%E8%99%B9%E5%AE%B9%E5%99%A8%E4%BA%91%E5%86%85%E9%83%A8%E8%B5%84%E6%96%99-%E5%87%86%E5%A4%87%E6%89%8B%E5%86%8C/</loc>
-    <lastmod>2019-01-14T07:02:55.340Z</lastmod>
-    <data>
-        <display>
-        <title>白虹容器云内部资料-准备手册</title>
-        <pubTime>2019-01-14T06:57:47.000Z</pubTime>
-        
-        <tag>容器云</tag>
-         
          
            
         </display>
@@ -1015,27 +1264,6 @@
              
               <breadCrumb title="Share" url="http://yoursite.com/categories/Share/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/10/16/bootstrap3-unittest-django2-%E6%8E%A5%E5%8F%A3%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0/</loc>
-    <lastmod>2018-10-17T02:21:13.624Z</lastmod>
-    <data>
-        <display>
-        <title>bootstrap3+unittest+django2 接口自动化测试平台</title>
-        <pubTime>2018-10-16T08:22:50.000Z</pubTime>
-        
-        <tag>API</tag>
-         
-        <tag>django</tag>
-         
-        <tag>自动化</tag>
-         
-         
-           
         </display>
     </data>
     </url>

@@ -78,7 +78,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="kubernetes,容器云," />
 
 
 
@@ -89,17 +89,20 @@
 
 
 
-<meta name="description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta name="description" content="设计高可用的Kubeadm架构前面给大家介绍了K8S很多基础的知识，现在我们要进行实战与理论的结合。之前我有发布一个课程《Kubernetes从入门到弃坑》，里面有提到Kubernetes的单机部署，但是在生产环境中我们不可能用单节点kubernetes。所以今天让我们一起设计一下高可用的Kubeadm架构。 ETCD 集群master节点组件中，ETCD是集群主数据库，存储所有资源对象和状态，A">
+<meta name="keywords" content="kubernetes,容器云">
 <meta property="og:type" content="article">
 <meta property="og:title" content="容器云架构实践-10">
 <meta property="og:url" content="http://yoursite.com/2019/01/24/容器云架构实践-10/index.html">
 <meta property="og:site_name" content="CGLS 的博客">
-<meta property="og:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta property="og:description" content="设计高可用的Kubeadm架构前面给大家介绍了K8S很多基础的知识，现在我们要进行实战与理论的结合。之前我有发布一个课程《Kubernetes从入门到弃坑》，里面有提到Kubernetes的单机部署，但是在生产环境中我们不可能用单节点kubernetes。所以今天让我们一起设计一下高可用的Kubeadm架构。 ETCD 集群master节点组件中，ETCD是集群主数据库，存储所有资源对象和状态，A">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T08:43:38.053Z">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548842466954&di=6ec86ebaedd8d30b61c767f2d4d2fda5&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20181220%2Feeeb6943afd04ee59d6c9267c09065b3.jpeg">
+<meta property="og:updated_time" content="2019-01-30T07:20:42.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="容器云架构实践-10">
-<meta name="twitter:description" content="我哒哒的马蹄声是一个美丽的错误，我不是归人是过客">
+<meta name="twitter:description" content="设计高可用的Kubeadm架构前面给大家介绍了K8S很多基础的知识，现在我们要进行实战与理论的结合。之前我有发布一个课程《Kubernetes从入门到弃坑》，里面有提到Kubernetes的单机部署，但是在生产环境中我们不可能用单节点kubernetes。所以今天让我们一起设计一下高可用的Kubeadm架构。 ETCD 集群master节点组件中，ETCD是集群主数据库，存储所有资源对象和状态，A">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548842466954&di=6ec86ebaedd8d30b61c767f2d4d2fda5&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20181220%2Feeeb6943afd04ee59d6c9267c09065b3.jpeg">
 
 
 
@@ -352,6 +355,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/容器云/" itemprop="url" rel="index">
+                    <span itemprop="name">容器云</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -377,9 +402,60 @@
 
       
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548842466954&di=6ec86ebaedd8d30b61c767f2d4d2fda5&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20181220%2Feeeb6943afd04ee59d6c9267c09065b3.jpeg" rel="gallery_ck0dj0ohu006bl4w4kqflerph"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1548842466954&di=6ec86ebaedd8d30b61c767f2d4d2fda5&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20181220%2Feeeb6943afd04ee59d6c9267c09065b3.jpeg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
-        
+        <h1 id="设计高可用的Kubeadm架构"><a href="#设计高可用的Kubeadm架构" class="headerlink" title="设计高可用的Kubeadm架构"></a>设计高可用的Kubeadm架构</h1><p>前面给大家介绍了K8S很多基础的知识，现在我们要进行实战与理论的结合。之前我有发布一个课程《Kubernetes从入门到弃坑》，里面有提到Kubernetes的单机部署，但是在生产环境中我们不可能用单节点kubernetes。所以今天让我们一起设计一下高可用的Kubeadm架构。</p>
+<h1 id="ETCD-集群"><a href="#ETCD-集群" class="headerlink" title="ETCD 集群"></a>ETCD 集群</h1><p>master节点组件中，ETCD是集群主数据库，存储所有资源对象和状态，API 传输数据信息时会存入相关信息到etcd中，是实时更新的。所以要设计一个高可用的架构，我们需要etcd集群化，防止单节点的etcd故障，导致kubernetes集群整体宕机。</p>
+<h2 id="资源信息表"><a href="#资源信息表" class="headerlink" title="资源信息表"></a>资源信息表</h2><table>
+<thead>
+<tr>
+<th>服务器主机名</th>
+<th>服务器IP</th>
+<th>节点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>master1</td>
+<td>172.16.2.224</td>
+<td>主节点</td>
+</tr>
+<tr>
+<td>master2</td>
+<td>172.16.2.226</td>
+<td>备用节点</td>
+</tr>
+<tr>
+<td>master3</td>
+<td>172.16.2.227</td>
+<td>备用节点</td>
+</tr>
+</tbody>
+</table>
+<h2 id="修改hosts信息"><a href="#修改hosts信息" class="headerlink" title="修改hosts信息"></a>修改hosts信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br><span class="line">```</span><br><span class="line">172.16.2.224 master1</span><br><span class="line">172.16.2.226 master2</span><br><span class="line">172.16.2.227 master3</span><br><span class="line">172.16.2.225 work1</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<h2 id="获取etcd安装包"><a href="#获取etcd安装包" class="headerlink" title="获取etcd安装包"></a>获取etcd安装包</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd</span><br><span class="line">yum -y install vim wget</span><br><span class="line">wget https://github.com/coreos/etcd/releases/download/v3.2.24/etcd-v3.2.24-linux-amd64.tar.gz</span><br><span class="line">tar -zxvf etcd-v3.2.24-linux-amd64.tar.gz</span><br><span class="line">cd etcd-v3.2.24-linux-amd64</span><br><span class="line">cp etcd etcdctl /usr/local/bin/</span><br></pre></td></tr></table></figure>
+<h2 id="创建etcd数据目录"><a href="#创建etcd数据目录" class="headerlink" title="创建etcd数据目录"></a>创建etcd数据目录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /var/lib/etcd</span><br></pre></td></tr></table></figure>
+<h2 id="创建etcd的systemd-unit文件"><a href="#创建etcd的systemd-unit文件" class="headerlink" title="创建etcd的systemd unit文件"></a>创建etcd的systemd unit文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/lib/systemd/system/etcd.service</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash">master1</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=etcd server</span><br><span class="line">After=network.target</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">WorkingDirectory=/var/lib/etcd/</span><br><span class="line">EnvironmentFile=-/etc/etcd/etcd.conf</span><br><span class="line">ExecStart=/usr/local/bin/etcd --name master1 --initial-advertise-peer-urls http://172.16.2.224:2380 --listen-peer-urls http://172.16.2.224:2380 --listen-client-urls http://172.16.2.224:2379,http://127.0.0.1:2379 --advertise-client-urls http://172.16.2.224:2379 --initial-cluster-token etcd-cluster-1 --initial-cluster master1=http://172.16.2.224:2380,master2=http://172.16.2.226:2380,master3=http://172.16.2.227:2380 --initial-cluster-state new --data-dir=/var/lib/etcd</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5</span><br><span class="line">LimitNOFILE=65536</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">```</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> master2</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=etcd server</span><br><span class="line">After=network.target</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">WorkingDirectory=/var/lib/etcd/</span><br><span class="line">EnvironmentFile=-/etc/etcd/etcd.conf</span><br><span class="line">ExecStart=/usr/local/bin/etcd --name master2 --initial-advertise-peer-urls http://172.16.2.226:2380 --listen-peer-urls http://172.16.2.226:2380 --listen-client-urls http://172.16.2.226:2379,http://127.0.0.1:2379 --advertise-client-urls http://172.16.2.226:2379 --initial-cluster-token etcd-cluster-1 --initial-cluster master1=http://172.16.2.224:2380,master2=http://172.16.2.226:2380,master3=http://172.16.2.227:2380 --initial-cluster-state new --data-dir=/var/lib/etcd</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5</span><br><span class="line">LimitNOFILE=65536</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">```</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> master3</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=etcd server</span><br><span class="line">After=network.target</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">WorkingDirectory=/var/lib/etcd/</span><br><span class="line">EnvironmentFile=-/etc/etcd/etcd.conf</span><br><span class="line">ExecStart=/usr/local/bin/etcd --name master3 --initial-advertise-peer-urls http://172.16.2.227:2380 --listen-peer-urls http://172.16.2.227:2380 --listen-client-urls http://172.16.2.227:2379,http://127.0.0.1:2379 --advertise-client-urls http://172.16.2.227:2379 --initial-cluster-token etcd-cluster-1 --initial-cluster master1=http://172.16.2.224:2380,master2=http://172.16.2.226:2380,master3=http://172.16.2.227:2380 --initial-cluster-state new --data-dir=/var/lib/etcd</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5</span><br><span class="line">LimitNOFILE=65536</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
+<h2 id="启动etcd服务"><a href="#启动etcd服务" class="headerlink" title="启动etcd服务"></a>启动etcd服务</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl enable etcd</span><br><span class="line">systemctl start etcd</span><br><span class="line">systemctl status etcd</span><br></pre></td></tr></table></figure>
+<h2 id="查看集群信息"><a href="#查看集群信息" class="headerlink" title="查看集群信息"></a>查看集群信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看集群中的成员</span></span><br><span class="line">etcdctl member list</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看集群健康状态</span></span><br><span class="line">etcdctl cluster-health</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\cgls\Pictures\头条\2019\1.30\1548832290121.png" alt="1548832290121"></p>
+
       
     </div>
     
@@ -393,6 +469,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+          
+            <a href="/tags/容器云/" rel="tag"># 容器云</a>
+          
+        </div>
       
 
       
@@ -412,6 +496,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/28/up/" rel="prev" title="up">
+                up <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -463,8 +551,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -483,7 +580,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">104</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -494,7 +591,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -505,7 +602,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -593,6 +690,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#设计高可用的Kubeadm架构"><span class="nav-number">1.</span> <span class="nav-text">设计高可用的Kubeadm架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ETCD-集群"><span class="nav-number">2.</span> <span class="nav-text">ETCD 集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#资源信息表"><span class="nav-number">2.1.</span> <span class="nav-text">资源信息表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改hosts信息"><span class="nav-number">2.2.</span> <span class="nav-text">修改hosts信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取etcd安装包"><span class="nav-number">2.3.</span> <span class="nav-text">获取etcd安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建etcd数据目录"><span class="nav-number">2.4.</span> <span class="nav-text">创建etcd数据目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建etcd的systemd-unit文件"><span class="nav-number">2.5.</span> <span class="nav-text">创建etcd的systemd unit文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动etcd服务"><span class="nav-number">2.6.</span> <span class="nav-text">启动etcd服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看集群信息"><span class="nav-number">2.7.</span> <span class="nav-text">查看集群信息</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -604,7 +717,7 @@
     <h3 class="widget-title">Tag Cloud</h3>
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DB/">DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/K8S/">K8S</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenShift/">OpenShift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenStack/">OpenStack</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill/">Skill</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战/">实战</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器云/">容器云</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/情感分析/">情感分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chef/">Chef</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DB/">DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/K8S/">K8S</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenShift/">OpenShift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenStack/">OpenStack</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill/">Skill</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prometheus/">prometheus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战/">实战</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器云/">容器云</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/情感分析/">情感分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
     </div>

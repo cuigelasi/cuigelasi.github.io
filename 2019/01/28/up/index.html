@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="部署程序 主机名 IP     etcd、kubeadm master1 172.16.2.224   etcd、kubeadm master2 172.16.2.226   etcd、kubeadm master3 172.16.2.227   kubeadm work1 172.16.2.225    Etcd 集群123456789101112131415161718192021222">
+<meta property="og:type" content="article">
+<meta property="og:title" content="up">
+<meta property="og:url" content="http://yoursite.com/2019/01/28/up/index.html">
+<meta property="og:site_name" content="CGLS 的博客">
+<meta property="og:description" content="部署程序 主机名 IP     etcd、kubeadm master1 172.16.2.224   etcd、kubeadm master2 172.16.2.226   etcd、kubeadm master3 172.16.2.227   kubeadm work1 172.16.2.225    Etcd 集群123456789101112131415161718192021222">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-12T07:26:55.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="up">
+<meta name="twitter:description" content="部署程序 主机名 IP     etcd、kubeadm master1 172.16.2.224   etcd、kubeadm master2 172.16.2.226   etcd、kubeadm master3 172.16.2.227   kubeadm work1 172.16.2.225    Etcd 集群123456789101112131415161718192021222">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/28/up/"/>
+
+
+
+
+
+  <title>up | CGLS 的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9bd817c58745d5357bf7510922c22f7a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">CGLS 的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">every minute counts</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/28/up/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="cuijianmin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CGLS 的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">up</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-28T10:33:55+08:00">
+                2019-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <table>
+<thead>
+<tr>
+<th>部署程序</th>
+<th>主机名</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>etcd、kubeadm</td>
+<td>master1</td>
+<td>172.16.2.224</td>
+</tr>
+<tr>
+<td>etcd、kubeadm</td>
+<td>master2</td>
+<td>172.16.2.226</td>
+</tr>
+<tr>
+<td>etcd、kubeadm</td>
+<td>master3</td>
+<td>172.16.2.227</td>
+</tr>
+<tr>
+<td>kubeadm</td>
+<td>work1</td>
+<td>172.16.2.225</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Etcd-集群"><a href="#Etcd-集群" class="headerlink" title="Etcd 集群"></a>Etcd 集群</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载指定版本的etcd，解压并应用</span></span><br><span class="line">cd</span><br><span class="line">yum -y install vim wget</span><br><span class="line">wget https://github.com/coreos/etcd/releases/download/v3.2.24/etcd-v3.2.24-linux-amd64.tar.gz</span><br><span class="line">tar -zxvf etcd-v3.2.24-linux-amd64.tar.gz</span><br><span class="line">cd etcd-v3.2.24-linux-amd64</span><br><span class="line">cp etcd etcdctl /usr/local/bin/</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建etcd数据目录</span></span><br><span class="line">mkdir -p /var/lib/etcd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 在每个节点上修改hosts</span></span><br><span class="line">vim /etc/hosts</span><br><span class="line">```</span><br><span class="line">172.16.2.224 master1</span><br><span class="line">172.16.2.226 master2</span><br><span class="line">172.16.2.227 master3</span><br><span class="line">172.16.2.225 work1</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> 在每个节点上创建etcd的systemd unit文件/usr/lib/systemd/system/etcd.service</span></span><br><span class="line">vim /usr/lib/systemd/system/etcd.service</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash">master1</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=etcd server</span><br><span class="line">After=network.target</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">WorkingDirectory=/var/lib/etcd/</span><br><span class="line">EnvironmentFile=-/etc/etcd/etcd.conf</span><br><span class="line">ExecStart=/usr/local/bin/etcd --name master1 --initial-advertise-peer-urls http://172.16.2.224:2380 --listen-peer-urls http://172.16.2.224:2380 --listen-client-urls http://172.16.2.224:2379,http://127.0.0.1:2379 --advertise-client-urls http://172.16.2.224:2379 --initial-cluster-token etcd-cluster-1 --initial-cluster master1=http://172.16.2.224:2380,master2=http://172.16.2.226:2380,master3=http://172.16.2.227:2380 --initial-cluster-state new --data-dir=/var/lib/etcd</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5</span><br><span class="line">LimitNOFILE=65536</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">```</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> master2</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=etcd server</span><br><span class="line">After=network.target</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">WorkingDirectory=/var/lib/etcd/</span><br><span class="line">EnvironmentFile=-/etc/etcd/etcd.conf</span><br><span class="line">ExecStart=/usr/local/bin/etcd --name master2 --initial-advertise-peer-urls http://172.16.2.226:2380 --listen-peer-urls http://172.16.2.226:2380 --listen-client-urls http://172.16.2.226:2379,http://127.0.0.1:2379 --advertise-client-urls http://172.16.2.226:2379 --initial-cluster-token etcd-cluster-1 --initial-cluster master1=http://172.16.2.224:2380,master2=http://172.16.2.226:2380,master3=http://172.16.2.227:2380 --initial-cluster-state new --data-dir=/var/lib/etcd</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5</span><br><span class="line">LimitNOFILE=65536</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">```</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> master3</span></span><br><span class="line">[Unit]</span><br><span class="line">Description=etcd server</span><br><span class="line">After=network.target</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=notify</span><br><span class="line">WorkingDirectory=/var/lib/etcd/</span><br><span class="line">EnvironmentFile=-/etc/etcd/etcd.conf</span><br><span class="line">ExecStart=/usr/local/bin/etcd --name master3 --initial-advertise-peer-urls http://172.16.2.227:2380 --listen-peer-urls http://172.16.2.227:2380 --listen-client-urls http://172.16.2.227:2379,http://127.0.0.1:2379 --advertise-client-urls http://172.16.2.227:2379 --initial-cluster-token etcd-cluster-1 --initial-cluster master1=http://172.16.2.224:2380,master2=http://172.16.2.226:2380,master3=http://172.16.2.227:2380 --initial-cluster-state new --data-dir=/var/lib/etcd</span><br><span class="line"></span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5</span><br><span class="line">LimitNOFILE=65536</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动etcd服务</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl enable etcd</span><br><span class="line">systemctl start etcd</span><br><span class="line">systemctl status etcd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看集群中的成员</span></span><br><span class="line">etcdctl member list</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看集群健康状态</span></span><br><span class="line">etcdctl cluster-health</span><br></pre></td></tr></table></figure>
+<h1 id="Kubeadm-集群"><a href="#Kubeadm-集群" class="headerlink" title="Kubeadm 集群"></a>Kubeadm 集群</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 拷贝单机安装脚本</span></span><br><span class="line">scp -r k8s 172.16.2.224:/root</span><br><span class="line">scp -r k8s 172.16.2.226:/root</span><br><span class="line">scp -r k8s 172.16.2.227:/root</span><br><span class="line">scp -r k8s 172.16.2.225:/root</span><br><span class="line"><span class="meta">#</span><span class="bash"> 各节点安装基础服务</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.224、2.226、2.227（镜像需要重新获取）</span></span><br><span class="line">sh k8s/bin/k8s_install.sh --install_master</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.225（镜像需要重新获取）</span></span><br><span class="line">sh k8s/bin/k8s_install.sh --install_work</span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取kubeadm 1.3.2相应镜像</span></span><br><span class="line">docker pull mirrorgooglecontainers/kube-controller-manager-amd64:v1.13.2</span><br><span class="line">docker pull mirrorgooglecontainers/kube-apiserver-amd64:v1.13.2</span><br><span class="line">docker pull mirrorgooglecontainers/kube-scheduler-amd64:v1.13.2</span><br><span class="line">docker pull mirrorgooglecontainers/kube-proxy-amd64:v1.13.2</span><br><span class="line">docker pull anjia0532/google-containers.coredns:1.2.6</span><br><span class="line">docker pull anjia0532/google-containers.pause:3.1</span><br><span class="line">docker pull anjia0532/google-containers.etcd-amd64:3.2.24</span><br><span class="line"></span><br><span class="line">docker tag mirrorgooglecontainers/kube-controller-manager-amd64:v1.13.2 k8s.gcr.io/kube-controller-manager:v1.13.2</span><br><span class="line">docker tag mirrorgooglecontainers/kube-apiserver-amd64:v1.13.2 k8s.gcr.io/kube-apiserver:v1.13.2</span><br><span class="line">docker tag mirrorgooglecontainers/kube-scheduler-amd64:v1.13.2 k8s.gcr.io/kube-scheduler:v1.13.2</span><br><span class="line">docker tag mirrorgooglecontainers/kube-proxy-amd64:v1.13.2 k8s.gcr.io/kube-proxy:v1.13.2</span><br><span class="line">docker tag anjia0532/google-containers.coredns:1.2.6 k8s.gcr.io/coredns:1.2.6</span><br><span class="line">docker tag anjia0532/google-containers.pause:3.1 k8s.gcr.io/pause:3.1</span><br><span class="line">docker tag anjia0532/google-containers.etcd-amd64:3.2.24 k8s.gcr.io/etcd:3.2.24</span><br><span class="line"></span><br><span class="line">docker rmi mirrorgooglecontainers/kube-controller-manager-amd64:v1.13.2</span><br><span class="line">docker rmi mirrorgooglecontainers/kube-apiserver-amd64:v1.13.2</span><br><span class="line">docker rmi mirrorgooglecontainers/kube-scheduler-amd64:v1.13.2</span><br><span class="line">docker rmi mirrorgooglecontainers/kube-proxy-amd64:v1.13.2</span><br><span class="line">docker rmi anjia0532/google-containers.coredns:1.2.6</span><br><span class="line">docker rmi anjia0532/google-containers.pause:3.1</span><br><span class="line">docker rmi anjia0532/google-containers.etcd-amd64:3.2.24</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取calico 相应镜像</span></span><br><span class="line">cd k8s/images/calico</span><br><span class="line">sh upload.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑初始化yaml</span></span><br><span class="line">cd</span><br><span class="line">vim kubeadm_init.yaml</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash"> master1、master2、master3</span></span><br><span class="line">apiVersion: kubeadm.k8s.io/v1alpha3</span><br><span class="line">kind: ClusterConfiguration</span><br><span class="line">kubernetesVersion: stable</span><br><span class="line">networking:</span><br><span class="line">  podSubnet: 192.168.0.0/16</span><br><span class="line">  serviceSubnet: 172.10.0.0/16</span><br><span class="line">apiServerCertSANs:</span><br><span class="line">- master1</span><br><span class="line">- master2</span><br><span class="line">- master3</span><br><span class="line">- 172.16.2.224</span><br><span class="line">- 172.16.2.226</span><br><span class="line">- 172.16.2.227</span><br><span class="line">- 127.0.0.1</span><br><span class="line">etcd:</span><br><span class="line">  external:</span><br><span class="line">    endpoints:</span><br><span class="line">    - http://172.16.2.224:2379</span><br><span class="line">    - http://172.16.2.226:2379</span><br><span class="line">    - http://172.16.2.227:2379</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 初始化kubeadm，按顺序从master1开始依次执行</span></span><br><span class="line">export KUBECONFIG=/etc/kubernetes/admin.conf</span><br><span class="line">kubeadm init --config kubeadm_init.yaml</span><br><span class="line"></span><br><span class="line">\scp -r /etc/kubernetes/pki 172.16.2.227:/etc/kubernetes/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 收集token，work加入到集群时，用master1的</span></span><br><span class="line">kubeadm join 172.16.2.224:6443 --token jg6j1x.r21astvzc0vvbeso --discovery-token-ca-cert-hash sha256:ad42063fb09a3f6ce009180c0257c6d2d4d93b50048cbbc69fb9776da591f4e3</span><br><span class="line"></span><br><span class="line">kubeadm join 172.16.2.226:6443 --token 1ivh5e.ngev355hkv94uj2c --discovery-token-ca-cert-hash sha256:ad42063fb09a3f6ce009180c0257c6d2d4d93b50048cbbc69fb9776da591f4e3</span><br><span class="line"></span><br><span class="line">kubeadm join 172.16.2.227:6443 --token mt2coy.rx82ykaewm0xnob1 --discovery-token-ca-cert-hash sha256:ad42063fb09a3f6ce009180c0257c6d2d4d93b50048cbbc69fb9776da591f4e3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 初始化网络</span></span><br><span class="line">kubectl apply -f k8s/yaml/calico/rbac-kdd.yaml</span><br><span class="line">kubectl apply -f k8s/yaml/calico/calico.yaml</span><br><span class="line">kubectl get node</span><br><span class="line">kubectl get pod -n kube-system -o wide</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> work 加入到集群</span></span><br><span class="line">cd k8s/images/calico</span><br><span class="line">sh upload.sh</span><br><span class="line">kubeadm join 172.16.2.224:6443 --token jg6j1x.r21astvzc0vvbeso --discovery-token-ca-cert-hash sha256:ad42063fb09a3f6ce009180c0257c6d2d4d93b50048cbbc69fb9776da591f4e3</span><br></pre></td></tr></table></figure>
+<h1 id="HA"><a href="#HA" class="headerlink" title="HA"></a>HA</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装（master1、master2、master3）</span></span><br><span class="line">yum -y install epel-release keepalived</span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动服务（master1、master2、master3）</span></span><br><span class="line">systemctl enable keepalived &amp;&amp; systemctl start keepalived</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置检查规则（master1、master2、master3）</span></span><br><span class="line">vi /etc/keepalived/check_apiserver.sh</span><br><span class="line">```</span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">err=0</span><br><span class="line">for k in $( seq 1 10 )</span><br><span class="line">do</span><br><span class="line">    check_code=$(ps -ef|grep kube-apiserver | wc -l)</span><br><span class="line">    if [ "$check_code" = "1" ]; then</span><br><span class="line">        err=$(expr $err + 1)</span><br><span class="line">        sleep 5</span><br><span class="line">        continue</span><br><span class="line">    else</span><br><span class="line">        err=0</span><br><span class="line">        break</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line">if [ "$err" != "0" ]; then</span><br><span class="line">    echo "systemctl stop keepalived"</span><br><span class="line">    /usr/bin/systemctl stop keepalived</span><br><span class="line">    exit 1</span><br><span class="line">else</span><br><span class="line">    exit 0</span><br><span class="line">fi</span><br><span class="line">```</span><br><span class="line">chmod a+x /etc/keepalived/check_apiserver.sh</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置HA(禁用vrrp_strict，配置主节点)master1</span></span><br><span class="line">vi /etc/keepalived/keepalived.conf</span><br><span class="line">```</span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     acassen@firewall.loc</span><br><span class="line">     failover@firewall.loc</span><br><span class="line">     sysadmin@firewall.loc</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from Alexandre.Cassen@firewall.loc</span><br><span class="line">   smtp_server 127.0.0.1</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line"><span class="meta">   #</span><span class="bash">vrrp_strict</span></span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_apiserver &#123;</span><br><span class="line">    script "/etc/keepalived/check_apiserver.sh"</span><br><span class="line">    interval 2</span><br><span class="line">    weight -5</span><br><span class="line">    fall 3</span><br><span class="line">    rise 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">    interface ens192</span><br><span class="line">    mcast_src_ip 172.16.2.224</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 100</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.16.2.222</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_apiserver</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置HA(禁用vrrp_strict，配置主节点)master1</span></span><br><span class="line">vi /etc/keepalived/keepalived.conf</span><br><span class="line">```</span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     acassen@firewall.loc</span><br><span class="line">     failover@firewall.loc</span><br><span class="line">     sysadmin@firewall.loc</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from Alexandre.Cassen@firewall.loc</span><br><span class="line">   smtp_server 127.0.0.1</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line"><span class="meta">   #</span><span class="bash">vrrp_strict</span></span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_apiserver &#123;</span><br><span class="line">    script "/etc/keepalived/check_apiserver.sh"</span><br><span class="line">    interval 2</span><br><span class="line">    weight -5</span><br><span class="line">    fall 3</span><br><span class="line">    rise 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    interface ens192</span><br><span class="line">    mcast_src_ip 172.16.2.226</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 50</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.16.2.222</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_apiserver</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置HA(禁用vrrp_strict，配置主节点)master2</span></span><br><span class="line">vi /etc/keepalived/keepalived.conf</span><br><span class="line">```</span><br><span class="line">! Configuration File for keepalived</span><br><span class="line"></span><br><span class="line">global_defs &#123;</span><br><span class="line">   notification_email &#123;</span><br><span class="line">     acassen@firewall.loc</span><br><span class="line">     failover@firewall.loc</span><br><span class="line">     sysadmin@firewall.loc</span><br><span class="line">   &#125;</span><br><span class="line">   notification_email_from Alexandre.Cassen@firewall.loc</span><br><span class="line">   smtp_server 127.0.0.1</span><br><span class="line">   smtp_connect_timeout 30</span><br><span class="line">   router_id LVS_DEVEL</span><br><span class="line">   vrrp_skip_check_adv_addr</span><br><span class="line"><span class="meta">   #</span><span class="bash">vrrp_strict</span></span><br><span class="line">   vrrp_garp_interval 0</span><br><span class="line">   vrrp_gna_interval 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_script chk_apiserver &#123;</span><br><span class="line">    script "/etc/keepalived/check_apiserver.sh"</span><br><span class="line">    interval 2</span><br><span class="line">    weight -5</span><br><span class="line">    fall 3</span><br><span class="line">    rise 2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">    interface ens192</span><br><span class="line">    mcast_src_ip 172.16.2.227</span><br><span class="line">    virtual_router_id 51</span><br><span class="line">    priority 10</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        172.16.2.222</span><br><span class="line">    &#125;</span><br><span class="line">    track_script &#123;</span><br><span class="line">        chk_apiserver</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启服务，查看vip</span></span><br><span class="line">systemctl restart keepalived</span><br><span class="line">ip addr</span><br><span class="line">ping 172.16.2.222</span><br></pre></td></tr></table></figure>
+<h1 id="高可用集群"><a href="#高可用集群" class="headerlink" title="高可用集群"></a>高可用集群</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> kube-proxy 使用VIP</span></span><br><span class="line">kubectl edit -n kube-system configmap/kube-proxy</span><br><span class="line"><span class="meta">#</span><span class="bash"> cluster-info 使用VIP</span></span><br><span class="line">kubectl edit configmaps cluster-info -n kube-public</span><br></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><h2 id="etcd集群"><a href="#etcd集群" class="headerlink" title="etcd集群"></a>etcd集群</h2><p>集群搭建（主要）</p>
+<p><a href="https://www.cnblogs.com/jsonhc/p/7884668.html" target="_blank" rel="noopener">https://www.cnblogs.com/jsonhc/p/7884668.html</a></p>
+<p>集群搭建（参照）</p>
+<p><a href="https://blog.kelu.org/tech/2018/07/02/etcd-ha.html" target="_blank" rel="noopener">https://blog.kelu.org/tech/2018/07/02/etcd-ha.html</a></p>
+<h2 id="Kubeadm集群"><a href="#Kubeadm集群" class="headerlink" title="Kubeadm集群"></a>Kubeadm集群</h2><p>kubeadm_init.yaml（主要）</p>
+<p><a href="https://blog.csdn.net/ioniconline/article/details/83180880" target="_blank" rel="noopener">https://blog.csdn.net/ioniconline/article/details/83180880</a></p>
+<h2 id="HA-1"><a href="#HA-1" class="headerlink" title="HA"></a>HA</h2><p>keepalived(主要)</p>
+<p><a href="https://www.jianshu.com/p/6f98f60093a7" target="_blank" rel="noopener">https://www.jianshu.com/p/6f98f60093a7</a></p>
+<h2 id="高可用集群-1"><a href="#高可用集群-1" class="headerlink" title="高可用集群"></a>高可用集群</h2><p><a href="https://www.jianshu.com/p/6f98f60093a7" target="_blank" rel="noopener">https://www.jianshu.com/p/6f98f60093a7</a></p>
+<p><a href="https://blog.csdn.net/ioniconline/article/details/83180880" target="_blank" rel="noopener">https://blog.csdn.net/ioniconline/article/details/83180880</a></p>
+<h2 id="虚拟IP"><a href="#虚拟IP" class="headerlink" title="虚拟IP"></a>虚拟IP</h2><p>无法访问</p>
+<p><a href="https://www.jianshu.com/p/1455b30dc976" target="_blank" rel="noopener">https://www.jianshu.com/p/1455b30dc976</a></p>
+<h2 id="高可用的dns"><a href="#高可用的dns" class="headerlink" title="高可用的dns"></a>高可用的dns</h2><p><a href="https://blog.csdn.net/fanren224/article/details/86573264" target="_blank" rel="noopener">https://blog.csdn.net/fanren224/article/details/86573264</a> </p>
+<h2 id="NotReady"><a href="#NotReady" class="headerlink" title="NotReady"></a>NotReady</h2><p><a href="https://www.jianshu.com/p/3670225b2458" target="_blank" rel="noopener">https://www.jianshu.com/p/3670225b2458</a> </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/24/容器云架构实践-10/" rel="next" title="容器云架构实践-10">
+                <i class="fa fa-chevron-left"></i> 容器云架构实践-10
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/30/容器云架构实践-11/" rel="prev" title="容器云架构实践-11">
+                容器云架构实践-11 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522385181390&di=ba6c0bcdcc380025bece3f882657040b&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170109%2Fc71226098fd7466d9bbccad0833924ee_th.jpg"
+                alt="cuijianmin" />
+            
+              <p class="site-author-name" itemprop="name">cuijianmin</p>
+              <p class="site-description motion-element" itemprop="description">我哒哒的马蹄声是一个美丽的错误，我不是归人是过客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">104</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/cuigelasi" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/cuigelasi?viewmode=contents" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://plus.google.com/yourname" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i>Google</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yourname" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://vk.com/yourname" target="_blank" title="VK Group">
+                      
+                        <i class="fa fa-fw fa-vk"></i>VK Group</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://stackoverflow.com/users/10178945/%E5%B4%94%E5%81%A5%E6%95%8F" target="_blank" title="StackOverflow">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i>StackOverflow</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/yourname" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="skype:yourname?call|chat" target="_blank" title="Skype">
+                      
+                        <i class="fa fa-fw fa-skype"></i>Skype</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Etcd-集群"><span class="nav-number">1.</span> <span class="nav-text">Etcd 集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kubeadm-集群"><span class="nav-number">2.</span> <span class="nav-text">Kubeadm 集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HA"><span class="nav-number">3.</span> <span class="nav-text">HA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高可用集群"><span class="nav-number">4.</span> <span class="nav-text">高可用集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#etcd集群"><span class="nav-number">5.1.</span> <span class="nav-text">etcd集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kubeadm集群"><span class="nav-number">5.2.</span> <span class="nav-text">Kubeadm集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HA-1"><span class="nav-number">5.3.</span> <span class="nav-text">HA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高可用集群-1"><span class="nav-number">5.4.</span> <span class="nav-text">高可用集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟IP"><span class="nav-number">5.5.</span> <span class="nav-text">虚拟IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高可用的dns"><span class="nav-number">5.6.</span> <span class="nav-text">高可用的dns</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NotReady"><span class="nav-number">5.7.</span> <span class="nav-text">NotReady</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/API/">API</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Chef/">Chef</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DB/">DB</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DockOne-分享/">DockOne 分享</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/K8S/">K8S</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mitaka版/">Mitaka版</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenShift/">OpenShift</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenStack/">OpenStack</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Rancher/">Rancher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Skill/">Skill</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Swarm/">Swarm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker-compose/">docker-compose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/etcd/">etcd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/humpback/">humpback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openstack/">openstack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prometheus/">prometheus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/volume/">volume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化/">可视化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具/">可视化工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/可视化工具Portainer/">可视化工具Portainer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储/">存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/存储扩容/">存储扩容</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安装部署/">安装部署</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实战/">实战</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容器云/">容器云</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/情感分析/">情感分析</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/教程/">教程</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/方案/">方案</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志收集/">日志收集</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/服务发现/">服务发现</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/每天5分钟/">每天5分钟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/爬虫/">爬虫</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/绘图/">绘图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编排/">编排</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化/">自动化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/镜像/">镜像</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/限制/">限制</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/隔离/">隔离</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面试/">面试</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+    </div>
+    
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cuijianmin</span>
+
+  
+</div>
+
+<!--
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+-->
+<footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <!--统计start-->
+      <!--<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>-->
+      <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+      
+      <span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+  </span>
+      <span id="busuanzi_container_site_uv">
+  总访客数<span id="busuanzi_value_site_uv"></span>人次
+  </span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+  undefined
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
